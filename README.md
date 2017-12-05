@@ -1,6 +1,11 @@
 # betterReads
-Proyecto de promoción directa para TTADS
+Final project for TTADS.
 
-Integrantes:
+- Angular 4
+- Rest API
+- Cute JS
+- Bootstrap 4
+
+## Collaborators
 @julianpoma
 @gentilijuanmanuel
