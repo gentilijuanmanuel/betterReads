@@ -2,12 +2,15 @@
 
 betterReads es una página web focalizada en la reseña de libros y de autores de los mismos.
 
-Las tecnologías que utilizaremos son:
+Las tecnologías que utilizamos son:
 
 - Angular 4
-- Rest API
 - Kute JS
 - Bootstrap 4
+- MongoDB.
+- Mongoose.
+- Express.
+- NodeJS.
 
 ## Collaborators
 
