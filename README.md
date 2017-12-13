@@ -1,8 +1,8 @@
-# betterReads: Proyecto final de la materia Técnicas y Tecnologías Avanzadas de Desarrollo de Software (TTADS)
+# betterReads: Final project for the subject: Técnicas y Tecnologías Avanzadas de Desarrollo de Software (TTADS)
 
-betterReads es una página web focalizada en la reseña de libros y de autores de los mismos.
+betterReads is a web page about authors and books reviews, similar to the known goodReads.
 
-Las tecnologías que utilizamos son:
+Here is a list of some of the technologies and libraries used in the project.
 
 - Angular 4.
 - Kute JS.
@@ -16,3 +16,5 @@ Las tecnologías que utilizamos son:
 
 @julianpoma
 @gentilijuanmanuel
+
+Dec 2017.
