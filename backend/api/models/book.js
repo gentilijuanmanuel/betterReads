@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var schema = new Schema({
+var bookSchema = new Schema({
     isbn: {type: String, required: true},
     title: {type: String, required: true},
     author: [{type: Schema.Types.ObjectId, ref: 'Author'}],
@@ -10,4 +10,4 @@ var schema = new Schema({
     reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}]
 });
 
-module.exports = mongoose.model('Book', schema);
+module.exports = mongoose.model('Book', bookSchema);

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var schema = new Schema({
+var authorSchema = new Schema({
     name: {type: String, required: true},
     surname: {type: String, required: true},
     dateOfBirth: {type: String, required: true},
@@ -11,4 +11,4 @@ var schema = new Schema({
     quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}]
 });
 
-module.exports = mongoose.model('Author', schema);
+module.exports = mongoose.model('Author', authorSchema);
