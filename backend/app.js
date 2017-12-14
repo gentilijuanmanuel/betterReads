@@ -8,7 +8,7 @@ app.use(routes);
 /*
 * This is the error handler. Be sure to put all custom routes BEFORE this.
 * If any request was not catched by the routes BEFORE,
-*  the following routes will handle the error and throw a message.
+* the following routes will handle the error and throw a message.
 */
 
 app.use((req, res, next) => {
