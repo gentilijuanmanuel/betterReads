@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/better-reads',{useMongoClient: true });
 require('./api/models/author.js');
 require('./api/models/book.js');
