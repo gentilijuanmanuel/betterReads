@@ -30,6 +30,26 @@ router.get('/', (req, res, next) => {
         });
 });
 
+/*
+* CAREFUL: Does not return password.
+*/
+
+router.get('/:userId', (req, res, next) => {
+    const id = req.params.userId;
+
+    User.findById(id)
+        .select('username name surname dateOfBirth email gender')
+        .exec()
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 router.post('/', (req, res, next) => {
     const user = new User ({
         username: req.body.username,
@@ -53,7 +73,51 @@ router.post('/', (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+/*
+* PATCH is update, PUT is replace
+* JSON structure for requests
+*   [
+*	   {"change" : "name", "value" : "Julian"},
+*	   {"change" : "surname", "value" : "Poma"}
+*   ]
+*/
+
+router.patch('/:userId', (req, res, next) => {
+    const id = req.params.userId;
+
+    const updateArray = {}
+
+    for(const ops of req.body) {
+        updateArray[ops.change] = ops.value;
+    }
+
+    User.update({ _id: id }, { $set: updateArray })
+        .exec()
+        .then(result => {
+
+            if (result.nModified) {
+                res.status(200).json({
+                    status: result.ok,
+                    changed: result.nModified,
+                    message: 'User updated successfully'
+                });
+            }
+            else {
+                res.status(200).json({
+                    status: result.ok,
+                    changed: result.nModified,
+                    message: 'No attributes were affected. Please check change and value attributes of your request.'
+                });
+            }
+            
+        })
+        .catch(err => {
             res.status(500).json({
                 error: err
             });
@@ -65,11 +129,21 @@ router.delete('/:userId', (req, res, next) => {
     User.remove({ _id: id })
         .exec()
         .then(result => {
+
             const response = {
-                message: 'User deleted successfully',
+                count: result.result.n,
+                status: result.result.ok,
+                message: 'User deleted successfully'
             }
 
-            res.status(200).json(response);
+            if (result.result.n)
+            {
+                res.status(200).json(response);
+            }
+            else {
+                response.message = 'No user was deleted';
+                res.status(200).json(response);
+            }
         })
         .catch(err => {
             res.status(500).json({
