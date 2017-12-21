@@ -7,10 +7,16 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     User.find()
+        .select('username name surname email sex')
         .exec()
         .then(userCollection => {
-            if (userCollection.length > 0) {
-                res.status(200).json(userCollection);
+            const response = {
+                count: userCollection.length,
+                users: userCollection
+            }
+
+            if (response.count) {
+                res.status(200).json(response);
             } else {
                 res.status(200).json({
                     message: 'No users found'
@@ -25,7 +31,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-
     const user = new User ({
         username: req.body.username,
         password: req.body.password,
@@ -40,8 +45,11 @@ router.post('/', (req, res, next) => {
         .then(result => {
             console.log(result);
             res.status(201).json({
-                message: "User created with success",
-                createdUser: result
+                message: "User created successfully",
+                createdUser: {
+                    _id: result._id,
+                    username: result.username
+                }
             });
         })
         .catch(err => {
@@ -57,10 +65,13 @@ router.delete('/:userId', (req, res, next) => {
     User.remove({ _id: id })
         .exec()
         .then(result => {
-            res.status(200).json(result);
+            const response = {
+                message: 'User deleted successfully',
+            }
+
+            res.status(200).json(response);
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
                 error: err
             });
