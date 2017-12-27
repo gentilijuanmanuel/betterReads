@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const bcrypt = require('bcrypt');
 const router = express.Router();
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -38,7 +39,7 @@ router.get('/:userId', (req, res, next) => {
     const id = req.params.userId;
 
     User.findById(id)
-        .select('username name surname dateOfBirth email gender')
+        .select('username password name surname dateOfBirth email gender')
         .exec()
         .then(result => {
             res.status(200).json(result)
@@ -50,33 +51,59 @@ router.get('/:userId', (req, res, next) => {
         });
 });
 
-router.post('/', (req, res, next) => {
-    const user = new User ({
-        username: req.body.username,
-        password: req.body.password,
-        name: req.body.name,
-        surname: req.body.surname,
-        dateOfBirth: req.body.dateOfBirth,
-        email: req.body.email,
-        sex: req.body.sex
-    });
+router.post('/signup', (req, res, next) => {
 
-    user.save()
-        .then(result => {
-            console.log(result);
-            res.status(201).json({
-                message: "User created successfully",
-                createdUser: {
-                    _id: result._id,
-                    username: result.username
-                }
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            });
-        });
+    User.find({'username': req.body.username})
+        .exec()
+        .then(user => {
+
+            if(user.length>0)
+            {
+                return res.status(409).json({
+                    message: "The username has already been taken"
+                });
+
+            } else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    
+                    if (err) {
+                        return res.status(500).json({
+                            error: err
+                        });
+
+                    } else {
+
+                        const user = new User({
+                            username: req.body.username,
+                            password: hash,
+                            name: req.body.name,
+                            surname: req.body.surname,
+                            dateOfBirth: req.body.dateOfBirth,
+                            email: req.body.email,
+                            sex: req.body.sex
+                        });
+
+                        user.save()
+                            .then(result => {
+                                console.log(result);
+                                res.status(201).json({
+                                    message: "User created successfully",
+                                    createdUser: {
+                                        _id: result._id,
+                                        username: result.username
+                                    }
+                                });
+                            })
+                            .catch(err => {
+                                res.status(500).json({
+                                    error: err
+                                });
+                            });
+                    }
+
+                });
+            }
+    });
 });
 
 /*
