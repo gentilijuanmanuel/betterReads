@@ -31,10 +31,6 @@ router.get('/', (req, res, next) => {
         });
 });
 
-/*
-* CAREFUL: Does not return password.
-*/
-
 router.get('/:userId', (req, res, next) => {
     const id = req.params.userId;
 
