@@ -8,7 +8,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     User.find()
-        .select('name surname email sex')
+        .select('name surname email gender')
         .exec()
         .then(userCollection => {
             const response = {
@@ -43,7 +43,7 @@ router.get('/:userId', (req, res, next) => {
                 res.status(200).json(result);
             } else {
                 res.status(200).json({
-                    message: "The user requested does not exists."
+                    message: "No user found with that ID"
                 });
             }  
         })
@@ -82,7 +82,7 @@ router.post('/signup', (req, res, next) => {
                             name: req.body.name,
                             surname: req.body.surname,
                             dateOfBirth: req.body.dateOfBirth,
-                            sex: req.body.sex
+                            gender: req.body.gender
                         });
 
                         user.save()
@@ -179,6 +179,6 @@ router.delete('/:userId', (req, res, next) => {
                 error: err
             });
         });
-})
+});
 
 module.exports = router;

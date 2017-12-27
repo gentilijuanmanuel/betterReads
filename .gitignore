@@ -101,4 +101,6 @@ typings/
 !.vscode/extensions.json
 .history
 
+.jsbeautifyrc
+
 # End of https://www.gitignore.io/api/node,angular,visualstudiocode
