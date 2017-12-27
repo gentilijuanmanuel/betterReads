@@ -8,10 +8,11 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     User.find()
-        .select('username name surname email sex')
+        .select('name surname email sex')
         .exec()
         .then(userCollection => {
             const response = {
+
                 count: userCollection.length,
                 users: userCollection
             }
@@ -35,10 +36,16 @@ router.get('/:userId', (req, res, next) => {
     const id = req.params.userId;
 
     User.findById(id)
-        .select('username password name surname dateOfBirth email gender')
+        .select('email password name surname dateOfBirth gender')
         .exec()
         .then(result => {
-            res.status(200).json(result)
+            if(result) {
+                res.status(200).json(result);
+            } else {
+                res.status(200).json({
+                    message: "The user requested does not exists."
+                });
+            }  
         })
         .catch(err => {
             res.status(500).json({
@@ -56,7 +63,7 @@ router.post('/signup', (req, res, next) => {
             if(user.length>0)
             {
                 return res.status(409).json({
-                    message: "The username has already been taken"
+                    message: "The email has already been taken"
                 });
 
             } else {
@@ -70,12 +77,11 @@ router.post('/signup', (req, res, next) => {
                     } else {
 
                         const user = new User({
-                            username: req.body.username,
+                            email: req.body.email,
                             password: hash,
                             name: req.body.name,
                             surname: req.body.surname,
                             dateOfBirth: req.body.dateOfBirth,
-                            email: req.body.email,
                             sex: req.body.sex
                         });
 
