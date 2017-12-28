@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -106,6 +107,50 @@ router.post('/signup', (req, res, next) => {
                 });
             }
     });
+});
+
+router.post('/login', (req, res, next) => {
+    User.findOne({
+            email: req.body.email
+        })
+        .exec()
+        .then(user => {
+            if(user === null) {
+                res.status(401).json({
+                    message: 'Authentication failed.'
+                });
+            } else {
+                bcrypt.compare(req.body.password, user.password)
+                    .then(function (result) {
+                        if (result) {
+                            const token = jwt.sign({
+                                email: user.email,
+                                id: user.id
+                            },
+                            "asupersecretprivatekey:)",
+                            {
+                                expiresIn: '1h'
+
+                            });
+
+                            res.status(401).json({
+                                message: 'Authentication success.',
+                                token: token
+                            });
+
+                        } else {
+                            res.status(401).json({
+                                message: 'Authentication failed.'
+                            });
+                        }
+                    });
+            }          
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 /*
