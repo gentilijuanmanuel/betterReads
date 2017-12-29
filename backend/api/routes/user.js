@@ -226,4 +226,34 @@ router.delete('/:userId', (req, res, next) => {
         });
 });
 
+//return books of a user's library
+/*
+router.get('/library/:idUser', (req, res, next) => {
+    let idAuthor = req.params.idAuthor;
+
+    Book.find({ author: idAuthor })
+        .select('isbn title author description')
+        .exec()
+        .then(bookCollection => {
+            const response = {
+                count: bookCollection.length,
+                books: bookCollection
+            }
+
+            if (response.count) {
+                res.status(200).json(response);
+            } else {
+                res.status(200).json({
+                    message: 'This author does not have any book'
+                });
+            }
+        })
+        .catch(err => {
+                res.status(500).json({
+                    error: err
+                });
+        });
+});
+*/
+
 module.exports = router;

@@ -7,8 +7,7 @@ var authorSchema = new Schema({
     dateOfBirth: {type: String, required: true},
     gender: { type: String, enum: ['M', 'F'], default: 'M' },
     reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
-    books: [{type: Schema.Types.ObjectId, ref: 'Book'}],
-    quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}]
+    books: [{type: Schema.Types.ObjectId, ref: 'Book'}]
 });
 
 module.exports = mongoose.model('Author', authorSchema);
