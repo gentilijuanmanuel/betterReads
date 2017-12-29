@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Author.findById(req.params.id)
-        .select('name surname dateOfBirth gender books quotes reviews')
+        .select('name surname dateOfBirth gender books reviews')
         .populate('books')
         .populate('quotes')
         .populate('reviews')
@@ -62,8 +62,7 @@ router.post('/new', (req, res, next) => {
         dateOfBirth: req.body.dateOfBirth,
         gender: req.body.gender,
         reviews: req.body.reviews,
-        books: req.body.books,
-        quotes: req.body.quotes
+        books: req.body.books
     });
 
     author.save()

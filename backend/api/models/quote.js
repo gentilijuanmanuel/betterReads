@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var quoteSchema = new Schema({
-    titleOfTheBook: {type: String, required: true}, //no sé si esto está bien
+    book: {type: Schema.Types.ObjectId, ref: 'Book'},
     description: {type: String, required: true}
 });
 

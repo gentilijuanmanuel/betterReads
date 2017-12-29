@@ -8,7 +8,8 @@ var bookSchema = new Schema({
     description: {type: String},
     image: {type: String, required: true},
     genre: {type: String, required: true},
-    reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}]
+    reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
+    quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}]
 });
 
 module.exports = mongoose.model('Book', bookSchema);

@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const Book = mongoose.model('Book');
 const router = express.Router();
 
+
 //return all the books
 router.get('/', (req, res, next) => {
     Book.find()
-        .select('isbn title author description')
+        .select('isbn title author description reviews quotes')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -29,13 +30,39 @@ router.get('/', (req, res, next) => {
         });
 });
 
+
+//return a book
+
+router.get('/:bookId', (req, res, next) => {
+    const id = req.params.bookId;
+
+    Book.findById(id)
+        .select('isbn title author description reviews quotes')
+        .exec()
+        .then(result => {
+            if(result) {
+                res.status(200).json(result);
+            } else {
+                res.status(200).json({
+                    message: "No book found with that ID"
+                });
+            }  
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+
 //return books of an author
 
 router.get('/author/:idAuthor', (req, res, next) => {
     let idAuthor = req.params.idAuthor;
 
     Book.find({ author: idAuthor })
-        .select('isbn title author description')
+        .select('isbn title author description reviews quotes')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -58,13 +85,14 @@ router.get('/author/:idAuthor', (req, res, next) => {
         });
 });
 
+
 //return books of an specific genre
 
 router.get('/genre/:genre', (req, res, next) => {
     let genre = req.params.genre;
 
     Book.find({ genre: genre })
-        .select('isbn title author description')
+        .select('isbn title author description reviews quotes')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -87,24 +115,25 @@ router.get('/genre/:genre', (req, res, next) => {
         });
 });
 
+
 //post a book
 
 router.post('/new', (req, res, next) => {
-    let date = req.body.date;
-    
     let isbn = req.body.isbn;
     let title = req.body.title;
     let author = req.body.author;
     let description = req.body.description;
     let image = req.body.image;
     let reviews = req.body.reviews;
+    let quotes = req.body.quotes;
 
     var book = new Book({
         isbn: isbn,
         title: title,
         author: author,
         description: description,
-        reviews: reviews
+        reviews: reviews,
+        quotes: quotes
     });
 
     book.save((err, book) => {
@@ -171,12 +200,12 @@ router.patch('/:id', (req, res, next) => {
           error: err
         });
       });
-  });
+});
 
 
-  //delete a book
+//delete a book
 
-  router.delete('/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     const id = req.params.id;
     Book.remove({ _id: id })
       .exec()
@@ -201,7 +230,7 @@ router.patch('/:id', (req, res, next) => {
           error: err
         });
       });
-  });
+});
 
 
 module.exports = router;
