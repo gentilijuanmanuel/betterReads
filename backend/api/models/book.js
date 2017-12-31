@@ -7,7 +7,7 @@ var bookSchema = new Schema({
     author: {type: Schema.Types.ObjectId, ref: 'Author'},
     description: {type: String},
     image: {type: String, required: true},
-    genre: {type: String, required: true}
+    genre: {type: String, enum: ['No ficción', 'Novela', 'Poesía', 'Ensayo', 'Terror', 'Filosofía', 'Policial', 'Fantástico', 'Biografía', 'Autobiografía', 'Diario de viajes'], required: true}
     //reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
     //quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}]
 });
