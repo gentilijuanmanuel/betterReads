@@ -7,7 +7,7 @@ const router = express.Router();
 //return all the books
 router.get('/', (req, res, next) => {
     Book.find()
-        .select('isbn title author description reviews quotes')
+        .select('isbn title author description')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -37,7 +37,7 @@ router.get('/:bookId', (req, res, next) => {
     const id = req.params.bookId;
 
     Book.findById(id)
-        .select('isbn title author description reviews quotes')
+        .select('isbn title author description')
         .exec()
         .then(result => {
             if(result) {
@@ -62,7 +62,7 @@ router.get('/author/:idAuthor', (req, res, next) => {
     let idAuthor = req.params.idAuthor;
 
     Book.find({ author: idAuthor })
-        .select('isbn title author description reviews quotes')
+        .select('isbn title author description')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -92,7 +92,7 @@ router.get('/genre/:genre', (req, res, next) => {
     let genre = req.params.genre;
 
     Book.find({ genre: genre })
-        .select('isbn title author description reviews quotes')
+        .select('isbn title author description')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -124,16 +124,16 @@ router.post('/new', (req, res, next) => {
     let author = req.body.author;
     let description = req.body.description;
     let image = req.body.image;
-    let reviews = req.body.reviews;
-    let quotes = req.body.quotes;
+    //let reviews = req.body.reviews;
+    //let quotes = req.body.quotes;
 
     var book = new Book({
         isbn: isbn,
         title: title,
         author: author,
-        description: description,
-        reviews: reviews,
-        quotes: quotes
+        description: description
+        //reviews: reviews,
+        //quotes: quotes
     });
 
     book.save()
