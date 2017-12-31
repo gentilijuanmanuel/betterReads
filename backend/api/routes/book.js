@@ -56,7 +56,7 @@ router.get('/:bookId', (req, res, next) => {
 });
 
 
-//return books of an author
+//return books of an author: VERRRRRRRR
 
 router.get('/author/:idAuthor', (req, res, next) => {
     let idAuthor = req.params.idAuthor;
@@ -124,6 +124,7 @@ router.post('/new', (req, res, next) => {
     let author = req.body.author;
     let description = req.body.description;
     let image = req.body.image;
+    let genre = req.body.genre;
     //let reviews = req.body.reviews;
     //let quotes = req.body.quotes;
 
@@ -131,7 +132,9 @@ router.post('/new', (req, res, next) => {
         isbn: isbn,
         title: title,
         author: author,
-        description: description
+        description: description,
+        image: image,
+        genre: genre
         //reviews: reviews,
         //quotes: quotes
     });
@@ -157,7 +160,7 @@ router.post('/new', (req, res, next) => {
 });
 
 
-//update a book
+//update a book: VER
 
 router.patch('/:id', (req, res, next) => {
     const id = req.params.id;
@@ -171,7 +174,6 @@ router.patch('/:id', (req, res, next) => {
     Book.update({ _id: id }, { $set: updateArray })
       .exec()
       .then(result => {
-  
         if (result.nModified) {
           res.status(200).json({
             status: result.ok,
@@ -193,7 +195,7 @@ router.patch('/:id', (req, res, next) => {
           error: err
         });
       });
-});
+  });
 
 
 //delete a book

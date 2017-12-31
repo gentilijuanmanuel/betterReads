@@ -221,3 +221,22 @@ db.books.insertMany([
         genre: "Biografía"
     }
 ]);
+
+//insert 3 quotes
+db.quotes.insertMany([
+    {
+        book: "5a492611f968176678703da8",
+        description: "Es una excelente novela total, o novela de novelas. Si desean ver el potencial de Perec al máximo, no duden en leerlo.",
+        user: ""
+    },
+    {
+        book: "5a492611f968176678703daa",
+        description: "Surrealismo literario en su máxima expresión. Es como leer un cuadro de Dalí. Gran libro de una de las mentes más creativas de la literatura del siglo XX.",
+        user: ""
+    },
+    {
+        book: "5a492611f968176678703dab",
+        description: "Gran lectura de iniciación al fabuloso y entretenido mundo de la filosofía de la ciencia. Lectura recomendada para científicos, filósofos, ingenieros y, en general, para cualquier entusiasta de la ciencia.",
+        user: ""
+    }
+]);

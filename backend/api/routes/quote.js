@@ -6,7 +6,7 @@ const router = express.Router();
 
 //return all the quotes
 router.get('/', (req, res, next) => {
-    Book.find()
+    Quote.find()
         .exec()
         .then(quoteCollection => {
             const response = {
@@ -35,7 +35,7 @@ router.get('/', (req, res, next) => {
 router.get('/:quoteId', (req, res, next) => {
     const id = req.params.quoteId;
 
-    Book.findById(id)
+    Quote.findById(id)
         .exec()
         .then(result => {
             if(result) {
@@ -54,12 +54,12 @@ router.get('/:quoteId', (req, res, next) => {
 });
 
 
-//return quotes of a book
+//return quotes of a book VERRRRRR
 
 router.get('/book/:idBook', (req, res, next) => {
     let idBook = req.params.idBook;
 
-    Book.find({ book: idBook })
+    Quote.find({ book: idBook })
         .exec()
         .then(quoteCollection => {
             const response = {
@@ -82,12 +82,12 @@ router.get('/book/:idBook', (req, res, next) => {
         });
 });
 
-//return quotes of an user
+//return quotes of an user VERRRRRR
 
 router.get('/book/:idUser', (req, res, next) => {
     let idUser = req.params.idUser;
 
-    Book.find({ user: idUser })
+    Quote.find({ user: idUser })
         .exec()
         .then(quoteCollection => {
             const response = {
@@ -113,8 +113,8 @@ router.get('/book/:idUser', (req, res, next) => {
 
 //post a quote
 
-router.post('/new:idBook', (req, res, next) => {
-    let book = req.params.idBook;
+router.post('/new', (req, res, next) => {
+    let book = req.body.book;
     let description = req.body.description;
 
     var quote = new Quote({
@@ -122,7 +122,7 @@ router.post('/new:idBook', (req, res, next) => {
         description: description
     });
 
-    book.save()
+    quote.save()
         .then(result => {
             console.log(result);
             res.status(201)
@@ -142,7 +142,7 @@ router.post('/new:idBook', (req, res, next) => {
         });
 });
 
-//update a quote
+//update a quote VERRRRRR
 
 router.patch('/:id', (req, res, next) => {
     const id = req.params.id;
