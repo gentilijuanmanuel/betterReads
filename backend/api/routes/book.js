@@ -136,13 +136,6 @@ router.post('/new', (req, res, next) => {
         quotes: quotes
     });
 
-    book.save((err, book) => {
-        if (err) {
-            res.status(500).send(err);
-        }
-        res.status(200).send("Book submitted \n" + book);
-    });
-
     book.save()
         .then(result => {
             console.log(result);

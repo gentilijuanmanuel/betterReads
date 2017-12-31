@@ -82,6 +82,34 @@ router.get('/book/:idBook', (req, res, next) => {
         });
 });
 
+//return quotes of an user
+
+router.get('/book/:idUser', (req, res, next) => {
+    let idUser = req.params.idUser;
+
+    Book.find({ user: idUser })
+        .exec()
+        .then(quoteCollection => {
+            const response = {
+                count: quoteCollection.length,
+                books: quoteCollection
+            }
+
+            if (response.count) {
+                res.status(200).json(response);
+            } else {
+                res.status(200).json({
+                    message: 'This user does not have any quote'
+                });
+            }
+        })
+        .catch(err => {
+                res.status(500).json({
+                    error: err
+                });
+        });
+});
+
 
 //post a quote
 
@@ -92,13 +120,6 @@ router.post('/new:idBook', (req, res, next) => {
     var quote = new Quote({
         book: book,
         description: description
-    });
-
-    quote.save((err, book) => {
-        if (err) {
-            res.status(500).send(err);
-        }
-        res.status(200).send("Quote submitted \n" + book);
     });
 
     book.save()
