@@ -5,7 +5,7 @@ db = conn.getDB("better-reads");
 
 
 //insert 11 authors
-/*
+
 db.authors.insertMany([
     {
         name: "Georges",
@@ -129,7 +129,6 @@ db.authors.insertMany([
         photo: "john-maxwell-coetzee.jpg"
     }
 ]);
-*/
 
 //insert 11 books
 db.books.insertMany([
