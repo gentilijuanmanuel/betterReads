@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Author = mongoose.model('Author');
 const router = express.Router();
+const checkAuth = require('../middleware/check-auth');
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -55,7 +56,7 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.post('/new', (req, res, next) => {
+router.post('/new', checkAuth, (req, res, next) => {
     const author = new Author({
         name: req.body.name,
         surname: req.body.surname,
@@ -86,7 +87,7 @@ router.post('/new', (req, res, next) => {
         });
 });
 
-router.patch('/:id', (req, res, next) => {
+router.patch('/:id', checkAuth, (req, res, next) => {
   const id = req.params.id;
 
   const updateArray = {}
@@ -122,7 +123,7 @@ router.patch('/:id', (req, res, next) => {
     });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', checkAuth, (req, res, next) => {
   const id = req.params.id;
   Author.remove({ _id: id })
     .exec()
