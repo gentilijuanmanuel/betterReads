@@ -10,7 +10,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     User.find()
-        .select('name surname email gender')
+        .select('name surname email gender library')
         .exec()
         .then(userCollection => {
             const response = {
@@ -38,7 +38,7 @@ router.get('/:userId', (req, res, next) => {
     const id = req.params.userId;
 
     User.findById(id)
-        .select('email name surname dateOfBirth gender')
+        .select('email name surname dateOfBirth gender library')
         .exec()
         .then(result => {
             if(result) {

@@ -8,7 +8,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     Author.find()
-        .select('name surname gender books')
+        .select('name surname gender')
         .exec()
         .then(authors => {
             const response = {
@@ -35,10 +35,10 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Author.findById(req.params.id)
-        .select('name surname dateOfBirth gender books quotes reviews')
-        .populate('books')
-        .populate('quotes')
-        .populate('reviews')
+        .select('name surname dateOfBirth gender')
+        //.populate('books')
+        //.populate('quotes')
+        //.populate('reviews')
         .exec()
         .then(auth => {
           if(auth) {
@@ -61,10 +61,9 @@ router.post('/new', checkAuth, (req, res, next) => {
         name: req.body.name,
         surname: req.body.surname,
         dateOfBirth: req.body.dateOfBirth,
-        gender: req.body.gender,
-        reviews: req.body.reviews,
-        books: req.body.books,
-        quotes: req.body.quotes
+        gender: req.body.gender
+        //reviews: req.body.reviews,
+        //books: req.body.books
     });
 
     author.save()
