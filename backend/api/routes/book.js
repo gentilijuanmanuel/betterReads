@@ -58,10 +58,10 @@ router.get('/:bookId', (req, res, next) => {
 
 //return books of an author: VERRRRRRRR
 
-router.get('/author/:idAuthor', (req, res, next) => {
-    let idAuthor = req.params.idAuthor;
+router.get('/author/:id', (req, res, next) => {
+    let idAuthor = req.params.id;
 
-    Book.find({ author: idAuthor })
+    Book.find({ "author" : idAuthor })
         .select('isbn title author description')
         .exec()
         .then(bookCollection => {
