@@ -4,6 +4,7 @@ const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const checkAuth = require('../middleware/check-auth');
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -37,7 +38,7 @@ router.get('/:userId', (req, res, next) => {
     const id = req.params.userId;
 
     User.findById(id)
-        .select('email password name surname dateOfBirth gender library')
+        .select('email name surname dateOfBirth gender library')
         .exec()
         .then(result => {
             if(result) {
@@ -162,7 +163,7 @@ router.post('/login', (req, res, next) => {
 *   ]
 */
 
-router.patch('/:userId', (req, res, next) => {
+router.patch('/:userId', checkAuth, (req, res, next) => {
     const id = req.params.userId;
 
     const updateArray = {}
@@ -198,7 +199,7 @@ router.patch('/:userId', (req, res, next) => {
         });
 });
 
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', checkAuth, (req, res, next) => {
     const id = req.params.userId;
     User.remove({ _id: id })
         .exec()
