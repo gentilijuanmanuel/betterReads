@@ -13,7 +13,9 @@ var userSchema = new Schema({
     surname: {type: String, required: true},
     dateOfBirth: {type: String, required: true},
     gender: {type: String, enum:['M', 'F'], default: 'M'},
-    library: [{type: Schema.Types.ObjectId, ref: 'Book'}]
+    library: [
+        {type: Schema.Types.ObjectId, ref: 'Book'}
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

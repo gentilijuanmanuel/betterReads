@@ -4,12 +4,27 @@ var Schema = mongoose.Schema;
 var bookSchema = new Schema({
     isbn: {type: String, required: true},
     title: {type: String, required: true},
-    author: {type: Schema.Types.ObjectId, ref: 'Author'},
+    author: {
+        name: {type:String, required:true},
+        surname: {type:String, required:true}
+    },
     description: {type: String},
-    image: {type: String, required: true},
-    genre: {type: String, enum: ['No ficción', 'Novela', 'Poesía', 'Ensayo', 'Terror', 'Filosofía', 'Policial', 'Fantástico', 'Biografía', 'Autobiografía', 'Diario de viajes'], required: true}
-    //reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
-    //quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}]
+    image: {type: String},
+
+    genre: {type: String, enum: ['No ficción', 'Novela', 'Poesía', 'Ensayo', 'Terror', 'Filosofía', 'Policial', 'Fantástico', 'Biografía', 'Autobiografía', 'Diario de viajes'], required: true},
+
+    quotes: [
+        {
+            quote: {type: String}
+        }
+    ],
+    reviews: [
+        {
+            stars: {type: Number},
+            comment: {type: String},
+            user: {type: String}
+        }
+    ]
 });
 
 module.exports = mongoose.model('Book', bookSchema);
