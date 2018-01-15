@@ -18,11 +18,13 @@ Please head to the [Wiki](https://github.com/julianpoma/betterReads/wiki)
 ## Try it out
 ### Backend setup
 * `cd /backend`
+* `npm install`
 * `npm start`
 * The server is running on `localhost:3000`
 
 ### Angular frontend
 * `cd /frontend`
+* `npm install`
 * `ng serve`
 * Head to `localhost:4200`
 
