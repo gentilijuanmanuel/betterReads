@@ -15,6 +15,17 @@ Here is a list of some of the technologies and libraries used in the project.
 ## Documentation
 Please head to the [Wiki](https://github.com/julianpoma/betterReads/wiki)
 
+## Try it out
+### Backend setup
+* `cd /backend`
+* `npm start`
+* The server is running on `localhost:3000`
+
+### Angular frontend
+* `cd /frontend`
+* `ng serve`
+* Head to `localhost:4200`
+
 ## Collaborators
 
 @julianpoma
