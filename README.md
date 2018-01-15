@@ -13,7 +13,7 @@ Here is a list of some of the technologies and libraries used in the project.
 - JWT Auth.
 
 ## Documentation
-Please head to the (Wiki)[https://github.com/julianpoma/betterReads/wiki] 
+Please head to the [Wiki](https://github.com/julianpoma/betterReads/wiki)
 
 ## Collaborators
 
