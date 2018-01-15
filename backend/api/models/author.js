@@ -9,7 +9,10 @@ var authorSchema = new Schema({
     gender: { type: String, enum: ['M', 'F'], default: 'M' },
     nationality: {type: String},
     language: {type: String},
-    photo: {type: String}
+    photo: {type: String},
+    books: [
+        { type: Schema.Types.ObjectId, ref: 'Book' }
+    ]
 });
 
 module.exports = mongoose.model('Author', authorSchema);

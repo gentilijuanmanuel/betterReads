@@ -156,7 +156,6 @@ router.post('/login', (req, res, next) => {
 
 /*
 * Add support to change password
-*
 */
 
 router.patch('/:userId', checkAuth, (req, res, next) => {
