@@ -67,49 +67,33 @@ router.post('/new', checkAuth, (req, res, next) => {
     });
 
     book.save()
-        .then(result => {
-            Author.findOne({ name: result.author.name, surname: result.author.surname })
-                .exec()
-                .then(author => {
-                    if(author) {
-                        author.books.push(result._id);
-                        author.save()
-                            .then(
-                                res.status(201)
-                                    .json({
-                                        message: "Book created successfully and added to author",
-                                        createdBook: {
-                                            _id: result._id,
-                                            title: result.title,
-                                            author: author._id
-                                        }
-                                    })
-                            )
-                            .catch(err => {
-                                res.status(500)
-                                    .json({
-                                        error: err
-                                    });
-                            });
-                    }
-                    else {
-                        res.status(201)
-                            .json({
-                                message: "Book created successfully",
-                                createdBook: {
-                                    _id: result._id,
-                                    title: result.title,
-                                }
-                            });
-                    }
-
-                })
-                .catch(err => {
-                    res.status(500)
-                        .json({
-                            error: err
-                        });
-                });
+        .then(book => {
+            Author.findOneAndUpdate(
+                { name: book.author.name, surname: book.author.surname },
+                { $push: { "books": book.id } },
+            )
+            .then(author => {
+                if(author) {
+                    res.status(201).json({
+                        message: "Book created successfully and added to author",
+                        status: 1,
+                        id: book.id,
+                        author: author._id
+                    });
+                } else {
+                    res.status(201).json({
+                        message: "Book created successfully",
+                        status: 2,
+                        id: book.id
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500)
+                    .json({
+                        error: err
+                    });
+            });
         })
         .catch(err => {
             res.status(500)
