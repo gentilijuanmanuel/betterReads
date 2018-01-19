@@ -10,7 +10,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     User.find()
-        .select('name surname email gender library')
+        .select('name surname email library')
         .exec()
         .then(userCollection => {
             const response = {
@@ -39,6 +39,7 @@ router.get('/:userId', (req, res, next) => {
 
     User.findById(id)
         .select('email name surname dateOfBirth gender library')
+        .populate('library')
         .exec()
         .then(result => {
             if(result) {
@@ -58,7 +59,7 @@ router.get('/:userId', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
 
-    User.find({'username': req.body.username})
+    User.find({'email': req.body.email})
         .exec()
         .then(user => {
 
@@ -89,12 +90,11 @@ router.post('/signup', (req, res, next) => {
 
                         user.save()
                             .then(result => {
-                                console.log(result);
                                 res.status(201).json({
                                     message: "User created successfully",
                                     createdUser: {
                                         _id: result._id,
-                                        username: result.username
+                                        email: result.email
                                     }
                                 });
                             })
@@ -130,7 +130,7 @@ router.post('/login', (req, res, next) => {
                             },
                             "asupersecretprivatekey:)",
                             {
-                                expiresIn: '1h'
+                                expiresIn: '5h'
 
                             });
 
@@ -155,24 +155,19 @@ router.post('/login', (req, res, next) => {
 });
 
 /*
-* PATCH is update, PUT is replace
-* JSON structure for requests
-*   [
-*	   {"change" : "name", "value" : "Julian"},
-*	   {"change" : "surname", "value" : "Poma"}
-*   ]
+* Add support to change password
 */
 
 router.patch('/:userId', checkAuth, (req, res, next) => {
     const id = req.params.userId;
 
-    const updateArray = {}
-
-    for(const ops of req.body) {
-        updateArray[ops.change] = ops.value;
+    const updateObject = {
+        name: req.body.name,
+        surname: req.body.surname,
+        dateOfBirth: req.body.dateOfBirth
     }
 
-    User.update({ _id: id }, { $set: updateArray })
+    User.update({ _id: id }, { $set: updateObject })
         .exec()
         .then(result => {
 
@@ -220,6 +215,42 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
                 res.status(200).json(response);
             }
         })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        { $push: { "library": req.params.idbook } },
+        { safe: true, upsert: true }
+    )
+        .then(res.status(201).json(
+            {
+                message: "Book added successfully"
+            }
+        ))
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        { $pull: { "library": req.params.idbook } },
+        { safe: true, upsert: true }
+    )
+        .then(res.status(201).json(
+            {
+                message: "Book removed successfully"
+            }
+        ))
         .catch(err => {
             res.status(500).json({
                 error: err
