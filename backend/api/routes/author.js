@@ -119,6 +119,68 @@ router.patch('/:id', checkAuth, (req, res, next) => {
         error: err
       });
     });
-})
+});
+
+router.delete('/:id', checkAuth, (req, res, next) => {
+  const id = req.params.id;
+  Author.remove({ _id: id })
+    .exec()
+    .then(result => {
+      const response = {
+        count: result.result.n,
+        status: result.result.ok,
+        message: 'Author deleted successfully'
+      }
+
+      if (result.result.n) {
+        res.status(200).json(response);
+      }
+      else {
+        response.message = 'No user was deleted';
+        res.status(200).json(response);
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
+  Author.findByIdAndUpdate(
+    req.params.id,
+    { $push: { "books": req.params.idbook }},
+    { safe: true, upsert: true }
+  )
+    .then(res.status(201).json(
+      {
+        message: "Book added successfully"
+      }
+    ))
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
+  Author.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { "books": req.params.idbook } },
+    { safe: true, upsert: true }
+  )
+    .then(res.status(201).json(
+      {
+        message: "Book removed successfully"
+      }
+    ))
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
 
 module.exports = router;

@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Book = mongoose.model('Book');
+const Author = mongoose.model('Author');
 const router = express.Router();
+const checkAuth = require('../middleware/check-auth');
 
 router.get('/', (req, res, next) => {
     Book.find()
@@ -28,7 +30,6 @@ router.get('/', (req, res, next) => {
         });
 });
 
-
 router.get('/:bookId', (req, res, next) => {
     const id = req.params.bookId;
 
@@ -51,7 +52,7 @@ router.get('/:bookId', (req, res, next) => {
         });
 });
 
-router.post('/new', (req, res, next) => {
+router.post('/new', checkAuth, (req, res, next) => {
 
     var book = new Book({
         isbn: req.body.isbn,
@@ -67,13 +68,47 @@ router.post('/new', (req, res, next) => {
 
     book.save()
         .then(result => {
-            res.status(201)
-                .json({
-                    message: "Book created successfully",
-                    createdBook: {
-                        _id: result._id,
-                        title: result.title,
+            Author.findOne({ name: result.author.name, surname: result.author.surname })
+                .exec()
+                .then(author => {
+                    if(author) {
+                        author.books.push(result._id);
+                        author.save()
+                            .then(
+                                res.status(201)
+                                    .json({
+                                        message: "Book created successfully and added to author",
+                                        createdBook: {
+                                            _id: result._id,
+                                            title: result.title,
+                                            author: author._id
+                                        }
+                                    })
+                            )
+                            .catch(err => {
+                                res.status(500)
+                                    .json({
+                                        error: err
+                                    });
+                            });
                     }
+                    else {
+                        res.status(201)
+                            .json({
+                                message: "Book created successfully",
+                                createdBook: {
+                                    _id: result._id,
+                                    title: result.title,
+                                }
+                            });
+                    }
+
+                })
+                .catch(err => {
+                    res.status(500)
+                        .json({
+                            error: err
+                        });
                 });
         })
         .catch(err => {
@@ -84,7 +119,7 @@ router.post('/new', (req, res, next) => {
         });
 });
 
-router.post('/:id/quote', (req, res, next) => {
+router.post('/:id/quote', checkAuth, (req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.id,
         { $push: { "quotes": { quote: req.body.quote } } },
@@ -124,5 +159,39 @@ router.post('/:id/review', (req, res, next) => {
         });
 });
 
+router.patch('/:id', checkAuth, (req, res, next) => {
+
+    const updateObject = {
+        title: req.body.title,
+        description: req.body.description,
+        image: req.body.image,
+        genre: req.body.genre,
+    }
+
+    Book.update({ _id: req.params.id }, { $set: updateObject })
+        .exec()
+        .then(result => {
+
+            if (result.nModified) {
+                res.status(200).json({
+                    status: result.ok,
+                    changed: result.nModified,
+                    message: 'Book updated successfully'
+                });
+            }
+            else {
+                res.status(200).json({
+                    status: result.ok,
+                    changed: result.nModified,
+                    message: 'No attributes were affected. Please check change and value attributes of your request.'
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+})
 
 module.exports = router;

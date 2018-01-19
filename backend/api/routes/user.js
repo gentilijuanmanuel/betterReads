@@ -222,4 +222,40 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
         });
 });
 
+router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        { $push: { "library": req.params.idbook } },
+        { safe: true, upsert: true }
+    )
+        .then(res.status(201).json(
+            {
+                message: "Book added successfully"
+            }
+        ))
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        { $pull: { "library": req.params.idbook } },
+        { safe: true, upsert: true }
+    )
+        .then(res.status(201).json(
+            {
+                message: "Book removed successfully"
+            }
+        ))
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 module.exports = router;

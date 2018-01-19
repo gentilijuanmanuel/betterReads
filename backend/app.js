@@ -7,8 +7,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/better-reads',{useMongoClient: true });
 require('./api/models/author.js');
 require('./api/models/book.js');
-// require('./api/models/quote.js');
-// require('./api/models/review.js');
 require('./api/models/user.js');
 
 app.use(bodyParser.urlencoded({extended: false}));
