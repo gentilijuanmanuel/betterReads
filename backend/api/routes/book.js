@@ -76,14 +76,14 @@ router.post('/new', checkAuth, (req, res, next) => {
                 if(author) {
                     res.status(201).json({
                         message: "Book created successfully and added to author",
-                        status: 1,
+                        code: 1,
                         id: book.id,
                         author: author._id
                     });
                 } else {
                     res.status(201).json({
                         message: "Book created successfully",
-                        status: 2,
+                        code: 2,
                         id: book.id
                     });
                 }
