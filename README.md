@@ -4,13 +4,18 @@ betterReads is a web page about authors and books reviews, similar to the known 
 
 Here is a list of some of the technologies and libraries used in the project.
 
+Frontend:
 - Angular 4.
-- Kute JS.
-- Bootstrap 4.
+- Angular Material.
+- Flex-Layout.
+- Material Icons.
+
+Backend:
 - MongoDB.
 - Mongoose.
 - Express.
 - NodeJS.
+- JWT Auth.
 
 ## Collaborators
 
