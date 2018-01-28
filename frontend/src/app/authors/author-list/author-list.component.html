@@ -1,0 +1,20 @@
+<div flex fxLayout="row" fxLayout.lt-md="column">  
+  <div fxFlex="15"></div>
+  <div fxFlex="40">
+    <mat-list class="list">
+      <mat-list-item *ngFor="let author of authors">
+        <h3 matLine>{{author.name}} {{author.surname}}</h3>
+        <p matLine>
+          <span>{{author.dateOfBirth}} - {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</span>
+          <!-- El pipe | date le da un formato re copado a las fechas. Con algunas, se cae. -->
+          <br>
+          <span>{{author.ocupation}}</span>
+        </p>
+        <button mat-raised-button color="primary" (click)="onSelect(author)">Detalles <i class="material-icons">face</i></button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div fxFlex="40">
+    <app-author-detail [author]="selectedAuthor"></app-author-detail>
+  </div>
+</div>
