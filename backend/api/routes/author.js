@@ -45,46 +45,46 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Author.findById(req.params.id)
-        .select('name surname dateOfBirth gender')
-        //.populate('books')
-        //.populate('quotes')
-        //.populate('reviews')
-        .exec()
-        .then(auth => {
-          if(auth) {
-            res.status(200).json(auth);
-          } else {
-            res.status(200).json({
-              message: 'No author found with that ID'
-            });
-          }
-        })
-        .catch(err => {
-          res.status(500).json({
-            error: err
+      .select('name surname dateOfBirth dateOfDeath nationality language photo gender')
+      .populate('books')
+      .exec()
+      .then(auth => {
+        if(auth) {
+          res.status(200).json(auth);
+        } else {
+          res.status(200).json({
+            message: 'No author found with that ID'
           });
+        }
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: err
         });
+      });
 });
 
 router.post('/new', checkAuth, (req, res, next) => {
     const author = new Author({
-        name: req.body.name,
-        surname: req.body.surname,
-        dateOfBirth: req.body.dateOfBirth,
-        gender: req.body.gender
-        //reviews: req.body.reviews,
-        //books: req.body.books
+      name: req.body.name,
+      surname: req.body.surname,
+      dateOfBirth: req.body.dateOfBirth,
+      dateOfDeath: req.body.dateOfDeath,
+      nationality: req.body.nationality,
+      language: req.body.language,
+      photo: req.body.photo,
+      gender: req.body.gender
     });
 
     author.save()
         .then(result => {
-            console.log(result);
             res.status(201)
                 .json({
                     message: "Author created successfully",
                     createdAuthor: {
                         _id: result._id,
-                        name: result.name + ' ' + result.surname,
+                        name: result.name,
+                        surname: result.surname
                     }
                 });
         })
@@ -97,15 +97,14 @@ router.post('/new', checkAuth, (req, res, next) => {
 });
 
 router.patch('/:id', checkAuth, (req, res, next) => {
-  const id = req.params.id;
 
-  const updateArray = {}
-
-  for (const ops of req.body) {
-    updateArray[ops.change] = ops.value;
+  const updateObject = {
+    dateOfDeath: req.body.dateOfDeath,
+    nationality: req.body.nationality,
+    language: req.body.nationality
   }
 
-  Author.update({ _id: id }, { $set: updateArray })
+  Author.update({ _id: req.params.id }, { $set: updateObject })
     .exec()
     .then(result => {
 
@@ -137,7 +136,6 @@ router.delete('/:id', checkAuth, (req, res, next) => {
   Author.remove({ _id: id })
     .exec()
     .then(result => {
-
       const response = {
         count: result.result.n,
         status: result.result.ok,
@@ -148,7 +146,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
         res.status(200).json(response);
       }
       else {
-        response.message = 'No author was deleted';
+        response.message = 'No user was deleted';
         res.status(200).json(response);
       }
     })
@@ -159,5 +157,40 @@ router.delete('/:id', checkAuth, (req, res, next) => {
     });
 });
 
+router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
+  Author.findByIdAndUpdate(
+    req.params.id,
+    { $push: { "books": req.params.idbook }},
+    { safe: true, upsert: true }
+  )
+    .then(res.status(201).json(
+      {
+        message: "Book added successfully"
+      }
+    ))
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
+  Author.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { "books": req.params.idbook } },
+    { safe: true, upsert: true }
+  )
+    .then(res.status(201).json(
+      {
+        message: "Book removed successfully"
+      }
+    ))
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
 
 module.exports = router;

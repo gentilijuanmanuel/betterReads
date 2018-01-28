@@ -4,8 +4,9 @@ betterReads is a web page about authors and books reviews, similar to the known 
 
 Here is a list of some of the technologies and libraries used in the project.
 
+
 Frontend:
-- Angular 4.
+- Angular 5.
 - Angular Material.
 - Flex-Layout.
 - Material Icons.
@@ -16,6 +17,22 @@ Backend:
 - Express.
 - NodeJS.
 - JWT Auth.
+
+## Documentation
+Please head to the [Wiki](https://github.com/julianpoma/betterReads/wiki)
+
+## Try it out
+### Backend setup
+* `cd /backend`
+* `npm install`
+* `npm start`
+* The server is running on `localhost:3000`
+
+### Angular frontend
+* `cd /frontend`
+* `npm install`
+* `ng serve`
+* Head to `localhost:4200`
 
 ## Collaborators
 
