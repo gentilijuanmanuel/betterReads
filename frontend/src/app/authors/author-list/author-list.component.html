@@ -1,0 +1,19 @@
+<mat-grid-list cols="2" rowHeight="1200px">
+    <mat-grid-tile> 
+        <mat-list>
+            <mat-list-item *ngFor="let author of authors">
+              <h3 matLine>{{author.name}} {{author.surname}}</h3>
+              <p matLine>
+                <span>{{author.dateOfBirth}} - {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</span>
+                <!-- El pipe | date le da un formato re copado a las fechas. Con algunas, se cae. -->
+                <br>
+                <span>{{author.ocupation}}</span>
+              </p>
+              <button mat-raised-button color="primary" (click)="onSelect(author)">Detalles <i class="material-icons">face</i></button>
+            </mat-list-item>
+          </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-author-detail [author]="selectedAuthor"></app-author-detail>
+    </mat-grid-tile>
+  </mat-grid-list>

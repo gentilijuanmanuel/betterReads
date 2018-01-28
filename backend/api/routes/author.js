@@ -6,6 +6,7 @@ const checkAuth = require('../middleware/check-auth');
 
 const ObjectId = mongoose.Types.ObjectId;
 
+/*
 router.get('/', (req, res, next) => {
     Author.find()
         .select('name surname gender')
@@ -31,6 +32,15 @@ router.get('/', (req, res, next) => {
                     error: err
                 });
         });
+});
+*/
+
+router.get('/', (req, res, next) => {
+  Author.find({}).then(authors =>{
+    if (!authors) { return res.sendStatus(401); }
+    return res.json(authors) 
+  })
+  .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
