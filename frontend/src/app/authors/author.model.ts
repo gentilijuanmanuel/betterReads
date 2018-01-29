@@ -8,8 +8,9 @@ export class Author {
     public language: string;
     public ocupation: string;
     public photo: string;
+    public books: number[];
 
-    constructor (name: string, surname: string, dateOfBirth: string, dateOfDeath: string, gender: string, nationality: string, language: string, ocupation: string, photo: string) {
+    constructor (name: string, surname: string, dateOfBirth: string, dateOfDeath: string, gender: string, nationality: string, language: string, ocupation: string, photo: string, books: number[]) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -19,5 +20,6 @@ export class Author {
         this.language = language;
         this.ocupation = ocupation;
         this.photo = photo;
+        this.books = books;
     }
 }

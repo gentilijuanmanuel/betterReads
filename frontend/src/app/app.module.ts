@@ -15,6 +15,9 @@ import { AuthorsComponent } from './authors/authors.component';
 import { AuthorListComponent } from './authors/author-list/author-list.component';
 import { AuthorDetailComponent } from './authors/author-detail/author-detail.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { BooksComponent } from './books/books.component';
+import { BookListComponent } from './books/book-list/book-list.component';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { AppRoutingModule } from './/app-routing.module';
     FooterComponent,
     AuthorsComponent,
     AuthorListComponent,
-    AuthorDetailComponent
+    AuthorDetailComponent,
+    BooksComponent,
+    BookListComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,

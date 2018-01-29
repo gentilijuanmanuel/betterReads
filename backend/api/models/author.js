@@ -9,6 +9,7 @@ var authorSchema = new Schema({
     gender: { type: String, enum: ['M', 'F'], default: 'M' },
     nationality: {type: String},
     language: {type: String},
+    ocupation: {type: String},
     photo: {type: String},
     books: [
         { type: Schema.Types.ObjectId, ref: 'Book' }

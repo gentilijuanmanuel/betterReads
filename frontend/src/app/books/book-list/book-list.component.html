@@ -1,0 +1,21 @@
+<div flex fxLayout="row" fxLayout.lt-md="column">  
+  <div fxFlex="15"></div>
+  <div fxFlex="40">
+    <mat-list class="list">
+      <mat-list-item *ngFor="let book of books">
+        <h3 matLine>"{{book.title}}"</h3>
+        <p matLine>
+          <span>{{book.author.name}} {{book.author.surname}}</span>
+          <br>
+          <mat-chip-list>
+            <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+          </mat-chip-list>
+        </p>
+        <button mat-raised-button color="primary" (click)="onSelect(book)">Detalles <i class="material-icons">book</i></button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div fxFlex="40">
+    <app-book-detail [book]="selectedBook"></app-book-detail>
+  </div>
+</div>
