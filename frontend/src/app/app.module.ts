@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorListComponent } from './authors/author-list/author-list.component';
 import { AuthorDetailComponent } from './authors/author-detail/author-detail.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AuthorDetailComponent } from './authors/author-detail/author-detail.com
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
