@@ -8,7 +8,9 @@
           <span>{{author.dateOfBirth}} - {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</span>
           <!-- El pipe | date le da un formato re copado a las fechas. Con algunas, se cae. -->
           <br>
-          <span>{{author.ocupation}}</span>
+          <mat-chip-list>
+            <mat-chip color="accent" selected="true">{{author.ocupation}}</mat-chip> 
+          </mat-chip-list>
         </p>
         <button mat-raised-button color="primary" (click)="onSelect(author)">Detalles <i class="material-icons">face</i></button>
       </mat-list-item>

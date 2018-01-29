@@ -5,6 +5,7 @@ const Author = mongoose.model('Author');
 const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
 
+/*
 router.get('/', (req, res, next) => {
     Book.find()
         .select('isbn title author description image')
@@ -29,6 +30,15 @@ router.get('/', (req, res, next) => {
                 });
         });
 });
+*/
+
+router.get('/', (req, res, next) => {
+    Book.find({}).then(books =>{
+      if (!books) { return res.sendStatus(401); }
+      return res.json(books) 
+    })
+    .catch(next);
+  });
 
 router.get('/:bookId', (req, res, next) => {
     const id = req.params.bookId;
