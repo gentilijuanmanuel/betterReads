@@ -38,7 +38,9 @@
               Una lista de los mejores títulos de {{author.surname}}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>IMPLEMENTAR</p>
+          <div *ngFor="let book of author.books">
+              <p>{{book.title}}</p>
+          </div>  
         </mat-expansion-panel>
       </mat-accordion>
       <mat-accordion>
