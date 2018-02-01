@@ -54,9 +54,31 @@
                 Las opiniones de la comunidad sobre {{author.surname}}
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <p>IMPLEMENTAR</p>
+            <div *ngFor="let r of author.reviews">
+                <p>"{{r.comment}}"</p>
+                <p>Usuario: {{r.user}}</p>
+                <hr>
+            </div>
           </mat-expansion-panel>
-        </mat-accordion>
+      </mat-accordion>
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Frases
+            </mat-panel-title>
+            <mat-panel-description style="width: 300px;">
+                Frases de {{author.surname}} publicadas por usuarios
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngFor="let q of author.quotes">
+            <p>"{{q.quote}}"</p>
+            <p>Usuario: {{q.user}}</p>
+            <hr>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     <!--<mat-card-actions>
       <button mat-button>Hola</button>
     </mat-card-actions>-->
