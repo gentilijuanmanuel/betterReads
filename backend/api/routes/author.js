@@ -72,7 +72,8 @@ router.post('/new', checkAuth, (req, res, next) => {
       nationality: req.body.nationality,
       language: req.body.language,
       photo: req.body.photo,
-      gender: req.body.gender
+      gender: req.body.gender,
+      ocupation: req.body.ocupation
     });
 
     author.save()
