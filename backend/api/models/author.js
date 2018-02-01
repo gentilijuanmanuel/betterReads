@@ -17,6 +17,11 @@ var authorSchema = new Schema({
     quotes: [{
         quote: { type: String },
         user: { type: String }
+    }],
+    reviews: [{
+        stars: { type: Number },
+        comment: { type: String },
+        user: { type: String }
     }]
 });
 
