@@ -101,7 +101,8 @@ router.patch('/:id', checkAuth, (req, res, next) => {
   const updateObject = {
     dateOfDeath: req.body.dateOfDeath,
     nationality: req.body.nationality,
-    language: req.body.nationality
+    language: req.body.language,
+    ocupation: req.body.ocupation
   }
 
   Author.update({ _id: req.params.id }, { $set: updateObject })
