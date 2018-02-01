@@ -44,7 +44,6 @@ router.get('/:bookId', (req, res, next) => {
     const id = req.params.bookId;
 
     Book.findById(id)
-        .select('isbn title author description image quotes reviews')
         .exec()
         .then(result => {
             if(result) {
@@ -116,7 +115,12 @@ router.post('/new', checkAuth, (req, res, next) => {
 router.post('/:id/quote', checkAuth, (req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.id,
-        { $push: { "quotes": { quote: req.body.quote } } },
+        { $push: { "quotes": 
+            { 
+                quote: req.body.quote,
+                user: req.body.user  
+            } 
+        } },
         { safe: true, upsert: true }
     )
     .then(res.status(201).json(

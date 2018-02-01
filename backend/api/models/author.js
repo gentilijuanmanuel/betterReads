@@ -14,15 +14,19 @@ var authorSchema = new Schema({
     books: [
         { type: Schema.Types.ObjectId, ref: 'Book' }
     ],
-    quotes: [{
-        quote: { type: String },
-        user: { type: String }
-    }],
-    reviews: [{
-        stars: { type: Number },
-        comment: { type: String },
-        user: { type: String }
-    }]
+    quotes: [
+        {
+            quote: { type: String },
+            user: { type: String }
+        }
+    ],
+    reviews: [
+        {
+            stars: { type: Number },
+            comment: { type: String },
+            user: { type: String }
+        }
+    ]
 });
 
 module.exports = mongoose.model('Author', authorSchema);

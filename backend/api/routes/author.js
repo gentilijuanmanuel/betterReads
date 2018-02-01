@@ -9,7 +9,7 @@ const ObjectId = mongoose.Types.ObjectId;
 /*
 router.get('/', (req, res, next) => {
     Author.find()
-        .select('name surname gender')
+        .select('name surname dateOfBirth dateOfDeath')
         .exec()
         .then(authors => {
             const response = {
@@ -45,7 +45,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Author.findById(req.params.id)
-      .select('name surname dateOfBirth dateOfDeath nationality language photo gender')
       .populate('books')
       .exec()
       .then(auth => {
@@ -184,6 +183,55 @@ router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
     .then(res.status(201).json(
       {
         message: "Book removed successfully"
+      }
+    ))
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+router.post('/:id/quote', checkAuth, (req, res, next) => {
+  Author.findByIdAndUpdate(
+    req.params.id,
+    { $push: { "quotes": 
+      { 
+        quote: req.body.quote,
+        user: req.body.user  
+      } 
+    } },
+    { safe: true, upsert: true }
+  )
+    .then(res.status(201).json(
+      {
+        message: "Quote added successfully"
+      }
+    ))
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+router.post('/:id/review', (req, res, next) => {
+  Author.findByIdAndUpdate(
+    req.params.id,
+    {
+      $push: {
+        "reviews": {
+          stars: req.body.stars,
+          comment: req.body.comment,
+          user: req.body.user
+        }
+      }
+    },
+    { safe: true, upsert: true }
+  )
+    .then(res.status(201).json(
+      {
+        message: "Review added successfully"
       }
     ))
     .catch(err => {
