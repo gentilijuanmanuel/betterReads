@@ -10,12 +10,11 @@ var bookSchema = new Schema({
     },
     description: {type: String},
     image: {type: String},
-
     genre: {type: String, enum: ['No ficción', 'Novela', 'Poesía', 'Ensayo', 'Terror', 'Filosofía', 'Policial', 'Fantástico', 'Biografía', 'Autobiografía', 'Diario de viajes'], required: true},
-
     quotes: [
         {
-            quote: {type: String}
+            quote: {type: String},
+            user: { type: String }
         }
     ],
     reviews: [

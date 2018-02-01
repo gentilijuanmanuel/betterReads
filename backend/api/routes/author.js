@@ -36,7 +36,7 @@ router.get('/', (req, res, next) => {
 */
 
 router.get('/', (req, res, next) => {
-  Author.find({}).then(authors =>{
+  Author.find({}).populate('book').then(authors =>{
     if (!authors) { return res.sendStatus(401); }
     return res.json(authors) 
   })

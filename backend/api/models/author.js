@@ -13,7 +13,11 @@ var authorSchema = new Schema({
     photo: {type: String},
     books: [
         { type: Schema.Types.ObjectId, ref: 'Book' }
-    ]
+    ],
+    quotes: [{
+        quote: { type: String },
+        user: { type: String }
+    }]
 });
 
 module.exports = mongoose.model('Author', authorSchema);
