@@ -22,4 +22,9 @@ export class AuthorService {
     let url = this.firstPartUrl + "author";
     return this.getData(url);
   }
+
+  getAuthorById(id: string) {
+    let url = this.firstPartUrl + "author/" + id;
+    return this.getData(url);
+  }
 }
