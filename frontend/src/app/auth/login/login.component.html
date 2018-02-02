@@ -1,0 +1,81 @@
+<section class="main">
+  <section class="presentation" fxFlex=60>
+    <h1>Bienvenido a betterReads</h1>
+    <p>Conectese con mas de 15000 aficionados a la lectura por toda América Latina.</p>
+  </section>
+
+  <section class="login-form" fxFlex=40>
+    <mat-card fxFlex="400px">
+      <mat-card-title>
+        Iniciar sesión
+      </mat-card-title>
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #f="ngForm" (ngSubmit)="login(f)">
+  
+        <mat-form-field>
+          <input matInput ngModel name="email" type="email" placeholder="Ingrese su email" email #emailInput="ngModel" required>
+          <mat-error *ngIf="emailInput.hasError('required')">Este campo es requerido.</mat-error>
+          <mat-error *ngIf="!emailInput.hasError('required')">El texto ingresado no es un email.</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input type="password" name="password" ngModel matInput placeholder="Ingrese su contraseña" #passwordInput="ngModel" required>
+          <mat-error *ngIf="passwordInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+  
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">INGRESAR</button>
+      </form>
+    </mat-card>
+  </section>
+</section>
+
+<section class="signup-form" fxLayoutAlign="center">
+  <mat-card fxFlex="500px">
+    <mat-card-title>
+       ¿Aún no está con nosotros?
+    </mat-card-title>
+    <mat-card-content>
+      Ingrese sus datos y forme parte de esta hermosa comunidad.
+    </mat-card-content>
+
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #g="ngForm" (ngSubmit)="signup(g)">
+      <mat-form-field>
+        <input matInput ngModel name="email" type="email" placeholder="Ingrese su email" email required #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.hasError('required')">Este campo es requerido.</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">El texto ingresado no es un email.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="password" name="password" ngModel matInput placeholder="Ingrese su contraseña" required #passwordInput="ngModel">
+        <mat-error *ngIf="passwordInput.hasError('required')">Este campo es requerido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" name="name" ngModel matInput placeholder="Ingrese su nombre" #nameInput="ngModel" required>
+        <mat-error *ngIf="nameInput.hasError('required')">Este campo es requerido.</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" name="surname" ngModel matInput placeholder="Ingrese su apellido" #surnameInput="ngModel" required>
+        <mat-error *ngIf="surnameInput.hasError('required')">Este campo es requerido.</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Su fecha de nacimiento" [max]="maxDate" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-radio-group fxLayoutGap="25px" ngModel name="gender" required>
+        <mat-radio-button value="M">Masculino</mat-radio-button>
+        <mat-radio-button value="F">Femenino</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-checkbox ngModel name="agree" required>Acepto todos los terminos y condiciones.</mat-checkbox>
+
+      <button type="submit" mat-raised-button color="primary" [disabled]="g.invalid">REGISTRARME</button>
+    </form>
+
+  </mat-card>
+</section>

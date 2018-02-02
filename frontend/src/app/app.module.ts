@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,6 +18,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BooksComponent } from './books/books.component';
 import { BookListComponent } from './books/book-list/book-list.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
     AuthorDetailComponent,
     BooksComponent,
     BookListComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,49 @@
+.main {
+    padding-bottom: 35px;
+    padding-top: 15px;
+    background-color: lightgoldenrodyellow;
+}
+
+.login-form {
+    margin: 10px 10px;
+}
+
+.signup-form {
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.presentation {
+    text-align: center;
+}
+
+.presentation h1 {
+    font-size: 48px;
+    font-family: 'Lobster', cursive;
+}
+
+.presentation p {
+    font-size: 24px;
+    width: 60%;
+    margin: auto;
+}
+
+mat-form-field {
+    width: 300px;
+}
+
+mat-radio-group {
+    padding-bottom: 12px;
+}
+
+mat-checkbox {
+    padding-bottom: 12px;
+}
+
+mat-card-title {
+    text-align: center;
+}
+
+mat-card-content {
+    text-align: center;
+}
