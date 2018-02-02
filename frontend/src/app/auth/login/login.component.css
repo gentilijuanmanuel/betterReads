@@ -1,0 +1,21 @@
+.login-form {
+    width: 50%;
+    margin: 10px 10px;
+}
+
+.signup-form {
+    width: 100%;
+    margin: 20px 10px;
+}
+
+mat-form-field {
+    width: 300px;
+}
+
+mat-radio-group {
+    padding-bottom: 12px;
+}
+
+mat-checkbox {
+    padding-bottom: 12px;
+}
