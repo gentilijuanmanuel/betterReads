@@ -23,4 +23,15 @@ export class AuthService {
       }
     )
   }
+
+  signup(newUser) {
+    return this.http.post(
+      'http://localhost:3000/api/user/signup',
+      newUser
+    )
+    .map(
+      response => response.json(),
+      error => console.log(error)
+    );
+  }
 }

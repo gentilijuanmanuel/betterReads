@@ -30,14 +30,23 @@ export class LoginComponent implements OnInit {
         response => {},
 
         error => { 
-          this.snackBar.open("Los datos ingresados no son validos.", null, { duration: 3500 }
-        )},
+          this.snackBar.open("Los datos ingresados no son validos.", null, { duration: 3500 });
+        },
 
         () => this.router.navigate(['authors'])
       )
   }
 
   signup (form: NgForm) {
-    console.log(form);
+    this.authService.signup(form.value)
+      .subscribe(
+        response => {},
+        err => {
+          this.snackBar.open("El email ingresado ya ha sido registrado.", null, { duration: 3500 });
+        },
+        () => {
+          this.login(form);
+        }
+      )
   }
 }
