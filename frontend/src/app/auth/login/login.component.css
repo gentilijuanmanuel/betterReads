@@ -17,6 +17,18 @@
     text-align: center;
 }
 
+.presentation h1 {
+    font-size: 48px;
+    font-family: 'Lobster', cursive;
+}
+
+.presentation p {
+    font-size: 24px;
+    width: 60%;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
 mat-form-field {
     width: 300px;
 }
