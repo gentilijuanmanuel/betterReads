@@ -1,85 +1,172 @@
-<mat-card class="author-card" *ngIf="author">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
-      <mat-card-subtitle>{{author.dateOfBirth}} / {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://cdn.mhpbooks.com/uploads/2013/10/AVT_Georges-Perec_2570.jpeg" alt="author">
-    <br>
-    <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Datos personales
-            </mat-panel-title>
-            <mat-panel-description>
-              {{author.name}} {{author.surname}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>Nombre: {{author.name}}.</p>
-          <p>Apellido: {{author.surname}}.</p>
-          <p>Fecha de nacimiento: {{author.dateOfBirth}}.</p>
-          <p>Fecha de defunción: {{(author.dateOfDeath === "") ? 'Aún vive' : author.dateOfDeath }}.</p>
-          <p>Género: {{(author.gender === 'M') ? 'Masculino.' : 'Femenino.'}}</p>
-          <p>Nacionalidad: {{author.nationality}}.</p>
-          <p>Lengua materna: {{author.language}}.</p>
-          <p style="width: 300px;">Ocupación: {{author.ocupation}}.</p>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Libros publicados
-            </mat-panel-title>
-            <mat-panel-description>
-              Una lista de los mejores títulos de {{author.surname}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div *ngFor="let book of author.books">
-              <p>{{book.title}}</p>
-          </div>  
-        </mat-expansion-panel>
-      </mat-accordion>
-      <mat-accordion>
+<div fxLayout="row" fxLayout.lt-md="column">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span class="example-fill-remaining-space"><a style="color: white; text-decoration:none;" routerLink="/">Una vista en detalle de la vida y obra de {{author.name}} {{author.surname}}</a></span>
+        <span class="example-spacer"></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
+    <div fxFlex="20">
+      <br>
+      <mat-card class="author-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
+            <mat-card-subtitle>{{author.dateOfBirth}} / {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://cdn.mhpbooks.com/uploads/2013/10/AVT_Georges-Perec_2570.jpeg" alt="{{author.name}} {{author.surname}}">
+        <br>
+        <mat-accordion>
           <mat-expansion-panel (opened)="panelOpenState = true"
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Reviews de usuarios
+                Datos personales
               </mat-panel-title>
-              <mat-panel-description style="width: 300px;">
-                Las opiniones de la comunidad sobre {{author.surname}}
+              <mat-panel-description>
+                {{ (panelOpenState) ? "Un prolífico autor" : author.name + ' ' + author.surname }}
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngFor="let r of author.reviews">
-                <p>"{{r.comment}}"</p>
-                <p>Usuario: {{r.user}}</p>
-                <hr>
-            </div>
+            <!--<p>Nombre: {{author.name}}.</p>
+            <p>Apellido: {{author.surname}}.</p>
+            <p>Fecha de nacimiento: {{author.dateOfBirth}}.</p>
+            <p>Fecha de defunción: {{(author.dateOfDeath === "") ? 'Aún vive' : author.dateOfDeath }}.</p>
+            <p>Género: {{(author.gender === 'M') ? 'Masculino.' : 'Femenino.'}}</p>
+            <p>Nacionalidad: {{author.nationality}}.</p>
+            <p>Lengua materna: {{author.language}}.</p>
+            <p style="width: 300px;">Ocupación: {{author.ocupation}}.</p>-->
+            <ul>
+              <li>
+                Nombre: {{author.name}}.
+              </li>
+              <li>
+                Apellido: {{author.surname}}.
+              </li>
+              <li>
+                Fecha de nacimiento: {{author.dateOfBirth}}.
+              </li>
+              <li>
+                Fecha de defunción: {{(author.dateOfDeath === "") ? 'Aún vive' : author.dateOfDeath }}.
+              </li>
+              <li>
+                Género: {{(author.gender === 'M') ? 'Masculino.' : 'Femenino.'}}
+              </li>
+              <li>
+                Nacionalidad: {{author.nationality}}.
+              </li>
+              <li>
+                Lengua materna: {{author.language}}.
+              </li>
+              <li>
+                Ocupación: {{author.ocupation}}.
+              </li>
+            </ul>
           </mat-expansion-panel>
-      </mat-accordion>
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                               (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                Frases
-            </mat-panel-title>
-            <mat-panel-description style="width: 300px;">
-                Frases de {{author.surname}} publicadas por usuarios
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div *ngFor="let q of author.quotes">
-            <p>"{{q.quote}}"</p>
-            <p>Usuario: {{q.user}}</p>
-            <hr>
+        </mat-accordion>
+      </mat-card>
+      <br>
+    </div>
+    <div fxFlex="1"></div>
+    <div fxLayout="column" fxFlex="79">
+        <div flex>
+            <br>
+            <mat-card class="book-card">
+                <mat-card-header>
+                  <mat-card-title>Libros publicados por {{author.name}} {{author.surname}}</mat-card-title>
+                  <mat-card-subtitle>Una lista de los títulos más destacados del autor </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <div *ngFor="let book of author.books" flex fxLayout="row" fxLayout.lt-md="column">
+                    <div fxFlex="30">
+                        <mat-card>
+                          <div flex fxLayout="row">
+                              <mat-card-header class="italic">
+                                  <mat-card-title>{{book.title}}</mat-card-title>
+                                  <mat-card-subtitle>ISBN: {{book.isbn}}</mat-card-subtitle>
+                                </mat-card-header>
+                          </div>
+                          <!-- RENEGAR CON ESTO -->
+                          <!--<img mat-card-image class="image" src="http://www.libropatas.com/wp-content/uploads/2014/12/la-vida-instrucciones-de-uso.jpg" alt="{{book.title}">-->
+                          <div flex fxLayout="row" fxLayout.lt-md="column">
+                            <mat-card-content>
+                              <p>{{book.description}}</p>
+                              <mat-chip-list>
+                                <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+                                </mat-chip-list>
+                            </mat-card-content>
+                          </div>
+                          <div flex fxLayout="row-reverse">
+                            <mat-card-actions>
+                              <button mat-raised-button color="primary" mat-button>DETALLES</button>
+                            </mat-card-actions>
+                          </div>
+                        </mat-card>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+        </div>
+        <br>
+        <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
+          <div fxFlex="50">
+              <mat-card class="quote-card">
+                  <mat-card-header>
+                    <mat-card-title>Frases famosas de {{author.name}} {{author.surname}}</mat-card-title>
+                    <mat-card-subtitle>Extractos de charlas, entrevistas, conferencias, que se inmortalizaron entre comillas</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div *ngFor="let q of author.quotes" flex fxLayout="column">
+                      <div flex fxLayout="row">
+                        <mat-card>
+                          <mat-card-header class="italic">
+                            <mat-card-title>"{{q.quote}}"</mat-card-title>
+                            <mat-card-subtitle>Publicado por {{q.user}}</mat-card-subtitle>
+                          </mat-card-header>
+                        </mat-card>
+                      </div>
+                      <br>
+                    </div>
+                  </mat-card-content>
+                  <div flex fxLayout="row-reverse">
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" mat-button>PUBLICAR UNA QUOTE</button>
+                      </mat-card-actions>
+                  </div>
+                </mat-card>
+                <br>
           </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    <!--<mat-card-actions>
-      <button mat-button>Hola</button>
-    </mat-card-actions>-->
-</mat-card>
+          <div fxFlex="1"></div>
+          <div fxFlex="49">
+              <mat-card class="quote-card">
+                  <mat-card-header>
+                    <mat-card-title>Reviews de la comunidad <span class="italic">BetterReads</span> sobre {{author.name}} {{author.surname}}</mat-card-title>
+                    <mat-card-subtitle>La opinión de nuestros usuarios sobre la vida y obra de {{author.name}}  {{author.surname}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div *ngFor="let r of author.reviews" flex fxLayout="column">
+                      <div flex fxLayout="row">
+                        <mat-card>
+                          <mat-card-header class="italic">
+                            <mat-card-title>"{{r.comment}}"</mat-card-title>
+                            <mat-card-subtitle>Publicado por {{r.user}}</mat-card-subtitle>
+                          </mat-card-header>
+                          <mat-card-content>
+                              <p>{{r.stars}} de 5 estrellas.</p>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                      <br>
+                    </div>
+                  </mat-card-content>
+                  <div flex fxLayout="row-reverse">
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" mat-button>PUBLICAR UNA REVIEW</button>
+                      </mat-card-actions>
+                  </div>
+                </mat-card>
+                <br>
+          </div>
+        </div>
+    </div>
+</div>

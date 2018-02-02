@@ -1,22 +1,43 @@
-<div flex fxLayout="row" fxLayout.lt-md="column">  
-  <div fxFlex="15"></div>
-  <div fxFlex="40">
-    <mat-list class="list">
-      <mat-list-item *ngFor="let author of authors">
-        <h3 matLine>{{author.name}} {{author.surname}}</h3>
-        <p matLine>
-          <span>{{author.dateOfBirth}} - {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</span>
-          <!-- El pipe | date le da un formato re copado a las fechas. Con algunas, se cae. -->
-          <br>
-          <mat-chip-list>
-            <mat-chip color="accent" selected="true">{{author.ocupation}}</mat-chip> 
-          </mat-chip-list>
-        </p>
-        <button mat-raised-button color="primary" (click)="onSelect(author)">Detalles <i class="material-icons">face</i></button>
-      </mat-list-item>
-    </mat-list>
-  </div>
-  <div fxFlex="40">
-    <app-author-detail [author]="selectedAuthor"></app-author-detail>
+<div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
+  <div fxFlex="60">
+    <div *ngFor="let author of authors">
+        <mat-card class="example-card">
+          <div fxLayout="column">
+            <div fxLayout="row">
+                <mat-card-header>
+                    <div mat-card-avatar class="author-header-image"></div>
+                    <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
+                    <mat-card-subtitle>{{author.dateOfBirth}} - {{ (author.dateOfDeath === "") ? "Actualidad" : author.dateOfBirth }}</mat-card-subtitle>
+                </mat-card-header>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="30">
+                  <p style="font-style: italic;">"{{author.quotes[0].quote}}"</p>
+                  <p style="font-style: italic;">"{{author.quotes[1].quote}}"</p>
+                </div>
+                <div fxFlex="65" fxFlexOffset="5">
+                  <mat-card-content>
+                    <p>
+                      {{author.name}} {{author.surname}} nació en la fecha {{author.dateOfBirth}}. {{author.dateOfDeath === "" ? 'Aún vive' : 'Murió el ' + author.dateOfDeath }}. Su nacionalidad: {{author.nationality}}, su lengua materna: {{author.language}}. {{(author.dateOfDeath === "") ? "Es:" : "Ha sido:"}} {{author.ocupation}}.
+                    </p>
+                    <p>
+                      Para conocer más sobre este prolífico autor, haz click en "Detalles" y podrás ver sus libros publicados, sus frases más interesantes y la opinión de la comunidad BetterReads sobre su labor.
+                    </p>
+                    <mat-chip-list>
+                      <mat-chip color="accent" selected="true">{{author.ocupation}}</mat-chip>
+                    </mat-chip-list>
+                  </mat-card-content>
+                </div>
+            </div>
+            <div fxLayout="row-reverse">
+              <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="onSelect(author._id)">DETALLES</button>
+              </mat-card-actions>
+            </div>
+          </div>
+        </mat-card>
+        <br>
+    </div>
   </div>
 </div>
+
