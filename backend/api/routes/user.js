@@ -134,7 +134,7 @@ router.post('/login', (req, res, next) => {
 
                             });
 
-                            res.status(401).json({
+                            res.status(200).json({
                                 message: 'Authentication success.',
                                 token: token
                             });

@@ -19,6 +19,7 @@ import { BooksComponent } from './books/books.component';
 import { BookListComponent } from './books/book-list/book-list.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { LoginComponent } from './auth/login/login.component';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

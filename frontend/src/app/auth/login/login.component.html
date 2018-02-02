@@ -9,7 +9,7 @@
       <mat-card-title>
         Iniciar sesión
       </mat-card-title>
-      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #f="ngForm" (ngSubmit)="login(f)">
   
         <mat-form-field>
           <input matInput ngModel name="email" type="email" placeholder="Ingrese su email" email #emailInput="ngModel" required>
@@ -23,7 +23,6 @@
         </mat-form-field>
   
         <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">INGRESAR</button>
-  
       </form>
     </mat-card>
   </section>
@@ -38,7 +37,7 @@
       Ingrese sus datos y forme parte de esta hermosa comunidad.
     </mat-card-content>
 
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #g="ngForm" (ngSubmit)="onSubmit(g)">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #g="ngForm" (ngSubmit)="signup(g)">
       <mat-form-field>
         <input matInput ngModel name="email" type="email" placeholder="Ingrese su email" email required #emailInput="ngModel">
         <mat-error *ngIf="emailInput.hasError('required')">Este campo es requerido.</mat-error>
