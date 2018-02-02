@@ -62,7 +62,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Su fecha de nacimiento" [max]="maxDate" required>
+        <input name="dateOfBirth" ngModel matInput [matDatepicker]="picker" placeholder="Su fecha de nacimiento" [max]="maxDate" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
