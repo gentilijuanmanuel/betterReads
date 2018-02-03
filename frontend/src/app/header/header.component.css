@@ -12,6 +12,7 @@ mat-toolbar {
     text-decoration: none;
     color: white;
     margin-right: 25px;
+    margin-left: 10px;
 }
 
 ul {
@@ -20,19 +21,11 @@ ul {
     margin: 0;
 }
 
-a, i {
+.menu-item {
     text-decoration: none;
     color: white;
-    font-size: 18px;
-    font-weight: 400;
-}
-
-i {
-    font-size: 20px;
-}
-
-i {
-    vertical-align: middle;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 a:active, a:hover {
