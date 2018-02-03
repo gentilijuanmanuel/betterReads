@@ -1,14 +1,16 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span class="example-fill-remaining-space"><a class="brand" routerLink="/">betterReads</a></span>
-    <span class="example-spacer"></span>
-          
-    <button mat-button>Sobre nosotros</button>
-    <a href="https://github.com/julianpoma/betterReads/wiki" target="_blank" mat-button><i class="material-icons">code</i> API</a>
-    <button mat-button routerLink="/authors">Autores<i class="material-icons">face</i></button>
-    <button mat-button routerLink="/books">Libros <i class="material-icons">book</i></button>
-    <button mat-button>Reseñas <i class="material-icons">comment</i></button>
-    <button mat-button>Frases <i class="material-icons">format_quote</i></button>
-    <button mat-button>Nombre de usuario <i class="material-icons">person</i></button>
-  </mat-toolbar-row>
+<mat-toolbar color="primary" class="mat-elevation-z3">
+    <a class="brand" routerLink="/">betterReads</a>
+
+    <ul fxLayout fxLayoutGap="5px">
+      <li><a class="menu-item" routerLink="/authors" mat-button>Autores</a></li>
+      <li><a class="menu-item" routerLink="/books" mat-button>Libros</a></li>
+    </ul>
+
+    <span class="example-fill-remaining-space"></span>
+
+    <ul fxLayout>
+      <li>
+        <a href="https://github.com/julianpoma/betterReads/wiki" target="_blank" mat-icon-button class="menu-item"><mat-icon>code</mat-icon></a>
+      </li>
+    </ul>
 </mat-toolbar>
