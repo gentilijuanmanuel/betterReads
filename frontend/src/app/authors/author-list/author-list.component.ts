@@ -3,8 +3,6 @@ import { Author } from '../author.model';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthorService } from '../../author.service';
-//import { ActivatedRoute } from '@angular/router/src/router_state';
-//import { Router } from '@angular/router';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
