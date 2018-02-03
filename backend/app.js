@@ -9,6 +9,7 @@ require('./api/models/author.js');
 require('./api/models/book.js');
 require('./api/models/user.js');
 
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 

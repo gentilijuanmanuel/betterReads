@@ -11,11 +11,11 @@
     <br>
     <mat-card class="book-card">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
           <mat-card-title>{{book.title}}</mat-card-title>
           <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://cdn.mhpbooks.com/uploads/2013/10/AVT_Georges-Perec_2570.jpeg" alt="{{book.title}}">
+      <img mat-card-image src="{{book.image}}" alt="{{book.title}}">
       <br>
       <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true"

@@ -3,6 +3,32 @@ const mongoose = require('mongoose');
 const Author = mongoose.model('Author');
 const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, true);
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 50 //50 megabytes como máximo, para el tamaño de la imagen.
+  },
+  fileFilter: fileFilter
+});
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -63,7 +89,8 @@ router.get('/:id', (req, res, next) => {
       });
 });
 
-router.post('/new', checkAuth, (req, res, next) => {
+router.post('/new', /*checkAuth,*/ upload.single('photo'), (req, res, next) => {
+    console.log(req.file);
     const author = new Author({
       name: req.body.name,
       surname: req.body.surname,
@@ -71,12 +98,12 @@ router.post('/new', checkAuth, (req, res, next) => {
       dateOfDeath: req.body.dateOfDeath,
       nationality: req.body.nationality,
       language: req.body.language,
-      photo: req.body.photo,
+      photo: "http://localhost:3000/" + req.file.path,
       gender: req.body.gender,
       ocupation: req.body.ocupation
     });
 
-    author.save()
+    /*author.save()
         .then(result => {
             res.status(201)
                 .json({
@@ -94,7 +121,16 @@ router.post('/new', checkAuth, (req, res, next) => {
                     error: err
                 });
         });
+        */
+        author.save((err, author) => {
+          if (err) {
+              res.status(500).send(err);
+          }
+          res.status(200).send("Author submitted \n" + author);
+      });
+      
 });
+
 
 router.patch('/:id', checkAuth, (req, res, next) => {
 

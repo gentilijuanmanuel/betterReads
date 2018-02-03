@@ -18,6 +18,7 @@ Backend:
 - Express.
 - NodeJS.
 - JWT Auth.
+- Multer.
 
 ## Documentation
 Please head to the [Wiki](https://github.com/julianpoma/betterReads/wiki)
