@@ -11,11 +11,11 @@
       <br>
       <mat-card class="author-card">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
+          <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + author.photo + ')', 'background-size': 'cover'  }"></div>
             <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
             <mat-card-subtitle>{{author.dateOfBirth}} / {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://cdn.mhpbooks.com/uploads/2013/10/AVT_Georges-Perec_2570.jpeg" alt="{{author.name}} {{author.surname}}">
+        <img mat-card-image src="{{author.photo}}" alt="{{author.name}} {{author.surname}}">
         <br>
         <mat-accordion>
           <mat-expansion-panel (opened)="panelOpenState = true"

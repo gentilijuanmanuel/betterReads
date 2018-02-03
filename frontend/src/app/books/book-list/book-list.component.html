@@ -1,11 +1,12 @@
 <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
   <div fxFlex="60">
     <div *ngFor="let book of books">
+        <br>
         <mat-card class="list-card">
           <div fxLayout="column">
             <div fxLayout="row">
                 <mat-card-header>
-                    <div mat-card-avatar class="book-header-image"></div>
+                    <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
                     <mat-card-title class="italic">{{book.title}}</mat-card-title>
                     <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
                 </mat-card-header>

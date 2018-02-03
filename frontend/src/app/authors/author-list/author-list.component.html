@@ -1,11 +1,12 @@
 <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
   <div fxFlex="60">
     <div *ngFor="let author of authors">
+        <br>
         <mat-card class="list-card">
           <div fxLayout="column">
             <div fxLayout="row">
                 <mat-card-header>
-                    <div mat-card-avatar class="author-header-image"></div>
+                    <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + author.photo + ')', 'background-size': 'cover'  }"></div>
                     <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
                     <mat-card-subtitle>{{author.dateOfBirth}} - {{ (author.dateOfDeath === "") ? "Actualidad" : author.dateOfBirth }}</mat-card-subtitle>
                 </mat-card-header>
