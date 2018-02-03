@@ -3,6 +3,8 @@ import { Book } from '../book.model';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { BookService } from '../../book.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-book-list',
@@ -15,7 +17,7 @@ export class BookListComponent implements OnInit {
   private books = [];
   selectedBook: Book;
 
-  constructor(private service: BookService) {
+  constructor(private service: BookService, private route : ActivatedRoute, private router: Router) {
 
    }
 
@@ -23,7 +25,7 @@ export class BookListComponent implements OnInit {
     this.service.getBooks().subscribe(data => this.books = data);
   }
 
-  onSelect(book: Book): void {
-    this.selectedBook = book;
+  onSelect(id) {
+    this.router.navigate(['/books', id]);
   }
 }

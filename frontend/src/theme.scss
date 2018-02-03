@@ -2,10 +2,10 @@
 @include mat-core();
 
 $custom-primary: mat-palette($mat-amber, 900);
-$custom-accent:  mat-palette($mat-indigo, 500);
-$custom-warn:    mat-palette($mat-red, 600);
+$custom-accent:  mat-palette($mat-amber, 800);
+$custom-warn:    mat-palette($mat-blue-grey, 300);
 
-$custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
+$custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
 
 //$custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
 

@@ -21,4 +21,9 @@ export class BookService {
     let url = this.firstPartUrl + "book";
     return this.getData(url);
   }
+
+  getBookById(id: string) {
+    let url = this.firstPartUrl + "book/" + id;
+    return this.getData(url);
+  }
 }
