@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout () {
     this.authService.logout();
-    this.router.navigate(['welcome']);
+    this.router.navigate(['login']);
   }
 
 }

@@ -20,6 +20,7 @@ import { BookListComponent } from './books/book-list/book-list.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth.service';
+import { FeedComponent } from './feed/feed.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AuthService } from './auth.service';
     BooksComponent,
     BookListComponent,
     BookDetailComponent,
-    LoginComponent
+    LoginComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,

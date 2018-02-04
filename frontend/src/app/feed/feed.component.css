@@ -1,0 +1,27 @@
+.banner {
+    background-color: #FF5722;
+}
+
+.banner-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 250px;  
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: white;
+  font-size: 48px;
+  margin: 0 0;
+}
+
+p {
+  color: white;
+  font-size: 18px;
+}

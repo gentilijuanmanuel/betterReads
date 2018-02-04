@@ -6,12 +6,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthorDetailComponent } from './authors/author-detail/author-detail.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { AuthGuard } from './auth.guard';
+import { FeedComponent } from './feed/feed.component';
 
 const routes = [
-  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: '', component: FeedComponent },
   { path: 'authors', component: AuthorsComponent },
   { path: 'books', component: BooksComponent },
-  { path: 'welcome', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'authors/:id', component: AuthorDetailComponent },
   { path: 'books/:id', component: BookDetailComponent }
 
