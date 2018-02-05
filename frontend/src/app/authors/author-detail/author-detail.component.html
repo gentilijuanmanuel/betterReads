@@ -78,23 +78,25 @@
                 </mat-card-header>
                 <mat-card-content>
                   <div *ngFor="let book of author.books" flex fxLayout="row" fxLayout.lt-md="column">
-                    <div fxFlex="30">
-                        <mat-card>
+                        <mat-card fxFlex="300px">
                           <div flex fxLayout="row">
                               <mat-card-header class="italic">
+                                <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
                                   <mat-card-title>{{book.title}}</mat-card-title>
                                   <mat-card-subtitle>ISBN: {{book.isbn}}</mat-card-subtitle>
                                 </mat-card-header>
                           </div>
-                          <!-- RENEGAR CON ESTO -->
-                          <!--<img mat-card-image class="image" src="http://www.libropatas.com/wp-content/uploads/2014/12/la-vida-instrucciones-de-uso.jpg" alt="{{book.title}">-->
                           <div flex fxLayout="row" fxLayout.lt-md="column">
-                            <mat-card-content>
-                              <p>{{book.description}}</p>
-                              <mat-chip-list>
-                                <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
-                                </mat-chip-list>
-                            </mat-card-content>
+                            <div flex fxLayout="column">
+                              <div fxFlex="250px">
+                                  <mat-card-content>
+                                      <p>{{book.description}}</p>
+                                      <mat-chip-list>
+                                        <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+                                        </mat-chip-list>
+                                    </mat-card-content>
+                              </div>
+                            </div>
                           </div>
                           <div flex fxLayout="row-reverse">
                             <mat-card-actions>
@@ -102,7 +104,7 @@
                             </mat-card-actions>
                           </div>
                         </mat-card>
-                    </div>
+                        <div fxFlex="10px"></div>
                   </div>
                 </mat-card-content>
               </mat-card>
@@ -130,7 +132,7 @@
                   </mat-card-content>
                   <div flex fxLayout="row-reverse">
                       <mat-card-actions>
-                        <button mat-mini-fab color="primary" mat-button>+</button>
+                        <button mat-mini-fab color="primary" (click)="newQuote(author._id, 1)" mat-button>+</button>
                       </mat-card-actions>
                   </div>
                 </mat-card>
@@ -161,7 +163,7 @@
                   </mat-card-content>
                   <div flex fxLayout="row-reverse">
                       <mat-card-actions>
-                        <button mat-mini-fab color="primary" mat-button>+</button>
+                        <button mat-mini-fab color="primary" (click)="newReview(author._id, 1)" mat-button>+</button>
                       </mat-card-actions>
                   </div>
                 </mat-card>

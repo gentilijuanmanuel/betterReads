@@ -26,4 +26,14 @@ export class BookService {
     let url = this.firstPartUrl + "book/" + id;
     return this.getData(url);
   }
+
+  getBooksByGenre(genre: string) {
+    let url = this.firstPartUrl + "book/genre/" + genre;
+    return this.getData(url);
+  }
+
+  getBooksByAuthor(name: string, surname: string) {
+    let url = this.firstPartUrl + "book/author/" + name + "/" + surname;
+    return this.getData(url);
+  }
 }

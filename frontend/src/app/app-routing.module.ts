@@ -7,6 +7,8 @@ import { AuthorDetailComponent } from './authors/author-detail/author-detail.com
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { AuthGuard } from './auth.guard';
 import { FeedComponent } from './feed/feed.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { ReviewFormComponent } from './review-form/review-form.component';
 
 const routes = [
   { path: '', component: FeedComponent },
@@ -14,7 +16,9 @@ const routes = [
   { path: 'books', component: BooksComponent },
   { path: 'login', component: LoginComponent },
   { path: 'authors/:id', component: AuthorDetailComponent },
-  { path: 'books/:id', component: BookDetailComponent }
+  { path: 'books/:id', component: BookDetailComponent },
+  { path: 'quote-form/:id', component: QuoteFormComponent, canActivate: [AuthGuard] },
+  { path: 'review-form/:id', component: ReviewFormComponent, canActivate: [AuthGuard] }
 
   /*
   EXAMPLE OF PROTECTED ROUTE

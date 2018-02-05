@@ -24,4 +24,14 @@ export class AuthorDetailComponent implements OnInit {
   onSelect(id) {
     this.router.navigate(['/books', id]);
   }
+
+  //typeOfQuote = 1 if it's an author quote.
+  newQuote(id, typeOfQuote) {
+    this.router.navigate(['/quote-form', id], { queryParams: { type: typeOfQuote } });
+  }
+
+  //typeOfReview = 1 if it's an author review.
+  newReview(id, typeOfReview) {
+    this.router.navigate(['/review-form', id], { queryParams: { type: typeOfReview } });
+  }
 }
