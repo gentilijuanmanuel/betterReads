@@ -21,6 +21,7 @@ export class AuthorDetailComponent implements OnInit {
       this.service.getAuthorById(id['id']).subscribe(data => this.author = data) );
   }
 
-
-
+  onSelect(id) {
+    this.router.navigate(['/books', id]);
+  }
 }
