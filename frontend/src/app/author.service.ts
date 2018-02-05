@@ -27,4 +27,17 @@ export class AuthorService {
     let url = this.firstPartUrl + "author/" + id;
     return this.getData(url);
   }
+
+  postQuote(authorId: any, user: string, quote: string){
+    let url = this.firstPartUrl + "author/" + authorId + "/quote";
+    
+    return this.http.post(
+      url,
+      { quote: quote, user: user }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
 }

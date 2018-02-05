@@ -135,7 +135,7 @@ router.post('/new', checkAuth, (req, res, next) => {
         });
 });
 
-router.post('/:id/quote', checkAuth, (req, res, next) => {
+router.post('/quote/:id', /* checkAuth, */(req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.id,
         { $push: { "quotes": 

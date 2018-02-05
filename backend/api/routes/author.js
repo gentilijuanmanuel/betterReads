@@ -230,7 +230,7 @@ router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
     });
 });
 
-router.post('/:id/quote', checkAuth, (req, res, next) => {
+router.post('/:id/quote', /* checkAuth, */ (req, res, next) => {
   Author.findByIdAndUpdate(
     req.params.id,
     { $push: { "quotes": 
@@ -252,6 +252,7 @@ router.post('/:id/quote', checkAuth, (req, res, next) => {
       });
     });
 });
+
 
 router.post('/:id/review', (req, res, next) => {
   Author.findByIdAndUpdate(

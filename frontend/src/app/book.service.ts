@@ -1,5 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -35,5 +36,20 @@ export class BookService {
   getBooksByAuthor(name: string, surname: string) {
     let url = this.firstPartUrl + "book/author/" + name + "/" + surname;
     return this.getData(url);
+  }
+
+  postQuote(bookId: any, user: string, quote: string){
+    let url = this.firstPartUrl + "book/quote/" + bookId;
+
+    console.log(url);
+    
+    return this.http.post(
+      url,
+      { quote: quote, user: user }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
   }
 }
