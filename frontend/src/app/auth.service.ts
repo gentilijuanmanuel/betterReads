@@ -23,6 +23,9 @@ export class AuthService {
     .do(
       (response) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('id', response.id);
+        localStorage.setItem('name', response.name);
+        localStorage.setItem('surname', response.surname);
         this.authChange.next(true);
       }
     )
@@ -41,6 +44,9 @@ export class AuthService {
 
   logout () {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('name');
+    localStorage.removeItem('surname');
     this.authChange.next(false);
   }
 

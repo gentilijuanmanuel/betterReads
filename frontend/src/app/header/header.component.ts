@@ -11,15 +11,18 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth: boolean;
+  userName: String;
   authSubscription: Subscription;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.isAuth = this.authService.isAuth();
+    this.userName = localStorage.getItem('name');
 
     this.authSubscription = this.authService.authChange.subscribe(authStatus => {
       this.isAuth = authStatus;
+      this.userName = localStorage.getItem('name');
     })
   }
 
@@ -29,6 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout () {
     this.authService.logout();
+    this.userName = null;
     this.router.navigate(['login']);
   }
 
