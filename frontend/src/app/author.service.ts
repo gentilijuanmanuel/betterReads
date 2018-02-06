@@ -40,4 +40,19 @@ export class AuthorService {
         return response.json();
       })
   }
+
+  postReview(authorId: any, user: string, comment: string, stars: number){
+    let url = this.firstPartUrl + "author/" + authorId + "/review";
+
+    console.log(url);
+    
+    return this.http.post(
+      url,
+      { user: user, comment: comment, stars: stars }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
 }

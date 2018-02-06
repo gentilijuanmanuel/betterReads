@@ -40,12 +40,25 @@ export class BookService {
 
   postQuote(bookId: any, user: string, quote: string){
     let url = this.firstPartUrl + "book/quote/" + bookId;
+    
+    return this.http.post(
+      url,
+      { quote: quote, user: user }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
+
+  postReview(bookId: any, user: string, comment: string, stars: number){
+    let url = this.firstPartUrl + "book/review/" + bookId;
 
     console.log(url);
     
     return this.http.post(
       url,
-      { quote: quote, user: user }
+      { user: user, comment: comment, stars: stars }
     )
     .map(
       response => {

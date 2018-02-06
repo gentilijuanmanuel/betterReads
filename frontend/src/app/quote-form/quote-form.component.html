@@ -30,8 +30,10 @@
               <textarea matInput ngModel name="quote" type="text" placeholder="Ingrese la frase" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #quoteInput="ngModel" required></textarea>
               <mat-error *ngIf="quoteInput.hasError('required')">Este campo es requerido.</mat-error>
             </mat-form-field>
-        
-            <button type="submit" mat-raised-button color="primary" [disabled]="q.invalid">Publicar</button>
+
+            <div flex fxLayoutAlign="end">
+              <button type="submit" mat-raised-button color="primary" [disabled]="q.invalid">Publicar</button>
+            </div>
           </form>
         </mat-card>
   </div>

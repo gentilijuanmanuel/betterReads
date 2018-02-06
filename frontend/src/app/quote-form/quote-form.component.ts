@@ -75,10 +75,6 @@ export class QuoteFormComponent implements OnInit {
       );
     } else if(this.type === 2) {
 
-      console.log(form.value.id);
-      console.log(form.value.user);
-      console.log(form.value.quote);
-
       this.bookService.postQuote(form.value.id, form.value.user, form.value.quote).subscribe(
         response => {},
 

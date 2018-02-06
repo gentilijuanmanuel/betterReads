@@ -14,14 +14,20 @@
               Contribuya sumando contenido de calidad a la comunidad
             </mat-card-subtitle>
           
-            <form fxLayout="column" fxLayoutGap="7px" #g="ngForm" (ngSubmit)="signup(g)">
+            <form fxLayout="column" fxLayoutGap="7px" #r="ngForm" (ngSubmit)="postReview(r)">
+              
+              <!-- Tiene que ser hidden true -->
+              <mat-form-field>
+                <input matInput ngModel name="id" value="{{(type === 1) ? author._id : book._id }}" type="text" #idInput="ngModel">
+              </mat-form-field>
+              
               <mat-form-field>
                 <input matInput ngModel name="user" type="text" placeholder="acá va el nombre del usuario bloqueado" required #userInput="ngModel">
                 <mat-error *ngIf="userInput.hasError('required')">Este campo es requerido.</mat-error>
               </mat-form-field>
           
               <mat-form-field>
-                <textarea matInput ngModel required placeholder="Ingrese un comentario" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #quoteInput="ngModel"></textarea>
+                <textarea matInput ngModel name="comment" required placeholder="Ingrese un comentario" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #quoteInput="ngModel"></textarea>
                 <mat-error *ngIf="quoteInput.hasError('required')">Este campo es requerido.</mat-error>
               </mat-form-field>
 
@@ -30,7 +36,9 @@
                   <mat-error *ngIf="starsInput.hasError('required')">Este campo es requerido.</mat-error>
               </mat-form-field>
           
-              <button type="submit" mat-raised-button color="primary" [disabled]="g.invalid">Publicar</button>
+              <div flex fxLayoutAlign="end">
+                <button type="submit" mat-raised-button color="primary" [disabled]="r.invalid">Publicar</button>
+              </div>
             </form>
           </mat-card>
     </div>
