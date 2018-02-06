@@ -1,3 +1,8 @@
 .italic {
     font-style: italic;
 }
+
+.secondary {
+    color: white;
+    padding-left: 8px;
+}

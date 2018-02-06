@@ -12,9 +12,9 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if(this.authService.isAuth()) {
-      this.router.navigate(['/books']);
-    }
+    // if(this.authService.isAuth()) {
+    //   this.router.navigate(['/books']);
+    // }
   }
 }
 
