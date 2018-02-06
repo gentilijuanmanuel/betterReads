@@ -21,4 +21,13 @@ export class BookDetailComponent implements OnInit {
       this.service.getBookById(id['id']).subscribe(data => this.book = data) );
   }
 
+  //typeOfQuote = 2 if it's an book quote.
+  newQuote(id, typeOfQuote) {
+    this.router.navigate(['/quote-form', id], { queryParams: { type: typeOfQuote } });
+  }
+
+  //typeOfReview = 2 if it's an book review.
+  newReview(id, typeOfReview) {
+    this.router.navigate(['/review-form', id], { queryParams: { type: typeOfReview } });
+  }
 }

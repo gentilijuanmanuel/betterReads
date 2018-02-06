@@ -1,0 +1,90 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span class="example-fill-remaining-space">Nueva reseña</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+<div flex fxLayout="column" fxLayoutAlign="center">
+    <br>
+    <div flex fxFlex="40" fxLayout="row" fxLayoutAlign="center center">
+        <mat-card fxFlex="700px">
+            <mat-card-title>
+                Publicar una reseña de  <span class="italic">{{(type === 1) ? author.name + ' ' + author.surname : book.title}}</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Contribuya sumando contenido de calidad a la comunidad
+            </mat-card-subtitle>
+          
+            <form fxLayout="column" fxLayoutGap="7px" #r="ngForm" (ngSubmit)="postReview(r)">
+              
+              <!-- Tiene que ser hidden true -->
+              <mat-form-field>
+                <input matInput ngModel name="id" value="{{(type === 1) ? author._id : book._id }}" type="text" #idInput="ngModel">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <input matInput ngModel name="user" type="text" placeholder="acá va el nombre del usuario bloqueado" required #userInput="ngModel">
+                <mat-error *ngIf="userInput.hasError('required')">Este campo es requerido.</mat-error>
+              </mat-form-field>
+          
+              <mat-form-field>
+                <textarea matInput ngModel name="comment" required placeholder="Ingrese un comentario" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #quoteInput="ngModel"></textarea>
+                <mat-error *ngIf="quoteInput.hasError('required')">Este campo es requerido.</mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                  <input matInput ngModel name="stars" type="text" placeholder="5" required #starsInput="ngModel">
+                  <mat-error *ngIf="starsInput.hasError('required')">Este campo es requerido.</mat-error>
+              </mat-form-field>
+          
+              <div flex fxLayoutAlign="end">
+                <button type="submit" mat-raised-button color="primary" [disabled]="r.invalid">Publicar</button>
+              </div>
+            </form>
+          </mat-card>
+    </div>
+    <br>
+    <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
+        <mat-card flex>
+            <mat-card-title>
+                {{(type === 1) ? 'Otros libros de ' : 'Otros libros del género ' }} <span class="italic">{{(type === 1) ? author.name + ' ' + author.surname : book.genre}}</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              ¡Sabemos que usted es un gran lector!
+            </mat-card-subtitle>
+            <mat-card-content>
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
+                  <div *ngFor="let b of books">
+                    <mat-card fxFlex="300px">
+                      <div flex fxLayout="row">
+                        <mat-card-header class="italic">
+                          <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + b.image + ')', 'background-size': 'cover'  }"></div>
+                          <mat-card-title>{{b.title}}</mat-card-title>
+                          <mat-card-subtitle>ISBN: {{b.isbn}}</mat-card-subtitle>
+                        </mat-card-header>
+                      </div>
+                      <div flex fxLayout="row" fxLayout.lt-md="column">
+                        <div flex fxLayout="column">
+                          <div fxFlex="250px">
+                              <mat-card-content>
+                                  <p>{{b.description}}</p>
+                                  <mat-chip-list>
+                                    <mat-chip color="accent" selected="true">{{b.genre}}</mat-chip>
+                                  </mat-chip-list>
+                                </mat-card-content>
+                          </div>
+                        </div>
+                      </div>
+                      <div flex fxLayout="row-reverse">
+                        <mat-card-actions>
+                          <button mat-raised-button color="primary" (click)="onSelect(b._id)" mat-button>DETALLES</button>
+                        </mat-card-actions>
+                      </div>
+                    </mat-card>
+                    <div fxFlex="10px"></div>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+    </div>
+    <br>
+  </div>

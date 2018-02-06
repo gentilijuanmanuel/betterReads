@@ -1,7 +1,23 @@
+.login {
+    background-image: url("http://wallpapersdsc.net/wp-content/uploads/2017/10/Books-full-HD.jpg");
+}
+
+/*
+hr {
+    color: black;
+    background-color: black;
+    height: 3px;
+    border: none;
+}
+*/
+
 .main {
     padding-bottom: 35px;
     padding-top: 15px;
-    background-color: #FF5722;
+}
+
+.text {
+    color: white;
 }
 
 .container {

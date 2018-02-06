@@ -40,6 +40,29 @@ router.get('/', (req, res, next) => {
     .catch(next);
   });
 
+//get books of an specific author
+router.get('/author/:authorName/:authorSurname', (req, res, next) => {
+    let authorName = req.params.authorName;
+    let authorSurname = req.params.authorSurname;
+    
+    Book.find({ 'author.name' : authorName, 'author.surname' : authorSurname }).then(books =>{
+      if (!books) { return res.sendStatus(401); }
+      return res.json(books) 
+    })
+    .catch(next);
+  });
+
+//get books of an specific genre
+router.get('/genre/:genre', (req, res, next) => {
+    let genre = req.params.genre;
+    
+    Book.find({ 'genre' : genre }).then(books =>{
+      if (!books) { return res.sendStatus(401); }
+      return res.json(books) 
+    })
+    .catch(next);
+  });
+
 router.get('/:bookId', (req, res, next) => {
     const id = req.params.bookId;
 
@@ -112,7 +135,7 @@ router.post('/new', checkAuth, (req, res, next) => {
         });
 });
 
-router.post('/:id/quote', checkAuth, (req, res, next) => {
+router.post('/quote/:id', /* checkAuth, */(req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.id,
         { $push: { "quotes": 
@@ -135,7 +158,7 @@ router.post('/:id/quote', checkAuth, (req, res, next) => {
     });
 });
 
-router.post('/:id/review', (req, res, next) => {
+router.post('/review/:id', (req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.id,
         { $push: { "reviews": { 
