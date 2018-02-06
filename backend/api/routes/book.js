@@ -40,18 +40,6 @@ router.get('/', (req, res, next) => {
     .catch(next);
   });
 
-//get books of an specific author
-router.get('/author/:authorName/:authorSurname', (req, res, next) => {
-    let authorName = req.params.authorName;
-    let authorSurname = req.params.authorSurname;
-    
-    Book.find({ 'author.name' : authorName, 'author.surname' : authorSurname }).then(books =>{
-      if (!books) { return res.sendStatus(401); }
-      return res.json(books) 
-    })
-    .catch(next);
-  });
-
 //get books of an specific genre
 router.get('/genre/:genre', (req, res, next) => {
     let genre = req.params.genre;

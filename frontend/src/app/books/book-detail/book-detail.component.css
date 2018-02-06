@@ -2,6 +2,13 @@
 font-style: italic;
 }
 
+.wrapper {
+  width: 95%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+
 .image {
 /*width: 170px;
 height: 250px;*/

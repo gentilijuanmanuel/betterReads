@@ -6,109 +6,115 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
-<div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
-  <div fxFlex="20">
-    <br>
-    <mat-card class="book-card">
-      <mat-card-header>
-        <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
+<div class="wrapper">
+  <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
+    <div fxFlex="20">
+      <br>
+      <mat-card class="book-card">
+        <mat-card-header>
+          <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
           <mat-card-title>{{book.title}}</mat-card-title>
           <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src="{{book.image}}" alt="{{book.title}}">
+        </mat-card-header>
+        <img mat-card-image src="{{book.image}}" alt="{{book.title}}">
+        <br>
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Datos
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ (panelOpenState) ? "Un excelente libro" : book.title }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+              <li>
+                ISBN: {{book.isbn}}.
+              </li>
+              <li>
+                Autor: {{book.author.name}} {{book.author.surname}}.
+              </li>
+              <li>
+                Género: {{book.genre}}.
+              </li>
+              <li>
+                Descripción: {{book.description}}
+              </li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
       <br>
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Datos
-            </mat-panel-title>
-            <mat-panel-description>
-              {{ (panelOpenState) ? "Un excelente libro" : book.title }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <ul>
-            <li>
-              ISBN: {{book.isbn}}.
-            </li>
-            <li>
-              Autor: {{book.author.name}} {{book.author.surname}}.
-            </li>
-            <li>
-              Género: {{book.genre}}.
-            </li>
-            <li>
-              Descripción: {{book.description}}
-            </li>
-          </ul>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card>
-    <br>
-  </div>
-  <div fxFlex="1"></div>
-  <div fxLayout="column" fxFlex="79">
+    </div>
+    <div fxFlex="1"></div>
+    <div fxLayout="column" fxFlex="79">
       <br>
       <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
         <div fxFlex="50">
-            <mat-card class="quote-card">
-                <mat-card-header>
-                  <mat-card-title>Frases destacadas de <span class="italic">{{book.title}}</span></mat-card-title>
-                  <mat-card-subtitle>Los fragmentos más logrados del libro, que permanecen en la memoria de sus lectores</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <div *ngFor="let q of book.quotes" flex fxLayout="column">
-                    <div flex fxLayout="row">
-                      <mat-card>
-                        <mat-card-header class="italic">
-                          <mat-card-title>"{{q.quote}}"</mat-card-title>
-                          <mat-card-subtitle>Publicado por {{q.user}}</mat-card-subtitle>
-                        </mat-card-header>
-                      </mat-card>
-                    </div>
-                    <br>
-                  </div>
-                </mat-card-content>
-                <div flex fxLayout="row-reverse">
-                    <mat-card-actions>
-                      <button mat-mini-fab color="primary" (click)="newQuote(book._id, 2)" mat-button>+</button>
-                    </mat-card-actions>
+          <mat-card class="quote-card">
+            <mat-card-header>
+              <mat-card-title>Frases destacadas de
+                <span class="italic">{{book.title}}</span>
+              </mat-card-title>
+              <mat-card-subtitle>Los fragmentos más logrados del libro, que permanecen en la memoria de sus lectores</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div *ngFor="let q of book.quotes" flex fxLayout="column">
+                <div flex fxLayout="row">
+                  <mat-card>
+                    <mat-card-header class="italic">
+                      <mat-card-title>"{{q.quote}}"</mat-card-title>
+                      <mat-card-subtitle>Publicado por {{q.user}}</mat-card-subtitle>
+                    </mat-card-header>
+                  </mat-card>
                 </div>
-              </mat-card>
-              <br>
+                <br>
+              </div>
+            </mat-card-content>
+            <div flex fxLayout="row-reverse">
+              <mat-card-actions>
+                <button mat-mini-fab color="primary" (click)="newQuote(book._id, 2)" mat-button>+</button>
+              </mat-card-actions>
+            </div>
+          </mat-card>
+          <br>
         </div>
         <div fxFlex="1"></div>
         <div fxFlex="49">
-            <mat-card class="quote-card">
-                <mat-card-header>
-                  <mat-card-title>Reviews de la comunidad <span class="italic">BetterReads</span> sobre <span class="italic">{{book.title}}</span></mat-card-title>
-                  <mat-card-subtitle>La opinión de nuestros usuarios sobre {{book.title}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <div *ngFor="let r of book.reviews" flex fxLayout="column">
-                    <div flex fxLayout="row">
-                      <mat-card>
-                        <mat-card-header class="italic">
-                          <mat-card-title>"{{r.comment}}"</mat-card-title>
-                          <mat-card-subtitle>Publicado por {{r.user}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <p>{{r.stars}} de 5 estrellas.</p>
-                        </mat-card-content>
-                      </mat-card>
-                    </div>
-                    <br>
-                  </div>
-                </mat-card-content>
-                <div flex fxLayout="row-reverse">
-                    <mat-card-actions>
-                      <button mat-mini-fab color="primary" (click)="newReview(book._id, 2)" mat-button>+</button>
-                    </mat-card-actions>
+          <mat-card class="quote-card">
+            <mat-card-header>
+              <mat-card-title>Reviews de la comunidad
+                <span class="italic">BetterReads</span> sobre
+                <span class="italic">{{book.title}}</span>
+              </mat-card-title>
+              <mat-card-subtitle>La opinión de nuestros usuarios sobre {{book.title}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div *ngFor="let r of book.reviews" flex fxLayout="column">
+                <div flex fxLayout="row">
+                  <mat-card>
+                    <mat-card-header class="italic">
+                      <mat-card-title>"{{r.comment}}"</mat-card-title>
+                      <mat-card-subtitle>Publicado por {{r.user}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p>{{r.stars}} de 5 estrellas.</p>
+                    </mat-card-content>
+                  </mat-card>
                 </div>
-              </mat-card>
-              <br>
+                <br>
+              </div>
+            </mat-card-content>
+            <div flex fxLayout="row-reverse">
+              <mat-card-actions>
+                <button mat-mini-fab color="primary" (click)="newReview(book._id, 2)" mat-button>+</button>
+              </mat-card-actions>
+            </div>
+          </mat-card>
+          <br>
         </div>
       </div>
+    </div>
   </div>
 </div>

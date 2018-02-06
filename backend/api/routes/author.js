@@ -194,7 +194,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
     });
 });
 
-router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
+router.post('/:id/add/:idbook', /*checkAuth,*/ (req, res, next) => {
   Author.findByIdAndUpdate(
     req.params.id,
     { $push: { "books": req.params.idbook }},
