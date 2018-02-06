@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Author } from '../authors/author.model';
-import { Book } from '../books/book.model';
 import { AuthorService } from '../author.service';
 import { BookService } from '../book.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -18,10 +16,11 @@ import { MatSnackBar } from '@angular/material';
 
 export class ReviewFormComponent implements OnInit {
   private sub: any;
-  private type: number;
+  private type: any;
   private author: any;
   private book: any;
   private books: any;
+  private currentUser: string;
 
   constructor(
     private authorService: AuthorService,
@@ -32,27 +31,35 @@ export class ReviewFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+    this.currentUser = localStorage.getItem('name') + ' ' + localStorage.getItem('surname');
+
     this.sub = this.route
       .queryParams
       .subscribe(params => {
-        this.type = + params['type'] || 0;
-      });
+        this.type = params.type;
+        if (params.type == 'author') {
+          this.route.params.subscribe(id =>
+            this.authorService.getAuthorById(id['id']).subscribe(author => {
+              this.author = author;
+              this.books = this.author.books;
+            }
+            )
+          );
+        }
 
-      if(this.type === 1) {
-        this.route.params.subscribe(id =>
-          this.authorService.getAuthorById(id['id']).subscribe(data => {
-            this.author = data,
-            this.bookService.getBooksByAuthor(this.author.name, this.author.surname).subscribe(data => this.books = data);
-          }
-        ));
-  
-      } else if(this.type === 2) {
-        this.route.params.subscribe(id =>
-          this.bookService.getBookById(id['id']).subscribe(data => {
-            this.book = data,
-            this.bookService.getBooksByGenre(this.book.genre).subscribe(data => this.books = data);
-          }));
+        else if (params.type == 'book') {
+          this.route.params.subscribe(id =>
+            this.bookService.getBookById(id['id']).subscribe(book => {
+              this.book = book;
+
+              this.bookService.getBooksByGenre(this.book.genre).subscribe(books => this.books = books);
+            }
+            )
+          );
+        }
       }
+      );
   }
 
   onSelect(id) {
@@ -61,11 +68,9 @@ export class ReviewFormComponent implements OnInit {
 
   postReview(form: NgForm) {
 
-    if(this.type === 1) {
+    if(this.type == 'author') {
 
-      console.log(form.value);
-
-      this.authorService.postReview(form.value.id, form.value.user, form.value.comment, form.value.stars).subscribe(
+      this.authorService.postReview(this.author._id, this.currentUser, form.value.comment, form.value.stars).subscribe(
         response => {},
 
         error => { 
@@ -74,11 +79,11 @@ export class ReviewFormComponent implements OnInit {
 
         () => this.router.navigate(['authors'])
       );
-    } else if(this.type === 2) {
+    } else if(this.type == 'book') {
 
       console.log(form.value);
 
-      this.bookService.postReview(form.value.id, form.value.user, form.value.comment, form.value.stars).subscribe(
+      this.bookService.postReview(this.book._id, this.currentUser, form.value.comment, form.value.stars).subscribe(
         response => {},
 
         error => { 

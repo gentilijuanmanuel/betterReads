@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayout.lt-md="column">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <span class="example-fill-remaining-space"><a style="color: white; text-decoration:none;" routerLink="/">Una vista en detalle de la vida y obra de {{author.name}} {{author.surname}}</a></span>
+        <span class="example-fill-remaining-space"><a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de la vida y obra de {{author.name}} {{author.surname}}</a></span>
         <span class="example-spacer"></span>
       </mat-toolbar-row>
     </mat-toolbar>
@@ -76,6 +76,9 @@
             <mat-card-title>Libros publicados por {{author.name}} {{author.surname}}</mat-card-title>
             <mat-card-subtitle>Una lista de los títulos más destacados del autor </mat-card-subtitle>
           </mat-card-header>
+          <mat-card-content *ngIf="author.books.length == 0">
+            Este autor no tiene libros publicados :(
+          </mat-card-content>
           <mat-card-content>
             <div *ngFor="let book of author.books" flex fxLayout="row" fxLayout.lt-md="column">
               <mat-card fxFlex="300px">
@@ -132,7 +135,7 @@
             </mat-card-content>
             <div flex fxLayout="row-reverse">
               <mat-card-actions>
-                <button mat-mini-fab color="primary" (click)="newQuote(author._id, 1)" mat-button>+</button>
+                <button mat-mini-fab color="primary" (click)="newQuote(author._id, 'author')" mat-button>+</button>
               </mat-card-actions>
             </div>
           </mat-card>
@@ -164,7 +167,7 @@
             </mat-card-content>
             <div flex fxLayout="row-reverse">
               <mat-card-actions>
-                <button mat-mini-fab color="primary" (click)="newReview(author._id, 1)" mat-button>+</button>
+                <button mat-mini-fab color="primary" (click)="newReview(author._id, 'author')" mat-button>+</button>
               </mat-card-actions>
             </div>
           </mat-card>
