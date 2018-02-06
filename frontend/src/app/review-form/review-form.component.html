@@ -8,31 +8,22 @@
     <div flex fxFlex="40" fxLayout="row" fxLayoutAlign="center center">
         <mat-card fxFlex="700px">
             <mat-card-title>
-                Publicar una reseña de  <span class="italic">{{(type === 1) ? author.name + ' ' + author.surname : book.title}}</span>
+                Publicar una reseña de<span class="italic">{{(type == 'author') ? author.name + ' ' + author.surname : book.title}}</span>
             </mat-card-title>
             <mat-card-subtitle>
               Contribuya sumando contenido de calidad a la comunidad
             </mat-card-subtitle>
           
             <form fxLayout="column" fxLayoutGap="7px" #r="ngForm" (ngSubmit)="postReview(r)">
-              
-              <!-- Tiene que ser hidden true -->
-              <mat-form-field>
-                <input matInput ngModel name="id" value="{{(type === 1) ? author._id : book._id }}" type="text" #idInput="ngModel">
-              </mat-form-field>
-              
-              <mat-form-field>
-                <input matInput ngModel name="user" type="text" placeholder="acá va el nombre del usuario bloqueado" required #userInput="ngModel">
-                <mat-error *ngIf="userInput.hasError('required')">Este campo es requerido.</mat-error>
-              </mat-form-field>
-          
+      
               <mat-form-field>
                 <textarea matInput ngModel name="comment" required placeholder="Ingrese un comentario" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #quoteInput="ngModel"></textarea>
                 <mat-error *ngIf="quoteInput.hasError('required')">Este campo es requerido.</mat-error>
               </mat-form-field>
 
+              ¿Qué puntaje le daría?
               <mat-form-field>
-                  <input matInput ngModel name="stars" type="text" placeholder="5" required #starsInput="ngModel">
+                  <input matInput ngModel name="stars" type="number" max="5" min="1" required #starsInput="ngModel">
                   <mat-error *ngIf="starsInput.hasError('required')">Este campo es requerido.</mat-error>
               </mat-form-field>
           
@@ -44,16 +35,16 @@
     </div>
     <br>
     <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
-        <mat-card flex>
+        <mat-card flex  *ngIf="!books.length == 0">
             <mat-card-title>
-                {{(type === 1) ? 'Otros libros de ' : 'Otros libros del género ' }} <span class="italic">{{(type === 1) ? author.name + ' ' + author.surname : book.genre}}</span>
+                {{(type == 'author') ? 'Otros libros de' : 'Otros libros del género' }} <span class="italic">{{(type == 'author') ? author.name + ' ' + author.surname : book.genre}}</span>
             </mat-card-title>
             <mat-card-subtitle>
               ¡Sabemos que usted es un gran lector!
             </mat-card-subtitle>
             <mat-card-content>
                 <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
-                  <div *ngFor="let b of books">
+                  <div *ngFor="let b of books | slice:0:3">
                     <mat-card fxFlex="300px">
                       <div flex fxLayout="row">
                         <mat-card-header class="italic">
