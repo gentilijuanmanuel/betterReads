@@ -33,7 +33,8 @@ export class AuthorService {
     
     return this.http.post(
       url,
-      { quote: quote, user: user }
+      { quote: quote, user: user },
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
     )
     .map(
       response => {
@@ -43,12 +44,11 @@ export class AuthorService {
 
   postReview(authorId: any, user: string, comment: string, stars: number){
     let url = this.firstPartUrl + "author/" + authorId + "/review";
-
-    console.log(url);
     
     return this.http.post(
       url,
-      { user: user, comment: comment, stars: stars }
+      { user: user, comment: comment, stars: stars },
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
     )
     .map(
       response => {

@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span class="example-fill-remaining-space">Autores</span>
+        <span class="example-fill-remaining-space">Encontramos {{authcant}} autores</span>
     </mat-toolbar-row>
 </mat-toolbar>
-<app-author-list></app-author-list>
+<app-author-list (cant)="cant($event)"></app-author-list>

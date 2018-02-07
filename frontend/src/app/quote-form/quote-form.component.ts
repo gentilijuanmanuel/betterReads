@@ -76,7 +76,7 @@ export class QuoteFormComponent implements OnInit {
           this.snackBar.open("Los datos ingresados no son válidos.", null, { duration: 3500 });
         },
 
-        () => this.router.navigate(['authors'])
+        () => this.router.navigate(['authors', this.author._id])
       );
 
     } else if(this.type == 'book') {
@@ -88,7 +88,7 @@ export class QuoteFormComponent implements OnInit {
           this.snackBar.open("Los datos ingresados no son válidos.", null, { duration: 3500 });
         },
 
-        () => this.router.navigate(['books'])
+        () => this.router.navigate(['books', this.book._id])
       )
     }
   }

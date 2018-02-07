@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
 
+  private bookCant;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  cant(childCant) {
+    this.bookCant = childCant;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Book } from '../book.model';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -16,13 +16,17 @@ export class BookListComponent implements OnInit {
 
   private books = [];
   selectedBook: Book;
+  @Output() cant = new EventEmitter<any>();
 
   constructor(private service: BookService, private route : ActivatedRoute, private router: Router) {
 
    }
 
   ngOnInit() {
-    this.service.getBooks().subscribe(data => this.books = data);
+    this.service.getBooks().subscribe(data => {
+      this.books = data.books;
+      this.cant.emit(data.count);
+    });
   }
 
   onSelect(id) {

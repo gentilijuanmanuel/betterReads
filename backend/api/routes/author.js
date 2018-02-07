@@ -32,10 +32,9 @@ const upload = multer({
 
 const ObjectId = mongoose.Types.ObjectId;
 
-/*
 router.get('/', (req, res, next) => {
     Author.find()
-        .select('name surname dateOfBirth dateOfDeath')
+        .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo')
         .exec()
         .then(authors => {
             const response = {
@@ -59,15 +58,6 @@ router.get('/', (req, res, next) => {
                 });
         });
 });
-*/
-
-router.get('/', (req, res, next) => {
-  Author.find({}).populate('books').then(authors =>{
-    if (!authors) { return res.sendStatus(401); }
-    return res.json(authors) 
-  })
-  .catch(next);
-});
 
 router.get('/:id', (req, res, next) => {
     Author.findById(req.params.id)
@@ -89,8 +79,7 @@ router.get('/:id', (req, res, next) => {
       });
 });
 
-router.post('/new', /*checkAuth,*/ upload.single('photo'), (req, res, next) => {
-    console.log(req.file);
+router.post('/new', checkAuth, upload.single('photo'), (req, res, next) => {
     const author = new Author({
       name: req.body.name,
       surname: req.body.surname,
@@ -103,32 +92,33 @@ router.post('/new', /*checkAuth,*/ upload.single('photo'), (req, res, next) => {
       ocupation: req.body.ocupation
     });
 
-    /*author.save()
-        .then(result => {
-            res.status(201)
-                .json({
-                    message: "Author created successfully",
-                    createdAuthor: {
-                        _id: result._id,
-                        name: result.name,
-                        surname: result.surname
-                    }
-                });
-        })
-        .catch(err => {
-            res.status(500)
-                .json({
-                    error: err
-                });
-        });
-        */
-        author.save((err, author) => {
-          if (err) {
-              res.status(500).send(err);
-          }
-          res.status(200).send("Author submitted \n" + author);
+    author.save()
+      .then(result => {
+          res.status(201)
+              .json({
+                  message: "Author created successfully",
+                  createdAuthor: {
+                      _id: result._id,
+                      name: result.name,
+                      surname: result.surname
+                  }
+              });
+      })
+      .catch(err => {
+          res.status(500)
+              .json({
+                  error: err
+              });
       });
-      
+
+    /*
+    author.save((err, author) => {
+      if (err) {
+          res.status(500).send(err);
+      }
+      res.status(200).send("Author submitted \n" + author);
+    });*/
+    
 });
 
 
@@ -194,7 +184,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
     });
 });
 
-router.post('/:id/add/:idbook', /*checkAuth,*/ (req, res, next) => {
+router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
   Author.findByIdAndUpdate(
     req.params.id,
     { $push: { "books": req.params.idbook }},
@@ -230,7 +220,7 @@ router.post('/:id/remove/:idbook', checkAuth, (req, res, next) => {
     });
 });
 
-router.post('/:id/quote', /* checkAuth, */ (req, res, next) => {
+router.post('/:id/quote', checkAuth, (req, res, next) => {
   Author.findByIdAndUpdate(
     req.params.id,
     { $push: { "quotes": 
@@ -254,7 +244,7 @@ router.post('/:id/quote', /* checkAuth, */ (req, res, next) => {
 });
 
 
-router.post('/:id/review', (req, res, next) => {
+router.post('/:id/review', checkAuth, (req, res, next) => {
   Author.findByIdAndUpdate(
     req.params.id,
     {
