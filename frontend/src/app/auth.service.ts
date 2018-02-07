@@ -26,6 +26,8 @@ export class AuthService {
         localStorage.setItem('id', response.id);
         localStorage.setItem('name', response.name);
         localStorage.setItem('surname', response.surname);
+        localStorage.setItem('expires_at', response.expires);
+
         this.authChange.next(true);
       }
     )
@@ -47,12 +49,15 @@ export class AuthService {
     localStorage.removeItem('id');
     localStorage.removeItem('name');
     localStorage.removeItem('surname');
+    localStorage.removeItem('expires_at');
     this.authChange.next(false);
   }
 
   isAuth() {
     if(localStorage.getItem('token')) {
-      return true;
+      if (Number(localStorage.getItem('expires_at')) * 1000 > Date.now()) {
+        return true;
+      }
     }
     return false;
   }

@@ -134,12 +134,15 @@ router.post('/login', (req, res, next) => {
 
                             });
 
+                            var decoded = jwt.decode(token);
+
                             res.status(200).json({
                                 message: 'Authentication success.',
                                 token: token,
                                 id: user.id,
                                 name: user.name,
-                                surname: user.surname
+                                surname: user.surname,
+                                expires: decoded.exp
                             });
 
                         } else {
