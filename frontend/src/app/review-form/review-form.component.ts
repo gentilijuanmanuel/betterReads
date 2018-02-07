@@ -74,7 +74,7 @@ export class ReviewFormComponent implements OnInit {
         response => {},
 
         error => { 
-          this.snackBar.open("Los datos ingresados no son válidos.", null, { duration: 3500 });
+          this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
         },
 
         () => this.router.navigate(['authors', this.author._id])
@@ -85,7 +85,7 @@ export class ReviewFormComponent implements OnInit {
         response => {},
 
         error => { 
-          this.snackBar.open("Los datos ingresados no son válidos.", null, { duration: 3500 });
+          this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
         },
 
         () => this.router.navigate(['/books', this.book._id])
