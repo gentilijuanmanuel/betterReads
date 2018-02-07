@@ -5,10 +5,9 @@ const Author = mongoose.model('Author');
 const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
 
-/*
 router.get('/', (req, res, next) => {
     Book.find()
-        .select('isbn title author description image')
+        .select('isbn title author description image reviews quotes genre')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -30,25 +29,15 @@ router.get('/', (req, res, next) => {
                 });
         });
 });
-*/
 
-router.get('/', (req, res, next) => {
-    Book.find({}).then(books =>{
-      if (!books) { return res.sendStatus(401); }
-      return res.json(books) 
-    })
-    .catch(next);
-  });
-
-//get books of an specific genre
-router.get('/genre/:genre', (req, res, next) => {
-    let genre = req.params.genre;
-    
-    Book.find({ 'genre' : genre }).then(books =>{
-      if (!books) { return res.sendStatus(401); }
-      return res.json(books) 
-    })
-    .catch(next);
+router.get('/genre/:genre', (req, res, next) => {  
+    Book.find({ 'genre': req.params.genre })
+        .then(books =>{
+            if (!books) { return res.sendStatus(401); }
+            return res.json(books) 
+            }
+        )
+        .catch(next);
   });
 
 router.get('/:bookId', (req, res, next) => {

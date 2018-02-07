@@ -8,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorsComponent implements OnInit {
 
+  private authcant;
+  
   constructor() { }
 
   ngOnInit() {
+  }
+
+  cant(childCant) {
+    this.authcant = childCant;
   }
 
 }

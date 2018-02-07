@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Author } from '../author.model';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -15,6 +15,7 @@ import 'rxjs/add/operator/switchMap';
 export class AuthorListComponent implements OnInit {
 
   private authors = [];
+  @Output() cant = new EventEmitter<any>();
   selectedAuthor: Author;
 
   constructor(private service: AuthorService, private route : ActivatedRoute, private router: Router) {
@@ -22,7 +23,10 @@ export class AuthorListComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.service.getAuthors().subscribe(data => this.authors = data);
+    this.service.getAuthors().subscribe(data => { 
+      this.authors = data.authors;
+      this.cant.emit(data.count);
+    });
   }
 
   onSelect(id) {

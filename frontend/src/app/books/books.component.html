@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-      <span class="example-fill-remaining-space">Libros</span>
+      <span class="example-fill-remaining-space">Encontramos {{bookCant}} libros</span>
   </mat-toolbar-row>
 </mat-toolbar>
-<app-book-list></app-book-list>
+<app-book-list (cant)="cant($event)"></app-book-list>
