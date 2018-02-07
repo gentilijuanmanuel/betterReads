@@ -2,12 +2,19 @@
 font-style: italic;
 }
 
+.add {
+  color: white;
+}
+
 .wrapper {
   width: 95%;
   max-width: 1600px;
   margin: 0 auto;
 }
 
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
 
 .image {
 /*width: 170px;

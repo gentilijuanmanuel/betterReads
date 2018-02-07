@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Book } from '../book.model';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { BookService } from '../../book.service';
+import { UserService } from '../../user.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/util/isNumeric';
+import { Subscription } from 'rxjs/Subscription';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -13,21 +16,53 @@ import 'rxjs/util/isNumeric';
 })
 export class BookDetailComponent implements OnInit {
   private book: any;
+  private bookId: any;
+  private isAuth: boolean;
+  private authSubscription: Subscription;
 
-  constructor(private service: BookService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private service: BookService, 
+    private route: ActivatedRoute, 
+    private router: Router,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(id =>
-      this.service.getBookById(id['id']).subscribe(data => this.book = data) );
+    this.route.params.subscribe(id => {
+      this.bookId = id['id'];
+      this.service.getBookById(id['id']).subscribe(data => this.book = data)
+    });
+
+    this.isAuth = this.authService.isAuth();
+    this.authSubscription = this.authService.authChange.subscribe(authStatus => {
+      this.isAuth = authStatus;
+    })
   }
 
-  //typeOfQuote = 2 if it's an book quote.
   newQuote(id, typeOfQuote) {
     this.router.navigate(['/quote-form', id], { queryParams: { type: typeOfQuote } });
   }
 
-  //typeOfReview = 2 if it's an book review.
   newReview(id, typeOfReview) {
     this.router.navigate(['/review-form', id], { queryParams: { type: typeOfReview } });
+  }
+
+  addToLibrary () {
+    console.log(this.bookId);
+    this.userService.addBook(this.bookId)
+    .subscribe(
+      response => { 
+        this.snackBar.open("¡Libro agregado con exito!", null, { duration: 3500 });
+      },
+      err => {
+        this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
+      }
+    )
+  }
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
   }
 }

@@ -23,6 +23,7 @@ import { AuthService } from './auth.service';
 import { FeedComponent } from './feed/feed.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { ReviewFormComponent } from './review-form/review-form.component';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

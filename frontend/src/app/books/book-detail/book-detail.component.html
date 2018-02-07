@@ -1,9 +1,15 @@
 <div fxLayout="row" fxLayout.lt-md="column">
   <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span class="example-fill-remaining-space"><a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de <span class="italic">{{book.title}}</span></a></span>
-      <span class="example-spacer"></span>
-    </mat-toolbar-row>
+    <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de <span class="italic">{{book.title}}</span></a>
+
+    <button mat-icon-button class="add">
+      <mat-icon aria-label="Add to library">mode_edit</mat-icon>
+    </button>
+
+    <span class="fill-remaining-space"></span>
+
+    <button *ngIf="isAuth" mat-raised-button color="accent" class="add" (click)="addToLibrary()">AGREGAR A MI BIBLIOTECA</button>
+
   </mat-toolbar>
 </div>
 <div class="wrapper">
