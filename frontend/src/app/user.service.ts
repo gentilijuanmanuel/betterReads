@@ -29,4 +29,17 @@ export class UserService {
     )
   }
 
+  deleteBookFromLibrary(userId: string, bookId: string) {
+    let url = "http://localhost:3000/api/user/" + userId + "/remove/" + bookId;
+    
+    return this.http.post(
+      url,
+      {},
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+    });
+  }
 }

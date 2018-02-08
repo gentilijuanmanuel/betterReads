@@ -235,17 +235,7 @@ router.get('/library/:id', checkAuth, (req, res, next) => {
 
     User.findById(id)
         .select('name surname library')
-        .populate('library')
-        .then(books =>{
-            if (!books) { return res.sendStatus(401); }
-            return res.json(books) 
-            }
-        )
-        .catch(next);
-        
-        
-        
-        /*
+        .populate('library')    
         .exec()
         .then(result => {
             if(result) {
@@ -261,7 +251,7 @@ router.get('/library/:id', checkAuth, (req, res, next) => {
                 error: err
             });
         });
-        */
+        
 })
 
 router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {

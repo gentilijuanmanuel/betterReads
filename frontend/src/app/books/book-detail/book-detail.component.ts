@@ -50,16 +50,20 @@ export class BookDetailComponent implements OnInit {
   }
 
   addToLibrary () {
-    console.log(this.bookId);
     this.userService.addBook(this.bookId)
     .subscribe(
       response => { 
-        this.snackBar.open("¡Libro agregado con éxito!", null, { duration: 3500 });
+        let action = "VER BIBLIOTECA";
+        this.snackBar.open("¡Libro agregado con éxito!", action, { duration: 3500 });
       },
       err => {
         this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
       }
     )
+  }
+
+  goLibrary(){
+    this.router.navigate(['/library', localStorage.getItem("id")]);
   }
 
   ngOnDestroy() {
