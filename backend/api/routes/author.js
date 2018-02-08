@@ -187,7 +187,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
 router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
   Author.findByIdAndUpdate(
     req.params.id,
-    { $push: { "books": req.params.idbook }},
+    { $addToSet: { "books": req.params.idbook }},
     { safe: true, upsert: true }
   )
     .then(res.status(201).json(

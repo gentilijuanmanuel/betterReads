@@ -231,7 +231,7 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
 router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
     User.findByIdAndUpdate(
         req.params.id,
-        { $push: { "library": req.params.idbook } },
+        { $addToSet: { "library": req.params.idbook } },
         { safe: true, upsert: true }
     )
         .then(res.status(201).json(
