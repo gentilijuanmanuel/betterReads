@@ -18,4 +18,28 @@ export class UserService {
     });
   }
 
+  getLibraryByUserId(id: string) {
+    let url = "http://localhost:3000/api/user/library/" + id;
+
+    return this.http.get(
+      url,
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    ).map((res: Response) => 
+      res.json()
+    )
+  }
+
+  deleteBookFromLibrary(userId: string, bookId: string) {
+    let url = "http://localhost:3000/api/user/" + userId + "/remove/" + bookId;
+    
+    return this.http.post(
+      url,
+      {},
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+    });
+  }
 }

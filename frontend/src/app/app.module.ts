@@ -24,6 +24,7 @@ import { FeedComponent } from './feed/feed.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { UserService } from './user.service';
+import { LibraryComponent } from './library/library.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { UserService } from './user.service';
     LoginComponent,
     FeedComponent,
     QuoteFormComponent,
-    ReviewFormComponent
+    ReviewFormComponent,
+    LibraryComponent
   ],
   imports: [
     BrowserModule,
