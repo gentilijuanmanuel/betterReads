@@ -160,10 +160,6 @@ router.post('/login', (req, res, next) => {
         });
 });
 
-/*
-* Add support to change password
-*/
-
 router.patch('/:userId', checkAuth, (req, res, next) => {
     const id = req.params.userId;
 
@@ -228,31 +224,27 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
         });
 });
 
-//library
-
 router.get('/library/:id', checkAuth, (req, res, next) => {
-    const id = req.params.id;
-
-    User.findById(id)
+    
+    User.findById(req.params.id)
         .select('name surname library')
-        .populate('library')    
+        .populate('library')
         .exec()
         .then(result => {
             if(result) {
                 res.status(200).json(result);
             } else {
                 res.status(200).json({
-                    message: "No user found with that ID"
-                });
-            }  
+                        message: "No user found with that ID"
+                    });
+            }
         })
         .catch(err => {
             res.status(500).json({
-                error: err
-            });
+                    error: err
+                });
         });
-        
-})
+});
 
 router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
     User.findByIdAndUpdate(

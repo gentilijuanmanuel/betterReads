@@ -28,6 +28,6 @@ ul {
     font-weight: bold;
 }
 
-a:active, a:hover {
-    color: white;
+.greetings {
+    margin-right: 20px;
 }

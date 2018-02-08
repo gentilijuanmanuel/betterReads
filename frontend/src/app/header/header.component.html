@@ -9,9 +9,9 @@
       
           <span class="example-fill-remaining-space"></span>
       
-          <ul fxLayout fxLayoutGap="7px">
+          <ul fxLayout>
             <li *ngIf="!isAuth"><a class="menu-item" routerLink='/login' mat-button>Iniciar sesión</a></li>
-            <li *ngIf="isAuth"><a class="menu-item">¡Hola, {{userName}}!</a></li>
+            <li *ngIf="isAuth"><a class="menu-item greetings">¡Hola, {{userName}}!</a></li>
             <li *ngIf="isAuth"><a class="menu-item" (click)="goLibrary(userId)" mat-button>Mi biblioteca</a></li>
             <li *ngIf="isAuth" (click)="logout()"><a class="menu-item" mat-button>Cerrar sesión</a></li>
             <li>
