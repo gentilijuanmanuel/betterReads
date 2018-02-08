@@ -13,16 +13,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   userName: String;
   authSubscription: Subscription;
+  userId: string;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.isAuth = this.authService.isAuth();
     this.userName = localStorage.getItem('name');
+    this.userId = localStorage.getItem('id');
 
     this.authSubscription = this.authService.authChange.subscribe(authStatus => {
       this.isAuth = authStatus;
       this.userName = localStorage.getItem('name');
+      this.userId = localStorage.getItem('id');
     })
   }
 
@@ -33,7 +36,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout () {
     this.authService.logout();
     this.userName = null;
+    this.userId = null;
     this.router.navigate(['login']);
+  }
+
+  goLibrary(id: string) {
+    this.router.navigate(['/library', id]);
   }
 
 }

@@ -1,0 +1,48 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span class="example-fill-remaining-space">Biblioteca de {{user.name}} {{user.surname}}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+<div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
+    <div fxFlex="60">
+      <div *ngFor="let book of user.library">
+          <br>
+          <mat-card class="list-card">
+            <div fxLayout="column">
+              <div fxLayout="row">
+                  <mat-card-header>
+                      <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
+                      <mat-card-title class="italic">{{book.title}}</mat-card-title>
+                      <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
+                  </mat-card-header>
+              </div>
+              <div fxLayout="row">
+                  <div fxFlex="30">
+                    <p style="font-style: italic;">"{{book.reviews[0].comment}}"</p>
+                    <p style="font-style: italic;">(Publicado por {{book.reviews[0].user}})</p>
+                  </div>
+                  <div fxFlex="65" fxFlexOffset="5">
+                    <mat-card-content>
+                      <p>
+                        {{book.description}}
+                      </p>
+                      <p>
+                        Para conocer más sobre este libro, haz click en "Detalles" y podrás ver los fragmentos más interesantes sobre el mismo, así como también la opinión de la comunidad de <span class="italic">BetterReads</span>.
+                      </p>
+                      <mat-chip-list>
+                        <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+                      </mat-chip-list>
+                    </mat-card-content>
+                  </div>
+              </div>
+              <div fxLayout="row-reverse">
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="onSelect(book._id)">DETALLES</button>
+                </mat-card-actions>
+              </div>
+            </div>
+          </mat-card>
+          <br>
+      </div>
+    </div>
+  </div>

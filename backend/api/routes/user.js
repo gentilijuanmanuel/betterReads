@@ -228,6 +228,42 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
         });
 });
 
+//library
+
+router.get('/library/:id', checkAuth, (req, res, next) => {
+    const id = req.params.id;
+
+    User.findById(id)
+        .select('name surname library')
+        .populate('library')
+        .then(books =>{
+            if (!books) { return res.sendStatus(401); }
+            return res.json(books) 
+            }
+        )
+        .catch(next);
+        
+        
+        
+        /*
+        .exec()
+        .then(result => {
+            if(result) {
+                res.status(200).json(result);
+            } else {
+                res.status(200).json({
+                    message: "No user found with that ID"
+                });
+            }  
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+        */
+})
+
 router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
     User.findByIdAndUpdate(
         req.params.id,

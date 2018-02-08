@@ -54,10 +54,10 @@ export class BookDetailComponent implements OnInit {
     this.userService.addBook(this.bookId)
     .subscribe(
       response => { 
-        this.snackBar.open("¡Libro agregado con exito!", null, { duration: 3500 });
+        this.snackBar.open("¡Libro agregado con éxito!", null, { duration: 3500 });
       },
       err => {
-        this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
+        this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
       }
     )
   }
