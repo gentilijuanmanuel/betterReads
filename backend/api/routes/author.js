@@ -224,7 +224,7 @@ router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
             error: err
           });
         })
-    }
+      }
     }
   )
   .catch(err => {
