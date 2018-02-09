@@ -7,21 +7,25 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/util/isNumeric';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../../auth.service';
+import { AuthorService } from '../../author.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
   styleUrls: ['./book-detail.component.css'],
-  providers: [ BookService ]
+  providers: [ BookService, AuthorService ]
 })
 export class BookDetailComponent implements OnInit {
   private book: any;
   private bookId: any;
+  private authors: any;
   private isAuth: boolean;
   private authSubscription: Subscription;
 
   constructor(
-    private bookService: BookService, 
+    private bookService: BookService,
+    private authorService: AuthorService,
     private route: ActivatedRoute, 
     private router: Router,
     private userService: UserService,
@@ -38,7 +42,9 @@ export class BookDetailComponent implements OnInit {
     this.isAuth = this.authService.isAuth();
     this.authSubscription = this.authService.authChange.subscribe(authStatus => {
       this.isAuth = authStatus;
-    })
+    });
+
+    this.authorService.getAuthors().subscribe(res => this.authors = res.authors);
   }
 
   newQuote(id, typeOfQuote) {
@@ -63,6 +69,22 @@ export class BookDetailComponent implements OnInit {
         this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
       }
     )
+  }
+
+  addToAuthor (form: NgForm) {
+    this.authorService.addBookToLibrary(form.value.author, this.bookId, form.value.collaborator)
+      .subscribe(
+        response => {
+          this.snackBar.open("¡Libro agregado al autor con éxito!", null, { duration: 3500 });
+        },
+        err => {
+          this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
+        },
+
+        () => {
+          this.bookService.getBookById(this.bookId).subscribe(data => this.book = data)
+        }
+      )
   }
 
   goLibrary(){
