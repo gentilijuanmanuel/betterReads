@@ -55,4 +55,30 @@ export class AuthorService {
         return response.json();
       })
   }
+
+  editAuthor(id, form) {
+    return this.http.patch(
+      this.firstPartUrl + 'author/' + id,
+      form,
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+      .map(
+      response => response.json()
+      )
+  }
+
+  deleteBookFromLibrary(authorId: string, bookId: string) {
+    let url = "http://localhost:3000/api/author/" + authorId + "/remove/" + bookId;
+
+    return this.http.post(
+      url,
+      {},
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        response.json();
+      }
+    );
+  }
 }

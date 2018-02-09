@@ -3,7 +3,7 @@
     <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de <span class="italic">{{book.title}}</span></a>
 
     <button mat-icon-button class="add">
-      <mat-icon aria-label="Add to library">mode_edit</mat-icon>
+      <mat-icon (click)="edit(book._id)" aria-label="Edit">mode_edit</mat-icon>
     </button>
 
     <span class="fill-remaining-space"></span>

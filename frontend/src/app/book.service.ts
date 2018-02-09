@@ -65,4 +65,15 @@ export class BookService {
         return response.json();
       })
   }
+
+  editBook (id, form) {
+    return this.http.patch(
+        this.firstPartUrl + 'book/' + id,
+        form,
+        { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+      )
+      .map(
+        response => response.json()
+      )
+    }
 }

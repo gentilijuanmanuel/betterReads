@@ -1,0 +1,50 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="example-fill-remaining-space secondary">Editar el libro <i>{{book.title}}</i></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div flex fxLayout="column" fxLayoutAlign="center center">
+  <br>
+  <div>
+    <mat-card fxFlex="700px">
+      <mat-card-title>
+        Editar
+      </mat-card-title>
+      <mat-card-subtitle>
+        Por favor, revise antes de confirmar los cambios.
+      </mat-card-subtitle>
+
+      <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="editBook(q)">
+        <mat-form-field>
+          <input type="text" name="isbn" ngModel="{{book.isbn}}" matInput placeholder="ISBN" #isbnInput="ngModel" required>
+          <mat-error *ngIf="isbnInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" name="title" ngModel="{{book.title}}" matInput placeholder="Título" #titleInput="ngModel" required>
+          <mat-error *ngIf="titleInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <textarea matInput name="description" ngModel="{{book.description}}" type="text" placeholder="Descripción" matTextareaAutosize matAutosizeMinRows="2"
+            matAutosizeMaxRows="50" #descriptionInput="ngModel" required></textarea>
+          <mat-error *ngIf="descriptionInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Género" ngModel="{{book.genre}}" name="genre">
+            <mat-option *ngFor="let g of genres" [value]="g.value">
+              {{g.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div flex fxLayoutAlign="end">
+          <button type="submit" mat-raised-button color="primary" [disabled]="q.invalid">Guardar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  <br>
+</div>
