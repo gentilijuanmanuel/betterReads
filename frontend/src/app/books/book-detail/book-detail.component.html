@@ -5,7 +5,7 @@
     <button mat-icon-button class="add">
       <mat-icon (click)="edit(book._id)" aria-label="Edit">mode_edit</mat-icon>
     </button>
-
+    
     <span class="fill-remaining-space"></span>
 
     <button *ngIf="isAuth" mat-raised-button color="accent" class="add" (click)="addToLibrary()">AGREGAR A MI BIBLIOTECA</button>
@@ -21,6 +21,12 @@
           <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
           <mat-card-title>{{book.title}}</mat-card-title>
           <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
+          <hr class="separator">
+          <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="likeBook(book.likes)">
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </mat-card-actions>
         </mat-card-header>
         <img mat-card-image src="{{book.image}}" alt="{{book.title}}">
         <br>

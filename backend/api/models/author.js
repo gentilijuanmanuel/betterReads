@@ -26,7 +26,8 @@ var authorSchema = new Schema({
             comment: { type: String },
             user: { type: String }
         }
-    ]
+    ],
+    likes: {type: Number}
 });
 
 module.exports = mongoose.model('Author', authorSchema);

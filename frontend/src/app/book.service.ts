@@ -66,6 +66,20 @@ export class BookService {
       })
   }
 
+  likeBook(bookId: string, likes: number) {
+    let url = this.firstPartUrl + "book/like/" + bookId;
+
+    return this.http.patch(
+      url,
+      { likes: likes },
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
+
   editBook (id, form) {
     return this.http.patch(
         this.firstPartUrl + 'book/' + id,
