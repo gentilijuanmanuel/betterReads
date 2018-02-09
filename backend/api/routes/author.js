@@ -194,30 +194,37 @@ router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
   )
   .then(
     updatedAuthor => {
-
-      Book.findByIdAndUpdate(
-        req.params.idbook,
-        {
-          $set: { "author": {
-            name: updatedAuthor.name,
-            surname: updatedAuthor.surname
-          } }
-        },
-        { safe: true, upsert: true }
-      )
-      .exec()
-      .then(
+      if(req.body.collaborator) {
         res.status(201).json(
           {
             message: "Book added successfully"
           }
         )
-      )
-      .catch(err => {
-        res.status(500).json({
-          error: err
-        });
-      })
+      } else {
+        Book.findByIdAndUpdate(
+          req.params.idbook,
+          {
+            $set: { "author": {
+              name: updatedAuthor.name,
+              surname: updatedAuthor.surname
+            } }
+          },
+          { safe: true, upsert: true }
+        )
+        .exec()
+        .then(
+          res.status(201).json(
+            {
+              message: "Book added successfully and updated book author"
+            }
+          )
+        )
+        .catch(err => {
+          res.status(500).json({
+            error: err
+          });
+        })
+    }
     }
   )
   .catch(err => {

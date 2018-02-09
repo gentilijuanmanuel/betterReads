@@ -67,12 +67,14 @@ export class AuthorService {
       )
   }
 
-  addBookToLibrary(authorId: string, bookId: string) {
+  addBookToLibrary(authorId: string, bookId: string, collaborator: boolean) {
     let url = "http://localhost:3000/api/author/" + authorId + "/add/" + bookId;
 
     return this.http.post(
       url,
-      {},
+      {
+        collaborator: collaborator
+      },
       { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
     )
       .map(

@@ -72,7 +72,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   addToAuthor (form: NgForm) {
-    this.authorService.addBookToLibrary(form.value.author, this.bookId)
+    this.authorService.addBookToLibrary(form.value.author, this.bookId, form.value.collaborator)
       .subscribe(
         response => {
           this.snackBar.open("¡Libro agregado al autor con éxito!", null, { duration: 3500 });
