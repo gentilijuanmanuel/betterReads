@@ -2,9 +2,9 @@
   <mat-toolbar color="primary">
     <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de <span class="italic">{{book.title}}</span></a>
 
-    <button mat-icon-button class="add">
+    <!--<button mat-icon-button class="icons">
       <mat-icon aria-label="Add to library">mode_edit</mat-icon>
-    </button>
+    </button> -->
 
     <span class="fill-remaining-space"></span>
 
@@ -21,6 +21,12 @@
           <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
           <mat-card-title>{{book.title}}</mat-card-title>
           <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
+          <hr class="separator">
+          <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="likeBook(book.likes)">
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </mat-card-actions>
         </mat-card-header>
         <img mat-card-image src="{{book.image}}" alt="{{book.title}}">
         <br>

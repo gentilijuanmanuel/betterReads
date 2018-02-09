@@ -160,10 +160,44 @@ router.post('/review/:id', (req, res, next) => {
 router.patch('/:id', checkAuth, (req, res, next) => {
 
     const updateObject = {
+        isbn: req.body.isbn,
         title: req.body.title,
         description: req.body.description,
         image: req.body.image,
         genre: req.body.genre,
+        likes: req.body.likes
+    }
+
+    Book.update({ _id: req.params.id }, { $set: updateObject })
+        .exec()
+        .then(result => {
+
+            if (result.nModified) {
+                res.status(200).json({
+                    status: result.ok,
+                    changed: result.nModified,
+                    message: 'Book updated successfully'
+                });
+            }
+            else {
+                res.status(200).json({
+                    status: result.ok,
+                    changed: result.nModified,
+                    message: 'No attributes were affected. Please check change and value attributes of your request.'
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+})
+
+router.patch('/like/:id', checkAuth, (req, res, next) => {
+
+    const updateObject = {
+        likes: req.body.likes
     }
 
     Book.update({ _id: req.params.id }, { $set: updateObject })

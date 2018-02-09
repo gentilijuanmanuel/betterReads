@@ -21,7 +21,7 @@ export class BookDetailComponent implements OnInit {
   private authSubscription: Subscription;
 
   constructor(
-    private service: BookService, 
+    private bookService: BookService, 
     private route: ActivatedRoute, 
     private router: Router,
     private userService: UserService,
@@ -32,7 +32,7 @@ export class BookDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(id => {
       this.bookId = id['id'];
-      this.service.getBookById(id['id']).subscribe(data => this.book = data)
+      this.bookService.getBookById(id['id']).subscribe(data => this.book = data)
     });
 
     this.isAuth = this.authService.isAuth();
@@ -53,8 +53,7 @@ export class BookDetailComponent implements OnInit {
     this.userService.addBook(this.bookId)
     .subscribe(
       response => { 
-        let action = "VER BIBLIOTECA";
-        this.snackBar.open("¡Libro agregado con éxito!", action, { duration: 3500 });
+        this.snackBar.open("¡Libro agregado con éxito!", null, { duration: 3500 });
       },
       err => {
         this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
@@ -64,6 +63,19 @@ export class BookDetailComponent implements OnInit {
 
   goLibrary(){
     this.router.navigate(['/library', localStorage.getItem("id")]);
+  }
+
+  likeBook(likes: number) {
+    likes++;
+    this.bookService.likeBook(this.bookId, likes)
+    .subscribe(
+      response => { 
+        this.snackBar.open("Gracias por el like! Este libro ahora tiene " + likes + " likes.", null, { duration: 3500 });
+      },
+      err => {
+        this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
+      }
+    )
   }
 
   ngOnDestroy() {
