@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Author = mongoose.model('Author');
-const Book = mongoose.model('Book');
 const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
 const multer = require('multer');
@@ -192,45 +191,15 @@ router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
     { $addToSet: { "books": req.params.idbook }},
     { safe: true, upsert: true }
   )
-  .then(
-    updatedAuthor => {
-      if(req.body.collaborator) {
-        res.status(201).json(
-          {
-            message: "Book added successfully"
-          }
-        )
-      } else {
-        Book.findByIdAndUpdate(
-          req.params.idbook,
-          {
-            $set: { "author": {
-              name: updatedAuthor.name,
-              surname: updatedAuthor.surname
-            } }
-          },
-          { safe: true, upsert: true }
-        )
-        .exec()
-        .then(
-          res.status(201).json(
-            {
-              message: "Book added successfully and updated book author"
-            }
-          )
-        )
-        .catch(err => {
-          res.status(500).json({
-            error: err
-          });
-        })
-      }
-    }
-  )
+  .then(res.status(201)
+    .json({
+        message: "Book added successfully"
+    }))
   .catch(err => {
-    res.status(500).json({
-      error: err
-    });
+    res.status(500)
+        .json({
+            error: err
+        });
   });
 });
 
