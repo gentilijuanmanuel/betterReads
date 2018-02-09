@@ -34,4 +34,8 @@ export class AuthorDetailComponent implements OnInit {
   newReview(id, typeOfReview) {
     this.router.navigate(['/review-form', id], { queryParams: { type: typeOfReview } });
   }
+
+  edit(id) {
+    this.router.navigate(['/authors', id, 'edit'])
+  }
 }

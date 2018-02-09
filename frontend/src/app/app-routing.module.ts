@@ -11,6 +11,7 @@ import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { LibraryComponent } from './library/library.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
+import { EditAuthorComponent } from './authors/edit-author/edit-author.component';
 
 const routes = [
   { path: '', component: FeedComponent },
@@ -18,6 +19,7 @@ const routes = [
   { path: 'books', component: BooksComponent },
   { path: 'login', component: LoginComponent },
   { path: 'authors/:id', component: AuthorDetailComponent },
+  { path: 'authors/:id/edit', component: EditAuthorComponent, canActivate: [AuthGuard] },
   { path: 'books/:id', component: BookDetailComponent },
   { path: 'books/:id/edit', component: EditBookComponent, canActivate: [AuthGuard] },
   { path: 'quote-form/:id', component: QuoteFormComponent, canActivate: [AuthGuard] },

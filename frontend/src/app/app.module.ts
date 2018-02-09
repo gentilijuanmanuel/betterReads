@@ -26,6 +26,7 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 import { UserService } from './user.service';
 import { LibraryComponent } from './library/library.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
+import { EditAuthorComponent } from './authors/edit-author/edit-author.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { EditBookComponent } from './books/edit-book/edit-book.component';
     QuoteFormComponent,
     ReviewFormComponent,
     LibraryComponent,
-    EditBookComponent
+    EditBookComponent,
+    EditAuthorComponent
   ],
   imports: [
     BrowserModule,
