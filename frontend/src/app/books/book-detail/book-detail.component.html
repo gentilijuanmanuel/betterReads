@@ -8,7 +8,7 @@
     
     <span class="fill-remaining-space"></span>
 
-    <button *ngIf="isAuth" mat-raised-button color="accent" class="add" (click)="addToLibrary()">AGREGAR A MI BIBLIOTECA</button>
+    <button *ngIf="isAuth" mat-raised-button color="accent" class="icon" (click)="addToLibrary()">AGREGAR A MI BIBLIOTECA</button>
 
   </mat-toolbar>
 </div>
@@ -56,9 +56,30 @@
             </ul>
           </mat-expansion-panel>
         </mat-accordion>
+        <br>
+      </mat-card>
+      <br>
+
+      <mat-card fxLayoutAlign="center">    
+          <mat-card-content>
+          <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #g="ngForm" (ngSubmit)="addToAuthor(g)">     
+            Agregar "{{book.title}}" a la biblioteca de un autor.
+            <br><br>
+            <mat-form-field>
+              <mat-select placeholder="Seleccione un autor" ngModel name="author">
+                <mat-option *ngFor="let author of authors" [value]="author._id">
+                  {{author.name}} {{author.surname}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <button type="submit" mat-raised-button color="primary" [disabled]="g.invalid">ASIGNAR</button>
+          </form>    
+        </mat-card-content>
       </mat-card>
       <br>
     </div>
+
     <div fxFlex="1"></div>
     <div fxLayout="column" fxFlex="79">
       <br>
