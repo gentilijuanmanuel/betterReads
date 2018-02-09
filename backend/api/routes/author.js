@@ -121,11 +121,12 @@ router.post('/new', checkAuth, upload.single('photo'), (req, res, next) => {
     
 });
 
-
 router.patch('/:id', checkAuth, (req, res, next) => {
 
   const updateObject = {
+    dateOfBirth: req.body.dateOfBirth,
     dateOfDeath: req.body.dateOfDeath,
+    gender: req.body.gender,
     nationality: req.body.nationality,
     language: req.body.language,
     ocupation: req.body.ocupation

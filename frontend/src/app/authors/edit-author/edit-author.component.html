@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="example-fill-remaining-space secondary">Editar el autor {{author.name}} {{author.surname}}
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div flex fxLayout="column" fxLayoutAlign="center center">
+  <br>
+  <div>
+    <mat-card fxFlex="700px">
+      <mat-card-title>
+        {{author.name}} {{author.surname}}  
+      </mat-card-title>
+      <mat-card-subtitle>
+        Por favor, revise antes de confirmar los cambios.
+      </mat-card-subtitle>
+
+      <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="editAuthor(q)">
+        <mat-form-field>
+          <input name="dateOfBirth" ngModel={{author.dateOfBirth}} matInput [matDatepicker]="birth" placeholder="Fecha de nacimiento" [max]="maxDate" required>
+          <mat-datepicker-toggle matSuffix [for]="birth"></mat-datepicker-toggle>
+          <mat-datepicker #birth startView="year"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input name="dateOfDeath" ngModel={{author.dateOfDeath}} matInput [matDatepicker]="death" placeholder="Fecha de defuncion" required>
+          <mat-datepicker-toggle matSuffix [for]="death"></mat-datepicker-toggle>
+          <mat-datepicker #death startView="year"></mat-datepicker>
+        </mat-form-field>
+     
+        <mat-form-field>
+          <input type="text" name="nationality" ngModel="{{author.nationality}}" matInput placeholder="Nacionalidad" #nationalityInput="ngModel" required>
+          <mat-error *ngIf="nationalityInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" name="language" ngModel="{{author.language}}" matInput placeholder="Idiomas" #languageInput="ngModel"
+            required>
+          <mat-error *ngIf="languageInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" name="ocupation" ngModel="{{author.ocupation}}" matInput placeholder="Ocupaciones" #ocupationInput="ngModel"
+            required>
+          <mat-error *ngIf="ocupationInput.hasError('required')">Este campo es requerido.</mat-error>
+        </mat-form-field>
+
+        <div flex fxLayoutAlign="end">
+          <button type="submit" mat-raised-button color="primary" [disabled]="q.invalid">Guardar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  <br>
+</div>

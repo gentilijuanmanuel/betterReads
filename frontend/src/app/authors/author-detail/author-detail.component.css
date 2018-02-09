@@ -15,3 +15,11 @@
   max-width:80%;
   max-height:80%;
 }
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.edit {
+    color: white;
+}

@@ -49,6 +49,10 @@ export class BookDetailComponent implements OnInit {
     this.router.navigate(['/review-form', id], { queryParams: { type: typeOfReview } });
   }
 
+  edit(id) {
+    this.router.navigate(['/books', id, 'edit']);
+  }
+
   addToLibrary () {
     this.userService.addBook(this.bookId)
     .subscribe(

@@ -2,10 +2,10 @@
   <mat-toolbar color="primary">
     <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de <span class="italic">{{book.title}}</span></a>
 
-    <!--<button mat-icon-button class="icons">
-      <mat-icon aria-label="Add to library">mode_edit</mat-icon>
-    </button> -->
-
+    <button mat-icon-button class="add">
+      <mat-icon (click)="edit(book._id)" aria-label="Edit">mode_edit</mat-icon>
+    </button>
+    
     <span class="fill-remaining-space"></span>
 
     <button *ngIf="isAuth" mat-raised-button color="accent" class="add" (click)="addToLibrary()">AGREGAR A MI BIBLIOTECA</button>

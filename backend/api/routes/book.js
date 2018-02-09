@@ -112,7 +112,7 @@ router.post('/new', checkAuth, (req, res, next) => {
         });
 });
 
-router.post('/quote/:id', /* checkAuth, */(req, res, next) => {
+router.post('/quote/:id',  checkAuth, (req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.id,
         { $push: { "quotes": 
@@ -163,9 +163,7 @@ router.patch('/:id', checkAuth, (req, res, next) => {
         isbn: req.body.isbn,
         title: req.body.title,
         description: req.body.description,
-        image: req.body.image,
-        genre: req.body.genre,
-        likes: req.body.likes
+        genre: req.body.genre
     }
 
     Book.update({ _id: req.params.id }, { $set: updateObject })
@@ -192,7 +190,7 @@ router.patch('/:id', checkAuth, (req, res, next) => {
                 error: err
             });
         });
-})
+});
 
 router.patch('/like/:id', checkAuth, (req, res, next) => {
 
@@ -224,6 +222,6 @@ router.patch('/like/:id', checkAuth, (req, res, next) => {
                 error: err
             });
         });
-})
+});
 
 module.exports = router;

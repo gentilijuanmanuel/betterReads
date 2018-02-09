@@ -1,9 +1,15 @@
 <div fxLayout="row" fxLayout.lt-md="column">
     <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <span class="example-fill-remaining-space"><a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de la vida y obra de {{author.name}} {{author.surname}}</a></span>
-        <span class="example-spacer"></span>
-      </mat-toolbar-row>
+      <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de la vida y obra de {{author.name}} {{author.surname}}</a>
+    
+      <button mat-icon-button class="edit">
+        <mat-icon (click)="edit(author._id)" aria-label="Edit">mode_edit</mat-icon>
+      </button>
+    
+      <span class="fill-remaining-space"></span>
+    
+      <button *ngIf="isAuth" mat-raised-button color="accent" class="add" (click)="addToLibrary()">AGREGAR A MI BIBLIOTECA</button>
+    
     </mat-toolbar>
 </div>
 <div class="wrapper">
@@ -103,6 +109,9 @@
                 </div>
                 <div flex fxLayout="row-reverse">
                   <mat-card-actions>
+                    <button mat-raised-button color="warn" (click)="deleteBookFromAuthor(book._id)">
+                      <i class="material-icons">delete</i>
+                    </button>
                     <button mat-raised-button color="primary" (click)="onSelect(book._id)" mat-button>DETALLES</button>
                   </mat-card-actions>
                 </div>
