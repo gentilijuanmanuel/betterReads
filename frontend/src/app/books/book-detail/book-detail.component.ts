@@ -67,10 +67,15 @@ export class BookDetailComponent implements OnInit {
 
   likeBook(likes: number) {
     likes++;
+    console.log(likes);
     this.bookService.likeBook(this.bookId, likes)
     .subscribe(
       response => { 
-        this.snackBar.open("Gracias por el like! Este libro ahora tiene " + likes + " likes.", null, { duration: 3500 });
+        this.snackBar.open("¡Gracias! Este libro ahora tiene " + likes + " likes.", null, { duration: 3500 });
+        this.route.params.subscribe(id => {
+          this.bookId = id['id'];
+          this.bookService.getBookById(id['id']).subscribe(data => this.book = data)
+        });
       },
       err => {
         this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
