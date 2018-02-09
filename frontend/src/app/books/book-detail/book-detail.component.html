@@ -60,11 +60,19 @@
       </mat-card>
       <br>
 
-      <mat-card fxLayoutAlign="center">    
+      <mat-card fxLayoutAlign="center center" fxLayout="column">   
+          <mat-card-header>
+            <mat-card-title>
+              Agregar "{{book.title}}" a la biblioteca de un colaborador.
+            </mat-card-title>
+            <mat-card-subtitle>
+              Si tenes conocimiento sobre algún autor que haya colaborado en este libro, ¡agregalo a su biblioteca! 
+              <br><br>
+              <i style="font-size: 11px">(Esto no afectara la referencia al autor principal de este libro.)</i>
+            </mat-card-subtitle>
+          </mat-card-header>
           <mat-card-content>
           <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #g="ngForm" (ngSubmit)="addToAuthor(g)">     
-            Agregar "{{book.title}}" a la biblioteca de un autor.
-            <br><br>
             <mat-form-field>
               <mat-select placeholder="Seleccione un autor" ngModel name="author">
                 <mat-option *ngFor="let author of authors" [value]="author._id">
@@ -72,8 +80,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-checkbox ngModel name="collaborator">Este autor es un colaborador.</mat-checkbox>
-            <br>
             <button type="submit" mat-raised-button color="primary" [disabled]="g.invalid">ASIGNAR</button>
           </form>    
         </mat-card-content>
