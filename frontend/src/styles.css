@@ -3,11 +3,8 @@
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import url('https://fonts.googleapis.com/css?family=Lobster|Roboto');
 
-html {
+html, body {
   font-family: 'Roboto', sans-serif;
-  height: 100%;
-}
-
-body {
+  padding: 0;
   margin: 0;
 }

@@ -22,7 +22,7 @@
           <mat-card-title>{{book.title}}</mat-card-title>
           <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
           <hr class="separator">
-          <mat-card-actions>
+          <mat-card-actions *ngIf="isAuth">
             <button mat-icon-button color="primary" (click)="likeBook(book.likes)">
               <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
             </button>
@@ -60,7 +60,7 @@
       </mat-card>
       <br>
 
-      <mat-card fxLayoutAlign="center center" fxLayout="column">   
+      <mat-card *ngIf="isAuth"fxLayoutAlign="center center" fxLayout="column">   
           <mat-card-header>
             <mat-card-title>
               Agregar "{{book.title}}" a la biblioteca de un colaborador.
