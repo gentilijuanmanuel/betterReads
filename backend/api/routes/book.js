@@ -7,7 +7,7 @@ const checkAuth = require('../middleware/check-auth');
 
 router.get('/', (req, res, next) => {
     Book.find()
-        .select('isbn title author description image reviews quotes genre')
+        .select('isbn title author description image reviews quotes genre likes')
         .exec()
         .then(bookCollection => {
             const response = {
@@ -32,7 +32,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/popular', (req, res, next) => {
     Book.find({ likes: { $gt: 10 } })
-        .select('isbn title author description image reviews quotes genre')
+        .select('isbn title author description image reviews quotes genre likes')
         .exec()
         .then(bookCollection => {
             const response = {

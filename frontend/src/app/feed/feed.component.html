@@ -10,7 +10,9 @@
     <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Autores destacados de la comunidad</a>  
   </mat-toolbar>
 </div>
-<div class=content>
+
+
+
   <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
     <div fxFlex="60">
       <div *ngFor="let author of popularAuthors">
@@ -39,6 +41,7 @@
                       </p>
                       <mat-chip-list>
                         <mat-chip color="accent" selected="true">{{author.ocupation}}</mat-chip>
+                        <mat-chip color="accent" selected="true">{{author.likes}} <br> <i class="material-icons">favorite</i></mat-chip>
                       </mat-chip-list>
                     </mat-card-content>
                   </div>
@@ -53,7 +56,7 @@
           <br>
       </div>
     </div>
-  </div>
+  
   
   
 </div>
@@ -62,7 +65,8 @@
     <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Libros destacados de la comunidad</a>  
   </mat-toolbar>
 </div>
-<div class=content>
+
+
   <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
     <div fxFlex="60">
       <div *ngFor="let book of popularBooks">
@@ -91,6 +95,7 @@
                       </p>
                       <mat-chip-list>
                         <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+                        <mat-chip color="accent" selected="true">{{book.likes}} <br> <i class="material-icons">favorite</i></mat-chip>
                       </mat-chip-list>
                     </mat-card-content>
                   </div>
@@ -106,4 +111,3 @@
       </div>
     </div>
   </div>
-</div>

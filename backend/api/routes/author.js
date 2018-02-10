@@ -34,7 +34,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     Author.find()
-        .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo')
+        .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo likes')
         .exec()
         .then(authors => {
             const response = {
@@ -61,7 +61,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/popular', (req, res, next) => {
   Author.find({ likes: { $gt: 10 } })
-      .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo')
+      .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo likes')
       .exec()
       .then(authors => {
           const response = {
