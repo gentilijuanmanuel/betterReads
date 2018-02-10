@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AuthorDetailComponent implements OnInit {
   private author: any;
+  private authorId: any;
 
   constructor(
     private authorService: AuthorService, 
@@ -23,8 +24,10 @@ export class AuthorDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(id =>
-      this.authorService.getAuthorById(id['id']).subscribe(data => this.author = data) );
+    this.route.params.subscribe(id => {
+      this.authorId = id['id'];
+      this.authorService.getAuthorById(id['id']).subscribe(data => this.author = data)
+    });
   }
 
   onSelect(id) {
@@ -60,6 +63,22 @@ export class AuthorDetailComponent implements OnInit {
         data => this.author = data
       )
     }
+    )
+  }
+
+  likeAuthor(likes: number) {
+    likes++;
+    this.authorService.likeAuthor(this.authorId, likes)
+    .subscribe(
+      response => { 
+        this.snackBar.open("¡Gracias! Este autor ahora tiene " + likes + " likes.", null, { duration: 3500 });
+        this.route.params.subscribe(id => {
+          this.authorService.getAuthorById(id['id']).subscribe(data => this.author = data)
+        });
+      },
+      err => {
+        this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
+      }
     )
   }
 }

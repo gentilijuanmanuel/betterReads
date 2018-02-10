@@ -34,7 +34,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 router.get('/', (req, res, next) => {
     Author.find()
-        .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo')
+        .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo likes')
         .exec()
         .then(authors => {
             const response = {
@@ -57,6 +57,33 @@ router.get('/', (req, res, next) => {
                     error: err
                 });
         });
+});
+
+router.get('/popular', (req, res, next) => {
+  Author.find({ likes: { $gt: 10 } })
+      .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo likes')
+      .exec()
+      .then(authors => {
+          const response = {
+              count: authors.length,
+              authors: authors
+          }
+          if (response.count) {
+              res.status(200)
+                  .json(response);
+          } else {
+              res.status(200)
+                  .json({
+                      message: 'No authors found'
+                  });
+          }
+      })
+      .catch(err => {
+          res.status(500)
+              .json({
+                  error: err
+              });
+      });
 });
 
 router.get('/:id', (req, res, next) => {
@@ -270,5 +297,38 @@ router.post('/:id/review', checkAuth, (req, res, next) => {
       });
     });
 });
+
+router.patch('/like/:id', checkAuth, (req, res, next) => {
+
+  const updateObject = {
+      likes: req.body.likes
+  }
+
+  Author.update({ _id: req.params.id }, { $set: updateObject })
+      .exec()
+      .then(result => {
+
+          if (result.nModified) {
+              res.status(200).json({
+                  status: result.ok,
+                  changed: result.nModified,
+                  message: 'Author updated successfully'
+              });
+          }
+          else {
+              res.status(200).json({
+                  status: result.ok,
+                  changed: result.nModified,
+                  message: 'No attributes were affected. Please check change and value attributes of your request.'
+              });
+          }
+      })
+      .catch(err => {
+          res.status(500).json({
+              error: err
+          });
+      });
+});
+
 
 module.exports = router;
