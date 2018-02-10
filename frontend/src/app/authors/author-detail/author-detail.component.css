@@ -1,3 +1,17 @@
+.flex-grid {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.col-4 {
+    flex: 0 0 33.3333333%;
+    margin: 0px 0px 0px 0px;
+}
+
+.mat {
+  margin: 0px auto 15px auto;
+}
+
 .wrapper {
   width: 95%;
   max-width: 1600px;
@@ -22,4 +36,16 @@
 
 .edit {
     color: white;
+}
+
+@media (max-width: 1660px) {
+    .col-4 {
+        flex: 0 0 50%;
+    }
+}
+
+@media (max-width: 1150px) {
+    .flex-grid {
+        display: block;
+    }
 }

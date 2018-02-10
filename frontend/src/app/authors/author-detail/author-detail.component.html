@@ -14,7 +14,7 @@
 </div>
 <div class="wrapper">
   <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
-    <div fxFlex="20">
+    <div fxFlex="30">
       <br>
       <mat-card class="author-card">
         <mat-card-header>
@@ -74,7 +74,7 @@
       <br>
     </div>
     <div fxFlex="1"></div>
-    <div fxLayout="column" fxFlex="79">
+    <div fxLayout="column" fxFlex="70">
       <div flex>
         <br>
         <mat-card class="book-card">
@@ -85,9 +85,9 @@
           <mat-card-content *ngIf="author.books.length == 0">
             Este autor no tiene libros publicados :(
           </mat-card-content>
-          <mat-card-content>
-              <div *ngFor="let book of author.books" flex fxLayout="row" fxLayout.lt-md="column">
-              <mat-card fxFlex="300px">
+          <mat-card-content class="flex-grid">
+            <div *ngFor="let book of author.books" class="col-4">
+              <mat-card fxFlex="320px" class="mat">
                 <div flex fxLayout="row">
                   <mat-card-header class="italic">
                     <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
@@ -116,7 +116,6 @@
                   </mat-card-actions>
                 </div>
               </mat-card>
-              <div fxFlex="10px"></div>
             </div>
           </mat-card-content>
         </mat-card>
