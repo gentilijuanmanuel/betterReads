@@ -96,4 +96,23 @@ export class AuthorService {
       }
     );
   }
+
+  likeAuthor(authorId: string, likes: number) {
+    let url = this.firstPartUrl + "author/like/" + authorId;
+
+    return this.http.patch(
+      url,
+      { likes: likes },
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
+
+  getPopularAuthors() {
+    let url = this.firstPartUrl + "author/popular";
+    return this.getData(url);
+  }
 }

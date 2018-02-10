@@ -21,7 +21,13 @@ h1 {
   margin: 0 0;
 }
 
+/*
 p {
   color: white;
   font-size: 18px;
+}
+*/
+
+.likes {
+  font-size: 20px;
 }

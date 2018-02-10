@@ -4,13 +4,110 @@
   </div>
 </div>
 
-<div class=content>
-  <h1 routerLink="/authors">Autores destacados</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel atque enim unde modi non eius nihil, sapiente voluptatum ipsum at dolorem natus, rerum cumque dignissimos vitae culpa maxime, tenetur quasi?</p>
-  <h1 routerLink="/books">Libros destacados</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel atque enim unde modi non eius nihil, sapiente voluptatum ipsum at dolorem natus, rerum cumque dignissimos vitae culpa maxime, tenetur quasi?</p>
-  <h1>Reviews destacadas</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel atque enim unde modi non eius nihil, sapiente voluptatum ipsum at dolorem natus, rerum cumque dignissimos vitae culpa maxime, tenetur quasi?</p>
-  <h1>Quotes destacados</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel atque enim unde modi non eius nihil, sapiente voluptatum ipsum at dolorem natus, rerum cumque dignissimos vitae culpa maxime, tenetur quasi?</p>
+
+<div fxLayout="row" fxLayout.lt-md="column">
+  <mat-toolbar color="primary">
+    <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Autores destacados de la comunidad</a>  
+  </mat-toolbar>
 </div>
+
+
+
+  <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
+    <div fxFlex="60">
+      <div *ngFor="let author of popularAuthors">
+          <br>
+          <mat-card class="list-card">
+            <div fxLayout="column">
+              <div fxLayout="row">
+                  <mat-card-header>
+                      <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + author.photo + ')', 'background-size': 'cover'  }"></div>
+                      <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
+                      <mat-card-subtitle>{{author.dateOfBirth}} - {{ (author.dateOfDeath === "") ? "Actualidad" : author.dateOfBirth }}</mat-card-subtitle>
+                  </mat-card-header>
+              </div>
+              <div fxLayout="row">
+                  <div fxFlex="30">
+                    <p style="font-style: italic;">"{{author.quotes[0].quote}}"</p>
+                    <p style="font-style: italic;">"{{author.quotes[1].quote}}"</p>
+                  </div>
+                  <div fxFlex="65" fxFlexOffset="5">
+                    <mat-card-content>
+                      <p>
+                        {{author.name}} {{author.surname}} nació en la fecha {{author.dateOfBirth}}. {{author.dateOfDeath === "" ? 'Aún vive' : 'Murió el ' + author.dateOfDeath }}. Su nacionalidad: {{author.nationality}}, su lengua materna: {{author.language}}. {{(author.dateOfDeath === "") ? "Es:" : "Ha sido:"}} {{author.ocupation}}.
+                      </p>
+                      <p>
+                        Para conocer más sobre este prolífico autor, haz click en "Detalles" y podrás ver sus libros publicados, sus frases más interesantes y la opinión de la comunidad BetterReads sobre su labor.
+                      </p>
+                      <mat-chip-list>
+                        <mat-chip color="accent" selected="true">{{author.ocupation}}</mat-chip>
+                        <mat-chip color="accent" selected="true">{{author.likes}} <br> <i class="material-icons">favorite</i></mat-chip>
+                      </mat-chip-list>
+                    </mat-card-content>
+                  </div>
+              </div>
+              <div fxLayout="row-reverse">
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="onSelect(author._id)">DETALLES</button>
+                </mat-card-actions>
+              </div>
+            </div>
+          </mat-card>
+          <br>
+      </div>
+    </div>
+  
+  
+  
+</div>
+<div fxLayout="row" fxLayout.lt-md="column">
+  <mat-toolbar color="primary">
+    <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Libros destacados de la comunidad</a>  
+  </mat-toolbar>
+</div>
+
+
+  <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
+    <div fxFlex="60">
+      <div *ngFor="let book of popularBooks">
+          <br>
+          <mat-card class="list-card">
+            <div fxLayout="column">
+              <div fxLayout="row">
+                  <mat-card-header>
+                      <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
+                      <mat-card-title class="italic">{{book.title}}</mat-card-title>
+                      <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
+                  </mat-card-header>
+              </div>
+              <div fxLayout="row">
+                  <div fxFlex="30">
+                    <p style="font-style: italic;">"{{book.reviews[0].comment}}"</p>
+                    <p style="font-style: italic;">(Publicado por {{book.reviews[0].user}})</p>
+                  </div>
+                  <div fxFlex="65" fxFlexOffset="5">
+                    <mat-card-content>
+                      <p>
+                        {{book.description}}
+                      </p>
+                      <p>
+                        Para conocer más sobre este libro, haz click en "Detalles" y podrás ver los fragmentos más interesantes sobre el mismo, así como también la opinión de la comunidad de <span class="italic">BetterReads</span>.
+                      </p>
+                      <mat-chip-list>
+                        <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+                        <mat-chip color="accent" selected="true">{{book.likes}} <br> <i class="material-icons">favorite</i></mat-chip>
+                      </mat-chip-list>
+                    </mat-card-content>
+                  </div>
+              </div>
+              <div fxLayout="row-reverse">
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="onSelect(book._id)">DETALLES</button>
+                </mat-card-actions>
+              </div>
+            </div>
+          </mat-card>
+          <br>
+      </div>
+    </div>
+  </div>

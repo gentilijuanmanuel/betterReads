@@ -99,7 +99,6 @@ export class BookDetailComponent implements OnInit {
       response => { 
         this.snackBar.open("¡Gracias! Este libro ahora tiene " + likes + " likes.", null, { duration: 3500 });
         this.route.params.subscribe(id => {
-          this.bookId = id['id'];
           this.bookService.getBookById(id['id']).subscribe(data => this.book = data)
         });
       },
