@@ -96,4 +96,9 @@ export class AuthorService {
       }
     );
   }
+
+  getPopularAuthors() {
+    let url = this.firstPartUrl + "author/popular";
+    return this.getData(url);
+  }
 }

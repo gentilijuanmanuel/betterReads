@@ -30,6 +30,31 @@ router.get('/', (req, res, next) => {
         });
 });
 
+router.get('/popular', (req, res, next) => {
+    Book.find({ likes: { $gt: 10 } })
+        .select('isbn title author description image reviews quotes genre')
+        .exec()
+        .then(bookCollection => {
+            const response = {
+                count: bookCollection.length,
+                books: bookCollection
+            }
+
+            if (response.count) {
+                res.status(200).json(response);
+            } else {
+                res.status(200).json({
+                    message: 'No books found'
+                });
+            }
+        })
+        .catch(err => {
+                res.status(500).json({
+                    error: err
+                });
+        });
+});
+
 router.get('/genre/:genre', (req, res, next) => {  
     Book.find({ 'genre': req.params.genre })
         .then(books =>{

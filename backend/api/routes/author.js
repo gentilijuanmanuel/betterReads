@@ -59,6 +59,33 @@ router.get('/', (req, res, next) => {
         });
 });
 
+router.get('/popular', (req, res, next) => {
+  Author.find({ likes: { $gt: 10 } })
+      .select('name surname dateOfBirth dateOfDeath quotes language ocupation nationality photo')
+      .exec()
+      .then(authors => {
+          const response = {
+              count: authors.length,
+              authors: authors
+          }
+          if (response.count) {
+              res.status(200)
+                  .json(response);
+          } else {
+              res.status(200)
+                  .json({
+                      message: 'No authors found'
+                  });
+          }
+      })
+      .catch(err => {
+          res.status(500)
+              .json({
+                  error: err
+              });
+      });
+});
+
 router.get('/:id', (req, res, next) => {
     Author.findById(req.params.id)
       .populate('books')

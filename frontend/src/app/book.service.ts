@@ -90,4 +90,9 @@ export class BookService {
         response => response.json()
       )
     }
+
+  getPopularBooks() {
+    let url = this.firstPartUrl + "book/popular";
+    return this.getData(url);
+  }
 }
