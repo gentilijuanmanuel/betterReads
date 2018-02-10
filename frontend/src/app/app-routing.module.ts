@@ -13,10 +13,12 @@ import { LibraryComponent } from './library/library.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { EditAuthorComponent } from './authors/edit-author/edit-author.component';
 import { AccountManagementComponent } from './auth/account-management/account-management.component';
+import { NotfoundComponent } from './auth/notfound/notfound.component';
 
 const routes = [
   { path: '', component: FeedComponent },
   { path: 'authors', component: AuthorsComponent },
+  { path: '404', component: NotfoundComponent },
   { path: 'books', component: BooksComponent },
   { path: 'login', component: LoginComponent },
   { path: 'manage-account', component: AccountManagementComponent, canActivate: [AuthGuard] },
@@ -27,7 +29,8 @@ const routes = [
   { path: 'quote-form/:id', component: QuoteFormComponent, canActivate: [AuthGuard] },
   { path: 'review-form/:id', component: ReviewFormComponent, canActivate: [AuthGuard] },
   { path: 'my-library', component: LibraryComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' }
+
+  { path: '**', redirectTo: '404' }
 
   /*
   EXAMPLE OF PROTECTED ROUTE

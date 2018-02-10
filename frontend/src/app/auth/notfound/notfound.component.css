@@ -1,0 +1,27 @@
+.wrapper {
+  text-align: center;
+  padding-top: 70px;
+  height: 200px;
+}
+
+.big {
+  color: white;
+  font-size: 78px;
+  font-weight: bold;
+}
+
+.small {
+  color: white;
+  font-size: 10px;
+}
+
+p {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+button {
+    color: white;
+    font-size: 16px;
+}
