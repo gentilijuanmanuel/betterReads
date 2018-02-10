@@ -195,25 +195,87 @@ router.patch('/:userId', checkAuth, (req, res, next) => {
         });
 });
 
-router.delete('/:userId', checkAuth, (req, res, next) => {
-    const id = req.params.userId;
-    User.remove({ _id: id })
-        .exec()
-        .then(result => {
+router.post('/delete/:userId', checkAuth, (req, res, next) => {
 
-            const response = {
-                count: result.result.n,
-                status: result.result.ok,
-                message: 'User deleted successfully'
-            }
+    User.findById(req.params.userId)
+    .exec()
+    .then(user => {
+        bcrypt.compare(req.body.password, user.password)
+            .then(valid => {
+                if(valid) {
+                    User.findByIdAndRemove(req.params.userId)
+                    .exec()
+                    .then(result => {
+                        res.status(200).json({
+                            message: "Account deleted"
+                        });
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
 
-            if (result.result.n)
-            {
-                res.status(200).json(response);
-            }
-            else {
-                response.message = 'No user was deleted';
-                res.status(200).json(response);
+                } else {
+                    res.status(500).json({
+                        message: "Incorrect password"
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500).json({
+                    error: err
+                });
+            });
+
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.patch('/change-password/:id', checkAuth, (req, res, next) => {
+
+    User.findById(req.params.id)
+    .exec()
+    .then(user => {
+        bcrypt.compare(req.body.oldpassword, user.password)
+        .then(valid => {
+            if(valid) {
+
+                bcrypt.hash(req.body.newpassword, 10, (err, hash) => {
+
+                    if (err) {
+                        return res.status(500).json({
+                            error: err
+                        });
+
+                    } else {
+                        User.findByIdAndUpdate(
+                            req.params.id,
+                            { $set: { password: hash } },
+                            { safe: true, upsert: true }
+                        )
+                        .then(author => {
+                            res.status(200).json({
+                                message: "Password changed"
+                            });
+                        })
+                        .catch(err => {
+                            res.status(500)
+                                .json({
+                                    error: err
+                                });
+                        });
+                    }
+                });
+
+            } else {
+                res.status(500).json({
+                    message: "Incorrect password"
+                });
             }
         })
         .catch(err => {
@@ -221,6 +283,12 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
                 error: err
             });
         });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
 });
 
 router.post('/:id/add/:idbook', checkAuth, (req, res, next) => {
