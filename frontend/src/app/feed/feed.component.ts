@@ -34,4 +34,12 @@ export class FeedComponent implements OnInit {
     });
   }
 
+  onSelectAuthor(id) {
+    this.router.navigate(['/authors', id]);
+  }
+
+  onSelectBook(id) {
+    this.router.navigate(['/books', id]);
+  }
+
 }
