@@ -23,20 +23,14 @@ export class LibraryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(id => {
-      this.userId = id['id'];
-      this.service.getUserById(this.userId).subscribe(data => {
+    this.userId = localStorage.getItem('id');
+    this.service.getUserById(this.userId).subscribe(data => {
         this.user = data;
-      })
-    });
+    })
   }
 
   onSelect(id: string) {
     this.router.navigate(['/books', id]);
-  }
-
-  manageAccount () {
-    this.router.navigate(['/account', this.userId]);
   }
 
   deleteBookFromLibrary(idBook: string){

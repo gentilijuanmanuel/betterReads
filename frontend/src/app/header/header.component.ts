@@ -39,9 +39,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userId = null;
     this.router.navigate(['login']);
   }
-
-  goLibrary(id: string) {
-    this.router.navigate(['/library', id]);
-  }
-
 }

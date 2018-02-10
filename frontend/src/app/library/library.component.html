@@ -11,7 +11,7 @@
   <div fxFlex="35">
     <mat-card class="user-profile">
       <mat-card-title style="text-align:center">
-        ¡Hola de nuevo {{user.name}}!
+        ¡Hola de nuevo, {{user.name}}!
       </mat-card-title>
       <mat-card-content>
         <mat-card-subtitle>
@@ -30,7 +30,7 @@
         <p>Al día de hoy, agregaste {{user.library.length}} libros a tu biblioteca!</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="manageAccount()">ADMINISTRAR MI CUENTA</button>
+        <button mat-button routerLink='/manage-account'>ADMINISTRAR MI CUENTA</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -41,7 +41,7 @@
 
   <div fxFlex="60">
     <div *ngIf="!user.library.length" class="err">
-      <h1>Vaya! Parece que aún no has agregado ningún libro a tu biblioteca!</h1>
+      <h1>Vaya! Parece que aún no has agregado ningún libro a tu biblioteca...</h1>
       <button mat-raised-button color="accent" routerLink='/books' class="fix">VAMOS A ARREGLAR ESO</button>
     </div>
     <div *ngFor="let book of user.library">

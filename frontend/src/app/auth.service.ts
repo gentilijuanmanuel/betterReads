@@ -63,16 +63,29 @@ export class AuthService {
     return false;
   }
 
-  deleteAccount(userId, form) {
-    return this.http.delete(
-      "http://localhost:3000/api/user/" + userId,
+  deleteAccount(form) {
+    return this.http.post(
+      "http://localhost:3000/api/user/delete/" + localStorage.getItem('id'),
+      form,
       { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
     )
     .map(
       response => {
         return response.json();
-      },
-      error => console.log(error)
+      }
+    );
+  }
+
+  changePassword (form) {
+    return this.http.patch(
+      "http://localhost:3000/api/user/change-password/" + localStorage.getItem('id'),
+      form,
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      }
     );
   }
 }

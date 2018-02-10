@@ -19,14 +19,14 @@ const routes = [
   { path: 'authors', component: AuthorsComponent },
   { path: 'books', component: BooksComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'account/:id', component: AccountManagementComponent, canActivate: [AuthGuard] },
+  { path: 'manage-account', component: AccountManagementComponent, canActivate: [AuthGuard] },
   { path: 'authors/:id', component: AuthorDetailComponent },
   { path: 'authors/:id/edit', component: EditAuthorComponent, canActivate: [AuthGuard] },
   { path: 'books/:id', component: BookDetailComponent },
   { path: 'books/:id/edit', component: EditBookComponent, canActivate: [AuthGuard] },
   { path: 'quote-form/:id', component: QuoteFormComponent, canActivate: [AuthGuard] },
   { path: 'review-form/:id', component: ReviewFormComponent, canActivate: [AuthGuard] },
-  { path: 'library/:id', component: LibraryComponent, canActivate: [AuthGuard] }
+  { path: 'my-library', component: LibraryComponent, canActivate: [AuthGuard] }
 
   /*
   EXAMPLE OF PROTECTED ROUTE

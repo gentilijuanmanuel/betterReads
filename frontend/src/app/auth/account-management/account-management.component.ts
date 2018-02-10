@@ -11,8 +11,6 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AccountManagementComponent implements OnInit {
 
-  private userId;
-
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -21,20 +19,17 @@ export class AccountManagementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.userId = params['id'];
-    })
   }
   
   deleteAccount(form: NgForm) {
-    this.authService.deleteAccount(this.userId, form.value)
+    this.authService.deleteAccount(form.value)
     .subscribe(
       success => {
         this.snackBar.open("Sentimos verte partir :( Hasta la vuelta!", null, { duration: 3500 });
         this.authService.logout();
       },
       err => {
-        this.snackBar.open("Oops. No se pudo eliminar tu cuenta :(", null, { duration: 3500 });
+        this.snackBar.open("La contraseña ingresada no es valida", null, { duration: 3500 });
       },
       () => {
         this.router.navigate(['login'])
@@ -42,4 +37,15 @@ export class AccountManagementComponent implements OnInit {
     );
   }
 
+  changePassword(form: NgForm) {
+    this.authService.changePassword(form.value)
+    .subscribe(
+      success => {
+        this.snackBar.open("Contraseña cambiada satisfactoriamente!", null, { duration: 3500 });
+      },
+      err => {
+        this.snackBar.open("La contraseña ingresada no es valida", null, { duration: 3500 });
+      }
+    );
+  }
 }
