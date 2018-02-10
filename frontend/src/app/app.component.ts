@@ -9,12 +9,9 @@ import { Router } from '@angular/router'
 })
 export class AppComponent {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // if(this.authService.isAuth()) {
-    //   this.router.navigate(['/books']);
-    // }
+    this.authService.isAuth();
   }
 }
-

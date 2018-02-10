@@ -26,7 +26,8 @@ const routes = [
   { path: 'books/:id/edit', component: EditBookComponent, canActivate: [AuthGuard] },
   { path: 'quote-form/:id', component: QuoteFormComponent, canActivate: [AuthGuard] },
   { path: 'review-form/:id', component: ReviewFormComponent, canActivate: [AuthGuard] },
-  { path: 'my-library', component: LibraryComponent, canActivate: [AuthGuard] }
+  { path: 'my-library', component: LibraryComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' }
 
   /*
   EXAMPLE OF PROTECTED ROUTE
