@@ -21,6 +21,12 @@
           <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + author.photo + ')', 'background-size': 'cover'  }"></div>
           <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
           <mat-card-subtitle>{{author.dateOfBirth}} / {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</mat-card-subtitle>
+          <hr class="separator">
+          <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="likeAuthor(author.likes)">
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </mat-card-actions>
         </mat-card-header>
         <img mat-card-image src="{{author.photo}}" alt="{{author.name}} {{author.surname}}">
         <br>

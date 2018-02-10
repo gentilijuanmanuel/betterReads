@@ -298,4 +298,37 @@ router.post('/:id/review', checkAuth, (req, res, next) => {
     });
 });
 
+router.patch('/like/:id', checkAuth, (req, res, next) => {
+
+  const updateObject = {
+      likes: req.body.likes
+  }
+
+  Author.update({ _id: req.params.id }, { $set: updateObject })
+      .exec()
+      .then(result => {
+
+          if (result.nModified) {
+              res.status(200).json({
+                  status: result.ok,
+                  changed: result.nModified,
+                  message: 'Author updated successfully'
+              });
+          }
+          else {
+              res.status(200).json({
+                  status: result.ok,
+                  changed: result.nModified,
+                  message: 'No attributes were affected. Please check change and value attributes of your request.'
+              });
+          }
+      })
+      .catch(err => {
+          res.status(500).json({
+              error: err
+          });
+      });
+});
+
+
 module.exports = router;
