@@ -1,0 +1,27 @@
+.wrapper {
+    width: 80%;
+    max-width: 1200px;
+    margin: 50px auto 0px auto;
+}
+
+span {
+    color: white;
+    padding-left: 8px;
+}
+
+mat-card {
+    height: 286px;
+}
+
+mat-card-title,
+mat-card-subtitle {
+    text-align: center;
+}
+
+mat-form-field {
+    width: 250px;
+}
+
+mat-checkbox {
+    max-width: 150px;
+}

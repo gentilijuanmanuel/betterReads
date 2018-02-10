@@ -12,12 +12,14 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 import { LibraryComponent } from './library/library.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { EditAuthorComponent } from './authors/edit-author/edit-author.component';
+import { AccountManagementComponent } from './auth/account-management/account-management.component';
 
 const routes = [
   { path: '', component: FeedComponent },
   { path: 'authors', component: AuthorsComponent },
   { path: 'books', component: BooksComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'account/:id', component: AccountManagementComponent, canActivate: [AuthGuard] },
   { path: 'authors/:id', component: AuthorDetailComponent },
   { path: 'authors/:id/edit', component: EditAuthorComponent, canActivate: [AuthGuard] },
   { path: 'books/:id', component: BookDetailComponent },

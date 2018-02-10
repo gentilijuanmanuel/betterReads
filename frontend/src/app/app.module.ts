@@ -27,6 +27,7 @@ import { UserService } from './user.service';
 import { LibraryComponent } from './library/library.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { EditAuthorComponent } from './authors/edit-author/edit-author.component';
+import { AccountManagementComponent } from './auth/account-management/account-management.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { EditAuthorComponent } from './authors/edit-author/edit-author.component
     ReviewFormComponent,
     LibraryComponent,
     EditBookComponent,
-    EditAuthorComponent
+    EditAuthorComponent,
+    AccountManagementComponent
   ],
   imports: [
     BrowserModule,
