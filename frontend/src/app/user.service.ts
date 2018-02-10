@@ -18,8 +18,8 @@ export class UserService {
     });
   }
 
-  getLibraryByUserId(id: string) {
-    let url = "http://localhost:3000/api/user/library/" + id;
+  getUserById(id: string) {
+    let url = "http://localhost:3000/api/user/" + id;
 
     return this.http.get(
       url,

@@ -1,49 +1,93 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span class="example-fill-remaining-space">Biblioteca de {{user.name}} {{user.surname}}</span>
-    </mat-toolbar-row>
-  </mat-toolbar>
-<div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
-    <div fxFlex="60">
-      <div *ngFor="let book of user.library">
-          <br>
-          <mat-card class="list-card">
-            <div fxLayout="column">
-              <div fxLayout="row">
-                  <mat-card-header>
-                      <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
-                      <mat-card-title class="italic">{{book.title}}</mat-card-title>
-                      <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
-                  </mat-card-header>
-              </div>
-              <div fxLayout="row">
-                  <div fxFlex="30">
-                    <p style="font-style: italic;">"{{book.reviews[0].comment}}"</p>
-                    <p style="font-style: italic;">(Publicado por {{book.reviews[0].user}})</p>
-                  </div>
-                  <div fxFlex="65" fxFlexOffset="5">
-                    <mat-card-content>
-                      <p>
-                        {{book.description}}
-                      </p>
-                      <p>
-                        Para conocer más sobre este libro, haz click en "Detalles" y podrás ver los fragmentos más interesantes sobre el mismo, así como también la opinión de la comunidad de <span class="italic">BetterReads</span>.
-                      </p>
-                      <mat-chip-list>
-                        <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
-                      </mat-chip-list>
-                    </mat-card-content>
-                  </div>
-              </div>
-              <div fxLayout="row-reverse">
-                <mat-card-actions>
-                  <button mat-raised-button color="primary" (click)="onSelect(book._id)">DETALLES</button>
-                  <button mat-raised-button color="warn" (click)="deleteBookFromLibrary(book._id)"><i class="material-icons">delete</i></button>
-                </mat-card-actions>
-              </div>
+  <mat-toolbar-row>
+      <span>Biblioteca de {{user.name}} {{user.surname}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="wrapper">
+<div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
+
+  <!-- user profile -->
+
+  <div fxFlex="35">
+    <mat-card class="user-profile">
+      <mat-card-title style="text-align:center">
+        ¡Hola de nuevo {{user.name}}!
+      </mat-card-title>
+      <mat-card-content>
+        <mat-card-subtitle>
+          Algunos datos sobre ti:
+        </mat-card-subtitle>
+        <ul>
+          <li>Tus padres te nombraron "{{user.name}} {{user.surname}}"</li>
+          <li>Naciste el {{user.dateOfBirth}}</li>
+          <li>Registraste {{user.email}} para acceder a betterReads</li>
+          <li>Y tu contraseña es ... :)</li>
+        </ul>
+        <br>
+        <mat-card-subtitle>
+          Un poco de estadistica
+        </mat-card-subtitle>
+        <p>Al día de hoy, agregaste {{user.library.length}} libros a tu biblioteca!</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="manageAccount()">ADMINISTRAR MI CUENTA</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- end user profile -->
+  <div fxFlex="5"></div>
+  <!-- user library -->
+
+  <div fxFlex="60">
+    <div *ngIf="!user.library.length" class="err">
+      <h1>Vaya! Parece que aún no has agregado ningún libro a tu biblioteca!</h1>
+      <button mat-raised-button color="accent" routerLink='/books' class="fix">VAMOS A ARREGLAR ESO</button>
+    </div>
+    <div *ngFor="let book of user.library">
+        <br>
+        <mat-card class="list-card">
+          <div fxLayout="column">
+            <div fxLayout="row">
+                <mat-card-header>
+                    <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + book.image + ')', 'background-size': 'cover'  }"></div>
+                    <mat-card-title class="italic">{{book.title}}</mat-card-title>
+                    <mat-card-subtitle>{{book.author.name}} {{book.author.surname}}</mat-card-subtitle>
+                </mat-card-header>
             </div>
-          </mat-card>
-          <br>
-      </div>
+            <div fxLayout="row">
+                <div fxFlex="30">
+                  <p style="font-style: italic;">"{{book.reviews[0].comment}}"</p>
+                  <p style="font-style: italic;">(Publicado por {{book.reviews[0].user}})</p>
+                </div>
+                <div fxFlex="65" fxFlexOffset="5">
+                  <mat-card-content>
+                    <p>
+                      {{book.description}}
+                    </p>
+                    <p>
+                      Para conocer más sobre este libro, haz click en "Detalles" y podrás ver los fragmentos más interesantes sobre el mismo, así como también la opinión de la comunidad de <span class="italic">BetterReads</span>.
+                    </p>
+                    <mat-chip-list>
+                      <mat-chip color="accent" selected="true">{{book.genre}}</mat-chip>
+                    </mat-chip-list>
+                  </mat-card-content>
+                </div>
+            </div>
+            <div fxLayout="row-reverse">
+              <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="onSelect(book._id)">DETALLES</button>
+                <button mat-raised-button color="warn" (click)="deleteBookFromLibrary(book._id)"><i class="material-icons">delete</i></button>
+              </mat-card-actions>
+            </div>
+          </div>
+        </mat-card>
+        <br>
     </div>
   </div>
+
+  <!-- end user library -->
+</div>
+
+<!-- wrapper -->
+</div>

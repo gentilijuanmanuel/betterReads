@@ -62,4 +62,17 @@ export class AuthService {
     this.logout();
     return false;
   }
+
+  deleteAccount(userId, form) {
+    return this.http.delete(
+      "http://localhost:3000/api/user/" + userId,
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      },
+      error => console.log(error)
+    );
+  }
 }

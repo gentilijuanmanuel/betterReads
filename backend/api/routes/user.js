@@ -34,11 +34,10 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.get('/:userId', (req, res, next) => {
-    const id = req.params.userId;
+router.get('/:userId', checkAuth, (req, res, next) => {
 
-    User.findById(id)
-        .select('email name surname dateOfBirth gender library')
+    User.findById(req.params.userId)
+        .select('_id email name surname dateOfBirth gender library')
         .populate('library')
         .exec()
         .then(result => {
@@ -221,28 +220,6 @@ router.delete('/:userId', checkAuth, (req, res, next) => {
             res.status(500).json({
                 error: err
             });
-        });
-});
-
-router.get('/library/:id', checkAuth, (req, res, next) => {
-    
-    User.findById(req.params.id)
-        .select('name surname library')
-        .populate('library')
-        .exec()
-        .then(result => {
-            if(result) {
-                res.status(200).json(result);
-            } else {
-                res.status(200).json({
-                        message: "No user found with that ID"
-                    });
-            }
-        })
-        .catch(err => {
-            res.status(500).json({
-                    error: err
-                });
         });
 });
 

@@ -69,7 +69,7 @@
       <mat-form-field>
         <input name="dateOfBirth" ngModel matInput [matDatepicker]="picker" placeholder="Su fecha de nacimiento" [max]="maxDate" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #picker startView="year"></mat-datepicker>
       </mat-form-field>
 
       Escoja su género: <br><br>
@@ -80,7 +80,7 @@
 
       <mat-checkbox ngModel name="agree" required>Acepto todos los terminos y condiciones.</mat-checkbox>
 
-      <button type="submit" mat-raised-button color="primary" [disabled]="g.invalid">REGISTRARME</button>
+      <button type="submit" mat-raised-button color="warn" [disabled]="g.invalid">REGISTRARME</button>
     </form>
 
   </mat-card>

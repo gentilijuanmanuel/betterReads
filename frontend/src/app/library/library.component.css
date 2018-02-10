@@ -1,4 +1,24 @@
+.wrapper {
+    width: 80%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.user-profile {
+    margin-top: 19px;
+}
+
 span {
     color: white;
     padding-left: 8px;
+}
+
+.err, h1 {
+    color: white;
+    text-align: center;
+}
+
+.fix {
+    color: white;
+    font-size: 18px;
 }
