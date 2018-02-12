@@ -29,6 +29,7 @@ import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { EditAuthorComponent } from './authors/edit-author/edit-author.component';
 import { AccountManagementComponent } from './auth/account-management/account-management.component';
 import { NotfoundComponent } from './auth/notfound/notfound.component';
+import { AddAuthorComponent } from './authors/add-author/add-author.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { NotfoundComponent } from './auth/notfound/notfound.component';
     EditBookComponent,
     EditAuthorComponent,
     AccountManagementComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    AddAuthorComponent
   ],
   imports: [
     BrowserModule,
