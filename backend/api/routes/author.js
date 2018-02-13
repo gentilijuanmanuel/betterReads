@@ -28,9 +28,21 @@ const upload = multer({
     fileSize: 1024 * 1024 * 50 //50 megabytes como máximo, para el tamaño de la imagen.
   },
   fileFilter: fileFilter
-});
+}).single('file'); //CAMBIO
 
 const ObjectId = mongoose.Types.ObjectId;
+
+//RUTA PARA SUBIR IMAGEN
+router.post('/upload', function(req, res, next){
+  upload(req, res, function(err) {
+    if(err) {
+      return res.status(501).json({error: err});
+    }
+
+    return res.json({ originalname: req.file.originalname, uploadname: req.file.filename })
+  });
+});
+
 
 router.get('/', (req, res, next) => {
     Author.find()
@@ -106,6 +118,8 @@ router.get('/:id', (req, res, next) => {
       });
 });
 
+
+//CAMBIO
 router.post('/new', checkAuth, /* upload.single('photo'), */ (req, res, next) => {
     const author = new Author({
       name: req.body.name,
@@ -114,7 +128,7 @@ router.post('/new', checkAuth, /* upload.single('photo'), */ (req, res, next) =>
       dateOfDeath: req.body.dateOfDeath,
       nationality: req.body.nationality,
       language: req.body.language,
-      //photo: "http://localhost:3000/" + req.file.path,
+      photo: "http://localhost:3000/" + req.body.photo,
       gender: req.body.gender,
       ocupation: req.body.ocupation
     });

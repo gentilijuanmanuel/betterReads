@@ -99,6 +99,10 @@
               </mat-card-title>
               <mat-card-subtitle>Los fragmentos más logrados del libro, que permanecen en la memoria de sus lectores</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-content *ngIf="book.quotes.length == 0">
+                <p>Este autor no tene frases publicadas :(</p>
+                <p>¡Agrega una!</p>
+            </mat-card-content>
             <mat-card-content>
               <div *ngFor="let q of book.quotes" flex fxLayout="column">
                 <div flex fxLayout="row">
@@ -130,6 +134,10 @@
               </mat-card-title>
               <mat-card-subtitle>La opinión de nuestros usuarios sobre {{book.title}}</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-content *ngIf="book.reviews.length == 0">
+                <p>Este autor no tene reviews publicadas :(</p>
+                <p>¡Agrega una!</p>
+              </mat-card-content>
             <mat-card-content>
               <div *ngFor="let r of book.reviews" flex fxLayout="column">
                 <div flex fxLayout="row">
