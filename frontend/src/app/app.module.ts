@@ -30,6 +30,7 @@ import { EditAuthorComponent } from './authors/edit-author/edit-author.component
 import { AccountManagementComponent } from './auth/account-management/account-management.component';
 import { NotfoundComponent } from './auth/notfound/notfound.component';
 import { AddAuthorComponent } from './authors/add-author/add-author.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { AddAuthorComponent } from './authors/add-author/add-author.component';
     HttpModule,
     HttpClientModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FileUploadModule
   ],
   providers: [AuthService, UserService],
   bootstrap: [AppComponent]

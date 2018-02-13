@@ -11,7 +11,7 @@
             Nuevo
         </mat-card-title>
         <mat-card-subtitle>
-          Por favor, revise antes de confirmar los cambios.
+          Por favor, primero suba la imagen y, luego, complete los campos restantes.
         </mat-card-subtitle>
       
         <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="addAuthor(q)">   
@@ -70,3 +70,24 @@
       </mat-card>
 </div>
 <br>
+<div flex fxFlex="40" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card fxFlex="700px">
+      <div flex fxLayout="row" fxLayoutAlign="end">
+        <input type="file" name="photo" id="photo" multiple ng2FileSelect [uploader]="uploader">
+      </div>
+      <div *ngFor="let item of uploader.queue">
+        <hr>
+        <div flex fxLayout="row" fxLayoutAlign="center center">
+          <div flex fxFlex="70">
+            <p>{{item.file.name}}</p>
+          </div>
+          <div flex fxFlex="30">
+            <button mat-raised-button color="accent" (click)="item.upload()">Subir</button>
+            <button mat-raised-button color="warn" (click)="item.remove()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+</div>
+<br>
+</div>

@@ -124,7 +124,8 @@ export class AuthorService {
     gender: string,
     nationality: string,
     language: string,
-    ocupation: string
+    ocupation: string,
+    photo: string
   ) {
     let url = this.firstPartUrl + "author/new";
     
@@ -138,7 +139,8 @@ export class AuthorService {
         gender: gender,
         nationality: nationality,
         language: language,
-        ocupation: ocupation        
+        ocupation: ocupation,
+        photo: photo      
       },
       { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
     )
