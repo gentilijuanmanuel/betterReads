@@ -93,7 +93,6 @@ export class BookDetailComponent implements OnInit {
 
   likeBook(likes: number) {
     likes++;
-    console.log(likes);
     this.bookService.likeBook(this.bookId, likes)
     .subscribe(
       response => { 

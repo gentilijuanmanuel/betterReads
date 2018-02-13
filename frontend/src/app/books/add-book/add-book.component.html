@@ -1,0 +1,78 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span class="example-fill-remaining-space secondary">Agregar un nuevo libro</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div flex fxLayout="column" fxLayoutAlign="center">
+  <br>
+  <div flex fxFlex="40" fxLayout="row" fxLayoutAlign="center center">
+      <mat-card fxFlex="700px">
+          <mat-card-title>
+              Nuevo
+          </mat-card-title>
+          <mat-card-subtitle>
+            Por favor, primero suba la imagen y, luego, complete los campos restantes.
+          </mat-card-subtitle>
+        
+          <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="addBook(q)">   
+            <mat-form-field>
+              <input type="text" name="isbn" ngModel matInput placeholder="ISBN" #isbnInput="ngModel" required>
+              <mat-error *ngIf="isbnInput.hasError('required')">Este campo es requerido.</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field>
+              <input type="text" name="title" ngModel matInput placeholder="Título" #titleInput="ngModel" required>
+              <mat-error *ngIf="titleInput.hasError('required')">Este campo es requerido.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input type="text" name="name" ngModel matInput placeholder="Nombre del autor" #nameInput="ngModel" required>
+                <mat-error *ngIf="nameInput.hasError('required')">Este campo es requerido.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input type="text" name="surname" ngModel matInput placeholder="Apellido del autor" #surnameInput="ngModel" required>
+                <mat-error *ngIf="surnameInput.hasError('required')">Este campo es requerido.</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field>
+                <mat-select placeholder="Género" ngModel name="genre">
+                  <mat-option *ngFor="let g of genres" [value]="g.value">
+                    {{g.value}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput ngModel name="description" required placeholder="Descripción" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #descriptionInput="ngModel"></textarea>
+                <mat-error *ngIf="descriptionInput.hasError('required')">Este campo es requerido.</mat-error>
+              </mat-form-field>
+  
+            <div flex fxLayoutAlign="end">
+              <button type="submit" mat-raised-button color="primary" [disabled]="q.invalid">Agregar</button>
+            </div>
+          </form>
+        </mat-card>
+  </div>
+  <br>
+  <div flex fxFlex="40" fxLayout="row" fxLayoutAlign="center center">
+      <mat-card fxFlex="700px">
+        <div flex fxLayout="row" fxLayoutAlign="end">
+          <input type="file" name="image" id="image" multiple ng2FileSelect [uploader]="uploader">
+        </div>
+        <div *ngFor="let item of uploader.queue">
+          <hr>
+          <div flex fxLayout="row" fxLayoutAlign="center center">
+            <div flex fxFlex="70">
+              <p>{{item.file.name}}</p>
+            </div>
+            <div flex fxFlex="30">
+              <button mat-raised-button color="accent" (click)="item.upload()">Subir</button>
+              <button mat-raised-button color="warn" (click)="item.remove()">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+  </div>
+  <br>
+  </div>

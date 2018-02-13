@@ -1,20 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorService } from '../../author.service';
+import { BookService } from '../../book.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { FileSelectDirective, FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 
-const uri = 'http://localhost:3000/api/author/upload';
+const uri = 'http://localhost:3000/api/book/upload';
 
 @Component({
-  selector: 'app-add-author',
-  templateUrl: './add-author.component.html',
-  styleUrls: ['./add-author.component.css'],
-  providers: [AuthorService]
+  selector: 'app-add-book',
+  templateUrl: './add-book.component.html',
+  styleUrls: ['./add-book.component.css'],
+  providers: [ BookService ]
 })
-export class AddAuthorComponent implements OnInit {
-  private maxDate;
+export class AddBookComponent implements OnInit {
+
+  genres = [
+    { value: 'Novela'},
+    { value: 'Poesía'},
+    { value: 'Ensayo'},
+    { value: 'No ficción' },
+    { value: 'Terror' },
+    { value: 'Filosofía' },
+    { value: 'Policial' },
+    { value: 'Fantástico' },
+    { value: 'Biografía' },
+    { value: 'Autobiografía' },
+    { value: 'Diario de viajes' },
+
+  ];
 
   uploader: FileUploader = new FileUploader({ url: uri });
 
@@ -23,19 +37,17 @@ export class AddAuthorComponent implements OnInit {
   attachmentList: any = [];
 
   constructor(
-    private authorService: AuthorService,
+    private bookService: BookService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
       this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
         this.attachmentList.push(JSON.parse(response));
-    }
+    } 
   }
 
   ngOnInit() {
-    this.maxDate = new Date();
-    this.maxDate.setFullYear(this.maxDate.getFullYear());
 
     var options: FileUploaderOptions = {};
     let token = localStorage.getItem("token");
@@ -52,16 +64,14 @@ export class AddAuthorComponent implements OnInit {
     }
   }
 
-  addAuthor(form: NgForm) {
-    this.authorService.addAuthor(
+  addBook(form: NgForm) {
+    this.bookService.addBook(
+      form.value.isbn,
+      form.value.title,
       form.value.name,
       form.value.surname,
-      form.value.dateOfBirth,
-      form.value.dateOfDeath,
-      form.value.gender,
-      form.value.nationality,
-      form.value.language,
-      form.value.ocupation,
+      form.value.description,
+      form.value.genre,
       this.fileName
     ).subscribe(
       response => {},
@@ -70,8 +80,12 @@ export class AddAuthorComponent implements OnInit {
         this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
       },
 
-      () => this.snackBar.open("Autor agregado con éxito.", null, { duration: 3500 })
+      () => this.snackBar.open("Libro agregado con éxito.", null, { duration: 3500 })
     );
   }
 
 }
+
+
+
+

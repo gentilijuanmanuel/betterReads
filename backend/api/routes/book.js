@@ -4,6 +4,44 @@ const Book = mongoose.model('Book');
 const Author = mongoose.model('Author');
 const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, true);
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 50 //50 megabytes como máximo, para el tamaño de la imagen.
+  },
+  fileFilter: fileFilter
+}).single('file');
+
+//RUTA PARA SUBIR IMAGEN
+router.post('/upload', function(req, res, next){
+    upload(req, res, function(err) {
+      if(err) {
+        return res.status(501).json({error: err});
+      }
+  
+      return res.json({ originalname: req.file.originalname, uploadname: req.file.filename })
+    });
+  });
+
 
 router.get('/', (req, res, next) => {
     Book.find()
@@ -96,7 +134,7 @@ router.post('/new', checkAuth, (req, res, next) => {
             surname: req.body.surname
         },
         description: req.body.description,
-        image: req.body.image,
+        image: "http://localhost:3000/" + req.body.image,
         genre: req.body.genre,
     });
 
