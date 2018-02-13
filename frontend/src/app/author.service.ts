@@ -115,4 +115,36 @@ export class AuthorService {
     let url = this.firstPartUrl + "author/popular";
     return this.getData(url);
   }
+
+  addAuthor(
+    name: string,
+    surname: string,
+    dateOfBirth: string,
+    dateOfDeath: string,
+    gender: string,
+    nationality: string,
+    language: string,
+    ocupation: string
+  ) {
+    let url = this.firstPartUrl + "author/new";
+    
+    return this.http.post(
+      url,
+      {
+        name: name,
+        surname: surname,
+        dateOfBirth: dateOfBirth,
+        dateOfDeath: dateOfDeath,
+        gender: gender,
+        nationality: nationality,
+        language: language,
+        ocupation: ocupation        
+      },
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
 }

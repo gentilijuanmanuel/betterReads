@@ -1,0 +1,72 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <span class="example-fill-remaining-space secondary">Agregar un nuevo autor</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div flex fxLayout="column" fxLayoutAlign="center">
+<br>
+<div flex fxFlex="40" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card fxFlex="700px">
+        <mat-card-title>
+            Nuevo
+        </mat-card-title>
+        <mat-card-subtitle>
+          Por favor, revise antes de confirmar los cambios.
+        </mat-card-subtitle>
+      
+        <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="addAuthor(q)">   
+          <mat-form-field>
+            <input type="text" name="name" ngModel matInput placeholder="Nombre" #nameInput="ngModel" required>
+            <mat-error *ngIf="nameInput.hasError('required')">Este campo es requerido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" name="surname" ngModel matInput placeholder="Apellido" #surnameInput="ngModel" required>
+            <mat-error *ngIf="surnameInput.hasError('required')">Este campo es requerido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="dateOfBirth" ngModel matInput [matDatepicker]="birth" placeholder="Fecha de nacimiento" [max]="maxDate" required>
+            <mat-datepicker-toggle matSuffix [for]="birth"></mat-datepicker-toggle>
+            <mat-datepicker #birth startView="year"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="dateOfDeath" ngModel matInput [matDatepicker]="death" placeholder="Fecha de defunción">
+            <mat-datepicker-toggle matSuffix [for]="death"></mat-datepicker-toggle>
+            <mat-datepicker #death startView="year"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Género" ngModel name="genre" [(value)]="selected" required>
+              <mat-option value="M">
+                Masculino
+              </mat-option>
+              <mat-option value="F">
+                Femenino
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" name="nationality" ngModel matInput placeholder="Nacionalidad" #nationalityInput="ngModel" required>
+            <mat-error *ngIf="nationalityInput.hasError('required')">Este campo es requerido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" name="language" ngModel matInput placeholder="Idioma" #languageInput="ngModel" required>
+            <mat-error *ngIf="languageInput.hasError('required')">Este campo es requerido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" name="ocupation" ngModel matInput placeholder="Ocupación" #ocupationInput="ngModel" required>
+            <mat-error *ngIf="ocupationInput.hasError('required')">Este campo es requerido.</mat-error>
+          </mat-form-field>
+
+          <div flex fxLayoutAlign="end">
+            <button type="submit" mat-raised-button color="primary" [disabled]="q.invalid">Agregar</button>
+          </div>
+        </form>
+      </mat-card>
+</div>
+<br>

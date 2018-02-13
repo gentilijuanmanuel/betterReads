@@ -106,7 +106,7 @@ router.get('/:id', (req, res, next) => {
       });
 });
 
-router.post('/new', checkAuth, upload.single('photo'), (req, res, next) => {
+router.post('/new', checkAuth, /* upload.single('photo'), */ (req, res, next) => {
     const author = new Author({
       name: req.body.name,
       surname: req.body.surname,
@@ -114,7 +114,7 @@ router.post('/new', checkAuth, upload.single('photo'), (req, res, next) => {
       dateOfDeath: req.body.dateOfDeath,
       nationality: req.body.nationality,
       language: req.body.language,
-      photo: "http://localhost:3000/" + req.file.path,
+      //photo: "http://localhost:3000/" + req.file.path,
       gender: req.body.gender,
       ocupation: req.body.ocupation
     });
