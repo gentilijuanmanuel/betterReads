@@ -15,6 +15,7 @@ import { EditAuthorComponent } from './authors/edit-author/edit-author.component
 import { AccountManagementComponent } from './auth/account-management/account-management.component';
 import { NotfoundComponent } from './auth/notfound/notfound.component';
 import { AddAuthorComponent } from './authors/add-author/add-author.component';
+import { AddBookComponent } from './books/add-book/add-book.component';
 
 const routes = [
   { path: '', component: FeedComponent },
@@ -31,6 +32,7 @@ const routes = [
   { path: 'review-form/:id', component: ReviewFormComponent, canActivate: [AuthGuard] },
   { path: 'my-library', component: LibraryComponent, canActivate: [AuthGuard] },
   { path: 'add-authors', component: AddAuthorComponent, canActivate: [AuthGuard] },
+  { path: 'add-books', component: AddBookComponent, canActivate: [AuthGuard] },
 
 
   { path: '**', redirectTo: '404' }

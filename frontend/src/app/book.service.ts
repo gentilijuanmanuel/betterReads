@@ -95,4 +95,34 @@ export class BookService {
     let url = this.firstPartUrl + "book/popular";
     return this.getData(url);
   }
+
+  addBook(
+    isbn: string,
+    title: string,
+    name: string,
+    surname: string,
+    description: string,
+    genre: string,
+    image: string
+  ) {
+    let url = this.firstPartUrl + "book/new";
+    
+    return this.http.post(
+      url,
+      {
+        isbn: isbn,
+        title: title,
+        name: name,
+        surname: surname,
+        description: description,
+        genre: genre,
+        image: image
+      },
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      })
+  }
 }

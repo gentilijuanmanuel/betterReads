@@ -11,6 +11,8 @@ Frontend:
 - Flex-Layout.
 - Material Icons.
 - Sass.
+- Ng2-file-upload.
+- File-uploader.
 
 Backend:
 - MongoDB.

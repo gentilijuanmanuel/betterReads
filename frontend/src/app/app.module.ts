@@ -31,6 +31,7 @@ import { AccountManagementComponent } from './auth/account-management/account-ma
 import { NotfoundComponent } from './auth/notfound/notfound.component';
 import { AddAuthorComponent } from './authors/add-author/add-author.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { AddBookComponent } from './books/add-book/add-book.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     EditAuthorComponent,
     AccountManagementComponent,
     NotfoundComponent,
-    AddAuthorComponent
+    AddAuthorComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
