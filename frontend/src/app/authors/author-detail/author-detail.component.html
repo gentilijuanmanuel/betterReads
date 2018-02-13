@@ -134,6 +134,10 @@
               <mat-card-title>Frases famosas de {{author.name}} {{author.surname}}</mat-card-title>
               <mat-card-subtitle>Extractos de charlas, entrevistas, conferencias, que se inmortalizaron entre comillas</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-content *ngIf="author.quotes.length == 0">
+                <p>Este autor no tene frases publicadas :(</p>
+                <p>¡Agrega una!</p>
+            </mat-card-content>
             <mat-card-content>
               <div *ngFor="let q of author.quotes" flex fxLayout="column">
                 <div flex fxLayout="row">
@@ -163,6 +167,10 @@
                 <span class="italic">BetterReads</span> sobre {{author.name}} {{author.surname}}</mat-card-title>
               <mat-card-subtitle>La opinión de nuestros usuarios sobre la vida y obra de {{author.name}} {{author.surname}}</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-content *ngIf="author.reviews.length == 0">
+                <p>Este autor no tene reviews publicadas :(</p>
+                <p>¡Agrega una!</p>
+              </mat-card-content>
             <mat-card-content>
               <div *ngFor="let r of author.reviews" flex fxLayout="column">
                 <div flex fxLayout="row">

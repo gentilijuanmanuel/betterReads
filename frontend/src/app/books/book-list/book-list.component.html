@@ -12,7 +12,10 @@
                 </mat-card-header>
             </div>
             <div fxLayout="row">
-                <div fxFlex="30">
+                <div fxFlex="30" *ngIf="book.reviews.length == 0">
+                    <p style="font-style: italic;">Este libro todavía no tiene reviews subidas :(</p>
+                  </div>
+                <div fxFlex="30" *ngIf="book.reviews.length != 0">
                   <p style="font-style: italic;">"{{book.reviews[0].comment}}"</p>
                   <p style="font-style: italic;">(Publicado por {{book.reviews[0].user}})</p>
                 </div>

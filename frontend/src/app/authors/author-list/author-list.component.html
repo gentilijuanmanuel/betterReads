@@ -12,7 +12,10 @@
                 </mat-card-header>
             </div>
             <div fxLayout="row">
-                <div fxFlex="30">
+                <div fxFlex="30" *ngIf="author.quotes.length == 0">
+                  <p style="font-style: italic;">Este autor todavía no tiene frases subidas :(</p>
+                </div>
+                <div fxFlex="30" *ngIf="author.quotes.length != 0">
                   <p style="font-style: italic;">"{{author.quotes[0].quote}}"</p>
                   <p style="font-style: italic;">"{{author.quotes[1].quote}}"</p>
                 </div>
