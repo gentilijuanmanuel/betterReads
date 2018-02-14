@@ -74,13 +74,16 @@ export class AddBookComponent implements OnInit {
       form.value.genre,
       this.fileName
     ).subscribe(
-      response => {},
-
-      error => { 
-        this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
+      
+      success => {
+        this.snackBar.open("Libro agregado con éxito!", null, { duration: 2500 });
       },
 
-      () => this.snackBar.open("Libro agregado con éxito.", null, { duration: 3500 })
+      err => {
+        this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
+      },
+
+      () => this.router.navigate(['books'])
     );
   }
 

@@ -1,0 +1,53 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="example-fill-remaining-space secondary">Borrar al autor <i>{{author.name}} {{author.surname}}</i>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div flex fxLayout="column" fxLayoutAlign="center center">
+  <br>
+  <div>
+    <mat-card fxFlex="700px">
+      <mat-card-title>
+        Borrar 
+      </mat-card-title>
+      <mat-card-subtitle>
+        Luego de confirmar los cambios, no se podrá volver atrás.
+      </mat-card-subtitle>
+
+      <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="deleteAuthor(q)">
+        
+        <mat-form-field>
+          <input type="text" name="name" ngModel="{{author.name}}" matInput placeholder="Nombre" #nameInput="ngModel" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" name="surname" ngModel="{{author.surname}}" matInput placeholder="Apellido" #surnameInput="ngModel" disabled>
+        </mat-form-field>
+     
+        <mat-form-field>
+          <input type="text" name="nationality" ngModel="{{author.nationality}}" matInput placeholder="Nacionalidad" #nationalityInput="ngModel" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" name="language" ngModel="{{author.language}}" matInput placeholder="Idioma" #languageInput="ngModel"
+            disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" name="ocupation" ngModel="{{author.ocupation}}" matInput placeholder="Ocupación" #ocupationInput="ngModel"
+            disabled>
+        </mat-form-field>
+
+        <div fxLayout="row">
+          <div fxFlex="100" fxLayoutAlign="end center">
+            <button type="submit" mat-raised-button color="warn">Eliminar</button>
+            <button (click)="cancel(author._id)" mat-raised-button color="accent">Cancelar</button>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  <br>
+</div>

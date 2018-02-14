@@ -149,4 +149,19 @@ export class AuthorService {
         return response.json();
       })
   }
+
+  deleteAuthor(id: string) {
+    let url = this.firstPartUrl + "author/" + id;
+
+    return this.http.delete(
+      url,
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      }
+    )
+  }
+
 }
