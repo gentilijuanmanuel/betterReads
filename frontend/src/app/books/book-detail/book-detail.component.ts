@@ -107,6 +107,10 @@ export class BookDetailComponent implements OnInit {
     )
   }
 
+  delete(id: string) {
+    this.router.navigate(['/books', id, 'delete'])
+  }
+
   ngOnDestroy() {
     this.authSubscription.unsubscribe();
   }

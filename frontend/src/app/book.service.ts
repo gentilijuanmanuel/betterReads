@@ -125,4 +125,18 @@ export class BookService {
         return response.json();
       })
   }
+
+  deleteBook(id: string, name: string, surname: string) {
+    let url = this.firstPartUrl + "book/" + id + "/" + name + "/" + surname;
+
+    return this.http.delete(
+      url,
+      { headers: new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('token') }) }
+    )
+    .map(
+      response => {
+        return response.json();
+      }
+    )
+  }
 }

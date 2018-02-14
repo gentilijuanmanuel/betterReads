@@ -5,6 +5,10 @@
     <button mat-icon-button class="icon">
       <mat-icon (click)="edit(book._id)" aria-label="Edit">mode_edit</mat-icon>
     </button>
+
+    <button mat-icon-button class="edit">
+      <mat-icon (click)="delete(book._id)">delete</mat-icon>
+    </button>
     
     <span class="fill-remaining-space"></span>
 

@@ -17,6 +17,7 @@ import { NotfoundComponent } from './auth/notfound/notfound.component';
 import { AddAuthorComponent } from './authors/add-author/add-author.component';
 import { AddBookComponent } from './books/add-book/add-book.component';
 import { DeleteAuthorComponent } from './authors/delete-author/delete-author.component';
+import { DeleteBookComponent } from './books/delete-book/delete-book.component';
 
 const routes = [
   { path: '', component: FeedComponent },
@@ -35,6 +36,7 @@ const routes = [
   { path: 'add-authors', component: AddAuthorComponent, canActivate: [AuthGuard] },
   { path: 'add-books', component: AddBookComponent, canActivate: [AuthGuard] },
   { path: 'authors/:id/delete', component: DeleteAuthorComponent, canActivate: [AuthGuard] },
+  { path: 'books/:id/delete', component: DeleteBookComponent, canActivate: [AuthGuard] },
 
 
   { path: '**', redirectTo: '404' }

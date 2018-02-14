@@ -1,0 +1,57 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span class="example-fill-remaining-space secondary">Borrar al libro <i>{{book.title}}</i>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <div flex fxLayout="column" fxLayoutAlign="center center">
+    <br>
+    <div>
+      <mat-card fxFlex="700px">
+        <mat-card-title>
+          Borrar 
+        </mat-card-title>
+        <mat-card-subtitle>
+          Luego de confirmar los cambios, no se podrá volver atrás.
+        </mat-card-subtitle>
+  
+        <form fxLayout="column" fxLayoutGap="7px" #q="ngForm" (ngSubmit)="deleteBook(q)">
+          
+          <mat-form-field>
+            <input type="text" name="isbn" ngModel="{{book.isbn}}" matInput placeholder="ISBN" #isbnInput="ngModel" disabled>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" name="title" ngModel="{{book.title}}" matInput placeholder="Título" #titleInput="ngModel" disabled>
+          </mat-form-field>
+       
+          <mat-form-field>
+            <input type="text" name="name" ngModel="{{book.author.name}}" matInput placeholder="Nombre del autor" #nameInput="ngModel" disabled>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" name="surname" ngModel="{{book.author.surname}}" matInput placeholder="Apellido del autor" #surnameInput="ngModel"
+              disabled>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <textarea matInput ngModel="{{book.description}}" name="description" placeholder="Descripción" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="50" #descriptionInput="ngModel" disabled></textarea>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input type="text" name="genre" ngModel="{{book.genre}}" matInput placeholder="Género" #genreInput="ngModel"
+                disabled>
+            </mat-form-field>
+  
+          <div fxLayout="row">
+            <div fxFlex="100" fxLayoutAlign="end center">
+              <button type="submit" mat-raised-button color="warn">Eliminar</button>
+              <button (click)="cancel(book._id)" mat-raised-button color="accent">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+    <br>
+  </div>

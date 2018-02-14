@@ -287,4 +287,86 @@ router.patch('/like/:id', checkAuth, (req, res, next) => {
         });
 });
 
+/*
+router.delete('/:id', checkAuth, (req, res, next) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    const surname = req.body.surname;
+
+    Book.remove({ _id: id })
+        .exec(function(err, removed) {
+            Author.findOneAndUpdate(
+              { name: name, surname: surname },
+              { $pull: { books: id  } },
+              { new: true },
+              function(err, removedFromAuthor) {
+                if (err) { console.error(err) }
+                res.status(200).send(removedFromAuthor)
+              })
+          }
+        )
+        .then(
+            result => {
+                const response = {
+                    count: result.result.n,
+                    status: result.result.ok,
+                    message: 'Book deleted successfully'
+                }
+  
+                if (result.result.n) {
+                    res.status(200).json(response);
+                }
+                else {
+                    response.message = 'No book was deleted';
+                    res.status(200).json(response);
+                }
+            })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+    });
+
+    */
+
+
+router.delete('/:id/:name/:surname', checkAuth, (req, res, next) => {
+
+    const id = req.params.id;
+    const name = req.params.name;
+    const surname = req.params.surname;
+    
+    Book.remove({ _id : id })
+        .then(() => {
+            Author.findOneAndUpdate(
+                { name: name, surname: surname },
+                { $pull: { "books" : id } },
+            )
+            .then(author => {
+                if(author) {
+                    res.status(201).json({
+                        message: "Book deleted successfully and deleted to authors library"
+                    });
+                    } else {
+                        res.status(201).json({
+                            message: "Book deleted successfully",
+                        });
+                    }
+            })
+            .catch(err => {
+                res.status(500)
+                   .json({
+                        error: err
+                    });
+                });
+            })
+        .catch(err => {
+            res.status(500)
+               .json({
+                    error: err
+                });
+        });
+    });
+
 module.exports = router;

@@ -33,6 +33,7 @@ import { AddAuthorComponent } from './authors/add-author/add-author.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AddBookComponent } from './books/add-book/add-book.component';
 import { DeleteAuthorComponent } from './authors/delete-author/delete-author.component';
+import { DeleteBookComponent } from './books/delete-book/delete-book.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { DeleteAuthorComponent } from './authors/delete-author/delete-author.com
     NotfoundComponent,
     AddAuthorComponent,
     AddBookComponent,
-    DeleteAuthorComponent
+    DeleteAuthorComponent,
+    DeleteBookComponent
   ],
   imports: [
     BrowserModule,
