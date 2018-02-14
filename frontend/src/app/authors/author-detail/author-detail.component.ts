@@ -81,4 +81,9 @@ export class AuthorDetailComponent implements OnInit {
       }
     )
   }
+
+  delete(id: string) {
+    this.router.navigate(['/authors', id, 'delete'])
+  }
+
 }

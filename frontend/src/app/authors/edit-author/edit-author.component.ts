@@ -39,11 +39,11 @@ export class EditAuthorComponent implements OnInit {
     this.authorService.editAuthor(this.author._id, form.value).subscribe(
 
       success => {
-        this.snackBar.open("Autor editado con exito!", null, { duration: 2500 });
+        this.snackBar.open("Autor editado con éxito!", null, { duration: 2500 });
       },
 
       err => {
-        this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
+        this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
       },
 
       () => this.router.navigate(['authors', this.author._id])

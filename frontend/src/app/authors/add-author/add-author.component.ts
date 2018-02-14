@@ -64,13 +64,16 @@ export class AddAuthorComponent implements OnInit {
       form.value.ocupation,
       this.fileName
     ).subscribe(
-      response => {},
 
-      error => { 
-        this.snackBar.open("Oops. Algo salio mal :(", null, { duration: 3500 });
+      success => {
+        this.snackBar.open("Autor agregado con éxito!", null, { duration: 2500 });
       },
 
-      () => this.snackBar.open("Autor agregado con éxito.", null, { duration: 3500 })
+      err => {
+        this.snackBar.open("Oops. Algo salió mal :(", null, { duration: 3500 });
+      },
+
+      () => this.router.navigate(['authors'])
     );
   }
 
