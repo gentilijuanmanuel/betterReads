@@ -215,7 +215,7 @@ router.delete('/:id', checkAuth, (req, res, next) => {
         res.status(200).json(response);
       }
       else {
-        response.message = 'No user was deleted';
+        response.message = 'No author was deleted';
         res.status(200).json(response);
       }
     })
