@@ -25,15 +25,35 @@
               <mat-error *ngIf="titleInput.hasError('required')">Este campo es requerido.</mat-error>
             </mat-form-field>
 
+            <!--
             <mat-form-field>
                 <input type="text" name="name" ngModel matInput placeholder="Nombre del autor" #nameInput="ngModel" required>
                 <mat-error *ngIf="nameInput.hasError('required')">Este campo es requerido.</mat-error>
             </mat-form-field>
+          -->
 
+            <mat-form-field>
+              <mat-select placeholder="Seleccione el nombre del autor" ngModel name="name">
+                <mat-option *ngFor="let author of authors" [value]="author.name">
+                  {{author.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Seleccione el apellido del autor" ngModel name="surname">
+                <mat-option *ngFor="let author of authors" [value]="author.surname">
+                  {{author.surname}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!--
             <mat-form-field>
                 <input type="text" name="surname" ngModel matInput placeholder="Apellido del autor" #surnameInput="ngModel" required>
                 <mat-error *ngIf="surnameInput.hasError('required')">Este campo es requerido.</mat-error>
             </mat-form-field>
+          -->
   
             <mat-form-field>
                 <mat-select placeholder="Género" ngModel name="genre">
