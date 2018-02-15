@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { FileSelectDirective, FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { AuthorService } from '../../author.service';
 
 const uri = 'http://localhost:3000/api/book/upload';
 
@@ -11,7 +12,7 @@ const uri = 'http://localhost:3000/api/book/upload';
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
   styleUrls: ['./add-book.component.css'],
-  providers: [ BookService ]
+  providers: [ BookService, AuthorService ]
 })
 export class AddBookComponent implements OnInit {
 
@@ -30,6 +31,8 @@ export class AddBookComponent implements OnInit {
 
   ];
 
+  private authors: any;
+
   uploader: FileUploader = new FileUploader({ url: uri });
 
   private fileName: string;
@@ -40,7 +43,8 @@ export class AddBookComponent implements OnInit {
     private bookService: BookService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authorService: AuthorService
   ) {
       this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
         this.attachmentList.push(JSON.parse(response));
@@ -62,6 +66,8 @@ export class AddBookComponent implements OnInit {
       this.fileName = "uploads/" + this.uploader.queue[0].file.name;
       this.snackBar.open("Foto subida con éxito.", null, { duration: 3500 });
     }
+
+    this.authorService.getAuthors().subscribe(res => this.authors = res.authors);
   }
 
   addBook(form: NgForm) {
