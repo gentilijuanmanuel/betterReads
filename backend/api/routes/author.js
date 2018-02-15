@@ -28,11 +28,10 @@ const upload = multer({
     fileSize: 1024 * 1024 * 50 //50 megabytes como máximo, para el tamaño de la imagen.
   },
   fileFilter: fileFilter
-}).single('file'); //CAMBIO
+}).single('file');
 
 const ObjectId = mongoose.Types.ObjectId;
 
-//RUTA PARA SUBIR IMAGEN
 router.post('/upload', function(req, res, next){
   upload(req, res, function(err) {
     if(err) {
@@ -118,9 +117,7 @@ router.get('/:id', (req, res, next) => {
       });
 });
 
-
-//CAMBIO
-router.post('/new', checkAuth, /* upload.single('photo'), */ (req, res, next) => {
+router.post('/new', checkAuth, (req, res, next) => {
     const author = new Author({
       name: req.body.name,
       surname: req.body.surname,
@@ -150,16 +147,7 @@ router.post('/new', checkAuth, /* upload.single('photo'), */ (req, res, next) =>
               .json({
                   error: err
               });
-      });
-
-    /*
-    author.save((err, author) => {
-      if (err) {
-          res.status(500).send(err);
-      }
-      res.status(200).send("Author submitted \n" + author);
-    });*/
-    
+      });   
 });
 
 router.patch('/:id', checkAuth, (req, res, next) => {
