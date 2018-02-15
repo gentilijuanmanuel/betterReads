@@ -1,5 +1,6 @@
 <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
   <div fxFlex="60">
+    <h1 *ngIf="!authors" class="err">Vaya vaya... No pudimos encontrar ningún autor :(</h1>
     <div *ngFor="let author of authors">
         <br>
         <mat-card class="list-card">
@@ -8,7 +9,7 @@
                 <mat-card-header>
                     <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + author.photo + ')', 'background-size': 'cover'  }"></div>
                     <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
-                    <mat-card-subtitle>{{author.dateOfBirth}} - {{ (author.dateOfDeath === "") ? "Actualidad" : author.dateOfBirth }}</mat-card-subtitle>
+                    <mat-card-subtitle>{{author.dateOfBirth | date: 'dd/MM/yyyy'}} - {{ (author.dateOfDeath === "") ? "Actualidad" : (author.dateOfBirth | date: 'dd/MM/yyyy') }}</mat-card-subtitle>
                 </mat-card-header>
             </div>
             <div fxLayout="row">
@@ -17,12 +18,12 @@
                 </div>
                 <div fxFlex="30" *ngIf="author.quotes.length != 0">
                   <p style="font-style: italic;">"{{author.quotes[0].quote}}"</p>
-                  <p style="font-style: italic;">"{{author.quotes[1].quote}}"</p>
+                  <p style="font-style: italic;" *ngIf="author.quotes.length > 1">"{{author.quotes[1].quote}}"</p>
                 </div>
                 <div fxFlex="65" fxFlexOffset="5">
                   <mat-card-content>
                     <p>
-                      {{author.name}} {{author.surname}} nació en la fecha {{author.dateOfBirth}}. {{author.dateOfDeath === "" ? 'Aún vive' : 'Murió el ' + author.dateOfDeath }}. Su nacionalidad: {{author.nationality}}, su lengua materna: {{author.language}}. {{(author.dateOfDeath === "") ? "Es:" : "Ha sido:"}} {{author.ocupation}}.
+                      {{author.name}} {{author.surname}} nació en la fecha {{author.dateOfBirth | date: 'dd/MM/yyyy'}}. {{author.dateOfDeath === "" ? 'Aún vive' : 'Murió el ' + (author.dateOfDeath | date: 'dd/MM/yyyy') }}. Su nacionalidad: {{author.nationality}}, su lengua materna: {{author.language}}. {{(author.dateOfDeath === "") ? "Es:" : "Ha sido:"}} {{author.ocupation}}.
                     </p>
                     <p>
                       Para conocer más sobre este prolífico autor, haz click en "Detalles" y podrás ver sus libros publicados, sus frases más interesantes y la opinión de la comunidad BetterReads sobre su labor.

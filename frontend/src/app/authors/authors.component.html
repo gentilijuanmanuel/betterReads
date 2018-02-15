@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span class="example-fill-remaining-space">Encontramos {{authcant}} autores</span>
+
+        <span class="fill-remaining-space"></span>
+        
+        <button mat-raised-button color="accent" class="icon" routerLink='/add-authors'>AGREGA UN NUEVO AUTOR</button>
     </mat-toolbar-row>
 </mat-toolbar>
 <app-author-list (cant)="cant($event)"></app-author-list>

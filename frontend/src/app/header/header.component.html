@@ -13,8 +13,6 @@
             <li *ngIf="!isAuth"><a class="menu-item" routerLink='/login' mat-button>Iniciar sesión</a></li>
             <li *ngIf="isAuth"><a class="menu-item greetings">¡Hola, {{userName}}!</a></li>
             <li *ngIf="isAuth"><a class="menu-item" routerLink='/my-library' mat-button>Mi biblioteca</a></li>
-            <li *ngIf="isAuth"><a class="menu-item" routerLink='/add-authors' mat-button>Agregar un autor</a></li>
-            <li *ngIf="isAuth"><a class="menu-item" routerLink='/add-books' mat-button>Agregar un libro</a></li>
             <li *ngIf="isAuth" (click)="logout()"><a class="menu-item" mat-button>Cerrar sesión</a></li>
             <li>
               <a href="https://github.com/julianpoma/betterReads/wiki" target="_blank" mat-icon-button class="menu-item"><mat-icon>code</mat-icon></a>

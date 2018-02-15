@@ -15,6 +15,12 @@
 
   <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
     <div fxFlex="60">
+      <div *ngIf="!popularAuthors">
+        <br>
+        <h1 class="err">No tenemos autores destacados.</h1>
+        <br>
+      </div>
+
       <div *ngFor="let author of popularAuthors">
           <br>
           <mat-card class="list-card">
@@ -72,6 +78,13 @@
 
   <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
     <div fxFlex="60">
+
+      <div *ngIf="!popularBooks">
+        <br>
+        <h1 class="err">No tenemos libros destacados.</h1>
+        <br>
+      </div>
+
       <div *ngFor="let book of popularBooks">
           <br>
           <mat-card class="list-card">

@@ -1,5 +1,6 @@
 <div flex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
   <div fxFlex="60">
+    <h1 *ngIf="!books" class="err">Vaya vaya... No pudimos encontrar ningún libro :(</h1>
     <div *ngFor="let book of books">
         <br>
         <mat-card class="list-card">

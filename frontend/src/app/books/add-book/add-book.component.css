@@ -1,3 +1,8 @@
 .secondary {
     color: white;
 }
+
+span {
+    color: white;
+    padding-left: 8px;
+}

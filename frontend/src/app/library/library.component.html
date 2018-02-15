@@ -19,7 +19,7 @@
         </mat-card-subtitle>
         <ul>
           <li>Tus padres te nombraron "{{user.name}} {{user.surname}}"</li>
-          <li>Naciste el {{user.dateOfBirth}}</li>
+          <li>Naciste el {{user.dateOfBirth | date: 'dd/MM/yyyy'}}</li>
           <li>Registraste {{user.email}} para acceder a betterReads</li>
           <li>Y tu contraseña es ... :)</li>
         </ul>
@@ -56,9 +56,12 @@
                 </mat-card-header>
             </div>
             <div fxLayout="row">
-                <div fxFlex="30">
+                <div fxFlex="30" *ngIf="book.reviews.length != 0">
                   <p style="font-style: italic;">"{{book.reviews[0].comment}}"</p>
                   <p style="font-style: italic;">(Publicado por {{book.reviews[0].user}})</p>
+                </div>
+                <div fxFlex="30" *ngIf="book.reviews.length == 0">
+                  <p style="font-style: italic;">Este libro no tiene reviews :(</p>
                 </div>
                 <div fxFlex="65" fxFlexOffset="5">
                   <mat-card-content>

@@ -24,7 +24,7 @@
         <mat-card-header>
           <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + author.photo + ')', 'background-size': 'cover'  }"></div>
           <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
-          <mat-card-subtitle>{{author.dateOfBirth}} / {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath }}</mat-card-subtitle>
+          <mat-card-subtitle>{{author.dateOfBirth | date: 'dd/MM/yyyy'}} / {{(author.dateOfDeath === "") ? 'Actualidad' : author.dateOfDeath | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
           <hr class="separator">
           <mat-card-actions>
             <button mat-icon-button color="primary" (click)="likeAuthor(author.likes)">
@@ -60,7 +60,7 @@
                 Apellido: {{author.surname}}.
               </li>
               <li>
-                Fecha de nacimiento: {{author.dateOfBirth}}.
+                Fecha de nacimiento: {{author.dateOfBirth | date: 'dd/MM/yyyy'}}.
               </li>
               <li>
                 Fecha de defunción: {{(author.dateOfDeath === "") ? 'Aún vive' : author.dateOfDeath }}.

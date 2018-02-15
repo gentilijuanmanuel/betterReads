@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
       <span class="example-fill-remaining-space">Encontramos {{bookCant}} libros</span>
+
+      <span class="fill-remaining-space"></span>
+      
+      <button mat-raised-button color="accent" class="icon" routerLink='/add-books'>AGREGA UN NUEVO LIBRO</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <app-book-list (cant)="cant($event)"></app-book-list>
