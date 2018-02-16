@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayout.lt-md="column">
     <mat-toolbar color="primary">
-      <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de la vida y obra de {{author.name}} {{author.surname}}</a>
+      <a style="color: white; text-decoration:none; padding-left:8px;" routerLink="/">Una vista en detalle de la vida y obra de <i>{{author.name}} {{author.surname}}</i></a>
     
       <button mat-icon-button class="edit">
         <mat-icon (click)="edit(author._id)" aria-label="Edit">mode_edit</mat-icon>

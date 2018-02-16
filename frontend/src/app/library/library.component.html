@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-      <span>Biblioteca de {{user.name}} {{user.surname}}</span>
+      <span>Biblioteca de <i>{{user.name}} {{user.surname}}</i></span>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="wrapper">
@@ -15,22 +15,22 @@
       </mat-card-title>
       <mat-card-content>
         <mat-card-subtitle>
-          Algunos datos sobre ti:
+          Algunos datos sobre tí
         </mat-card-subtitle>
-        <ul>
-          <li>Tus padres te nombraron "{{user.name}} {{user.surname}}"</li>
-          <li>Naciste el {{user.dateOfBirth | date: 'dd/MM/yyyy'}}</li>
-          <li>Registraste {{user.email}} para acceder a betterReads</li>
-          <li>Y tu contraseña es ... :)</li>
-        </ul>
-        <br>
+          <p>Tus padres te llamaron {{user.name}} {{user.surname}}.</p>
+          <p>Naciste el {{user.dateOfBirth | date: 'dd/MM/yyyy'}}.</p>
+          <p>Registraste a {{user.email}} para acceder a <i>BetterReads</i></p>
+          <p>Tu contraseña es ... :)</p>
+          <br>
         <mat-card-subtitle>
-          Un poco de estadistica
+          Un poco de estadística
         </mat-card-subtitle>
-        <p>Al día de hoy, agregaste {{user.library.length}} libros a tu biblioteca!</p>
+        <p>Al día de hoy, agregaste {{user.library.length}} {{user.library.length === 1 ? "libro" : "libros"}} a tu biblioteca.</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button routerLink='/manage-account'>ADMINISTRAR MI CUENTA</button>
+        <div fxLayout="row-reverse">
+          <button mat-raised-button color="primary" routerLink='/manage-account'>ADMINISTRAR MI CUENTA</button>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>
